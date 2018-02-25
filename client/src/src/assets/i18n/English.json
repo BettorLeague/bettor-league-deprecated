@@ -1,0 +1,11 @@
+{
+  "Nav":{
+    "Home" : "Home",
+    "User" : "User",
+    "Login" : "Login",
+    "Todo" : "Todo Item"
+  },
+  "HOME": {
+    "TITLE": "Hello Angular"
+  }
+}

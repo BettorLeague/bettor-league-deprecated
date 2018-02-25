@@ -1,0 +1,11 @@
+{
+  "Nav":{
+    "Home" : "Accueil",
+    "User" : "Utilisateur",
+    "Login" : "Se connecter",
+    "Todo" : "Tâche à faire"
+  },
+  "HOME": {
+    "TITLE": "Bonjour Angular"
+  }
+}

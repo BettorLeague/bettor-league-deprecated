@@ -1,0 +1,36 @@
+<form>
+<div class="container cardContainer">
+  <div class="row">
+    <div *ngIf="error" id="errorMsg" class="col alert alert-warning alert-danger fade show" role="alert">
+      <strong>Erreur !</strong> Mauvaise combinaison user name / password.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+
+      <mat-card elevation="5">
+        <mat-card-header>
+          <mat-card-subtitle>
+            <h2>Login</h2>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <mat-form-field class="full-width">
+              <input matInput id="userNameInput" name="username" #username="ngModel" [(ngModel)]="usernameBufferForm" placeholder="user / admin" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput id="passwordInput" name="password" [(ngModel)]="passwordBufferForm" type="password" placeholder="password / admin" required>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button id="submitBtn" mat-raised-button color="primary" (click)="onSubmit()" >Login</button>
+        </mat-card-actions>
+      </mat-card>
+
+  </div>
+
+</div>
+</form>

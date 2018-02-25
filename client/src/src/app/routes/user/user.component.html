@@ -1,0 +1,49 @@
+<div class="container cardContainer">
+  <mat-progress-bar
+    *ngIf="!dataSource"
+    [color]="'primary'"
+    [mode]="'indeterminate'">
+  </mat-progress-bar>
+
+  <mat-table id="userTable" #table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="UserName">
+      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Authorities">
+      <mat-header-cell *matHeaderCellDef> Authorities </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span *ngFor="let authority of element.authorities"> {{authority.name}} </span>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="['Id','UserName','FirstName','LastName','Authorities']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['Id','UserName','FirstName','LastName','Authorities']"></mat-row>
+  </mat-table>
+</div>
