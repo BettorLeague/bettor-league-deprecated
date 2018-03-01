@@ -30,7 +30,7 @@ Component         | Technology
 Frontend          | [Angular 5](https://github.com/angular/angular) (JavaScript)
 Backend (REST)    | [SpringBoot](https://projects.spring.io/spring-boot) (Java)
 REST Documentation| [Swagger UI / Springfox](https://github.com/springfox/springfox)
-In Memory DB      | [H2](http://www.h2database.com/html/main.html) / [PostgreSql](https://fr.wikipedia.org/wiki/PostgreSQL) 
+In Memory DB      | [H2](http://www.h2database.com/html/main.html) / [MySQL](https://www.mysql.com/fr/) 
 Persistence       | [JPA](https://fr.wikipedia.org/wiki/Java_Persistence_API) (Using Spring Data)
 Client Build Tools| [angular-cli , npm](https://github.com/angular/angular-cli)
 Server Build Tools| [Maven](https://maven.apache.org/) (Java)
