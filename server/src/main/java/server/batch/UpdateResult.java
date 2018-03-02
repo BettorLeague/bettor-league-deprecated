@@ -40,20 +40,12 @@ public class UpdateResult {
 
     private final Log logger = LogFactory.getLog(this.getClass());
 
-    //@Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
-    @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
+    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
+    //@Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void getLigue1Competition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-
-/*
-        for(int i = 1 ; i <= competition.getCurrentMatchday(); i++){
-            LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/450/leagueTable?matchday="+i,LeagueTable.class);
-            logger.warn("INSERT LIGUE 1 JOURNNE "+leagueTable.getMatchday());
-            leagueTableRepository.save(leagueTable);
-        }*/
-        //LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/450/leagueTable",LeagueTable.class);
     }
 
     private void updateCompetition(RestTemplate restTemplate, String id){
@@ -71,6 +63,8 @@ public class UpdateResult {
             competitionRepository.save(current);
         }
 
+        updateLeagueRank(restTemplate,competition,id);
+
     }
 
     private List<Team> updateTeamCompetition(RestTemplate restTemplate, String id){
@@ -81,5 +75,16 @@ public class UpdateResult {
         }
         return teams;
     }
+
+    private void updateLeagueRank(RestTemplate restTemplate,Competition competition,String id){
+        Competition current = competitionRepository.findByCaption(competition.getCaption());
+        for(int i = 1 ; i <= current.getCurrentMatchday(); i++){
+            if(isNull(leagueTableRepository.findByLeagueCaptionAndMatchday(current.getCaption(),i))){
+                LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/"+id+"/leagueTable?matchday="+i,LeagueTable.class);
+                leagueTableRepository.save(leagueTable);
+            }
+        }
+    }
+
 
 }

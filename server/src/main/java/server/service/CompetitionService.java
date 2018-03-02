@@ -55,7 +55,7 @@ public class CompetitionService {
     public ResponseEntity<LeagueTable> getRankingOfCompetition(Long id) {
         if (competitionRepository.exists(id)) {
             Competition competition = this.competitionRepository.findOne(id);
-            LeagueTable leagueTable = this.leagueTableRepository.findByLeagueCaption(competition.getCaption());
+            LeagueTable leagueTable = this.leagueTableRepository.findByLeagueCaptionAndMatchday(competition.getCaption(),competition.getCurrentMatchday());
             return new ResponseEntity<>(leagueTable,HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
