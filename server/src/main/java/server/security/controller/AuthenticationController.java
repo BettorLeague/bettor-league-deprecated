@@ -1,5 +1,7 @@
 package server.security.controller;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -12,14 +14,19 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import server.security.JwtAuthenticationRequest;
+import server.model.User;
+import server.repository.UserRepository;
+import server.security.service.JwtAuthenticationRequest;
 import server.security.JwtTokenUtil;
 import server.security.JwtUser;
 import server.security.service.JwtAuthenticationResponse;
+import server.security.service.JwtSignupRequest;
+import server.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +44,9 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
@@ -87,7 +97,13 @@ public class AuthenticationController {
             JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
             return new ResponseEntity<>(user,HttpStatus.OK);
         }
+    }
 
+    @ApiResponses(value = {
+            @ApiResponse(code = 409, message = "Username / Email is already in use")})
+    @RequestMapping(value = "${jwt.route.authentication.signup}", method = RequestMethod.POST)
+    public ResponseEntity<?> createUser(@RequestBody JwtSignupRequest jwtSignupRequest, Device device){
+        return userService.userSignUp(jwtSignupRequest);
     }
 
 

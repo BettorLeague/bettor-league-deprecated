@@ -3,11 +3,9 @@ package server.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import server.model.Competition;
-import server.model.LeagueTable;
-import server.model.Team;
-import server.model.User;
+import server.model.*;
 import server.repository.CompetitionRepository;
+import server.repository.FixtureRepository;
 import server.repository.LeagueTableRepository;
 import server.repository.UserRepository;
 
@@ -20,12 +18,15 @@ public class CompetitionService {
 
     private final CompetitionRepository competitionRepository;
     private final LeagueTableRepository leagueTableRepository;
+    private final FixtureRepository fixtureRepository;
 
-    public CompetitionService(CompetitionRepository competitionRepository,LeagueTableRepository leagueTableRepository){
+    public CompetitionService(CompetitionRepository competitionRepository,
+                              FixtureRepository fixtureRepository,
+                              LeagueTableRepository leagueTableRepository){
         this.competitionRepository = competitionRepository;
         this.leagueTableRepository = leagueTableRepository;
+        this.fixtureRepository = fixtureRepository;
     }
-
 
 
     public ResponseEntity<List<Competition>> getAllCompetition() {
@@ -55,6 +56,9 @@ public class CompetitionService {
     public ResponseEntity<LeagueTable> getRankingOfCompetition(Long id) {
         if (competitionRepository.exists(id)) {
             Competition competition = this.competitionRepository.findOne(id);
+            if(isNull(this.leagueTableRepository.findByLeagueCaptionAndMatchday(competition.getCaption(),competition.getCurrentMatchday()))){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             LeagueTable leagueTable = this.leagueTableRepository.findByLeagueCaptionAndMatchday(competition.getCaption(),competition.getCurrentMatchday());
             return new ResponseEntity<>(leagueTable,HttpStatus.OK);
         }else
@@ -69,6 +73,21 @@ public class CompetitionService {
             }
             LeagueTable leagueTable = this.leagueTableRepository.findByLeagueCaptionAndMatchday(competition.getCaption(),matchDay);
             return new ResponseEntity<>(leagueTable,HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+    public ResponseEntity<List<Fixture>> getMatchOfCompetition(Long competitionId) {
+        if (competitionRepository.exists(competitionId)) {
+            return new ResponseEntity<>(this.fixtureRepository.findByCompetitionId(competitionId),HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<List<Fixture>> getMatchOfCompetitionByMatchDay(Long competitionId,int matchDay) {
+        if (competitionRepository.exists(competitionId)) {
+            return new ResponseEntity<>(this.fixtureRepository.findByCompetitionIdAndAndMatchday(competitionId,matchDay),HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

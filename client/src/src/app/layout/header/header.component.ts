@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
 
   translate : TranslateService;
+  routerService: Router;
 
   constructor(
     private router: Router,
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
     private translateService: TranslateService) {
 
     this.translate = translateService;
-    this.translate.langs
+    this.translate.langs;
+    this.routerService = router;
     this.translateService.addLangs(["English", "French"]);
     this.translate.setDefaultLang('English');
     let browserLang = this.translate.getBrowserLang();

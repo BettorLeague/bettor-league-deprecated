@@ -17,6 +17,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<demo.version>0.0.1-SNAPSHOT</demo.version>
+		<lombok.version>1.16.4</lombok.version>
 	</properties>
 
 	<name>server</name>
@@ -71,9 +72,16 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+
 
 		<!-- JWT TOOLS -->
 

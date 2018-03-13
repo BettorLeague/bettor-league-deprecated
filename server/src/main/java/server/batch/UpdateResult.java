@@ -5,15 +5,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import server.model.Competition;
-import server.model.LeagueTable;
-import server.model.Standing;
-import server.model.Team;
+import server.model.*;
+import server.model.football.request.FixtureRequest;
 import server.model.football.request.TeamRequest;
-import server.repository.CompetitionRepository;
-import server.repository.LeagueTableRepository;
-import server.repository.StandingRepository;
-import server.repository.TeamRepository;
+import server.repository.*;
 import server.security.JwtUser;
 import server.service.CompetitionService;
 
@@ -37,16 +32,26 @@ public class UpdateResult {
     @Inject
     private StandingRepository standingRepository;
 
+    @Inject
+    private FixtureRepository fixtureRepository;
+
 
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
-    //@Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void getLigue1Competition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
     }
+/*
+    @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
+    public void lol(){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new RestTemplateInterceptor());
+        updateFixture(restTemplate,"450",new Long(1));
+    }*/
+
 
     private void updateCompetition(RestTemplate restTemplate, String id){
 
@@ -64,6 +69,7 @@ public class UpdateResult {
         }
 
         updateLeagueRank(restTemplate,competition,id);
+        //updateFixture(restTemplate,id,competition.getId());
 
     }
 
@@ -83,6 +89,15 @@ public class UpdateResult {
                 LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/"+id+"/leagueTable?matchday="+i,LeagueTable.class);
                 leagueTableRepository.save(leagueTable);
             }
+        }
+    }
+
+    private void updateFixture(RestTemplate restTemplate,String id,Long competitionId) {
+        FixtureRequest fixtureRequest = restTemplate.getForObject("https://www.football-data.org/v1/competitions/"+id+"/fixtures", FixtureRequest.class);
+        List<Fixture> fixtures = fixtureRequest.getFixtures();
+        for(Fixture fixture: fixtures){
+            fixture.setCompetitionId(competitionId);
+            fixtureRepository.save(fixture);
         }
     }
 
