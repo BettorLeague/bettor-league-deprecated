@@ -8,3 +8,10 @@
 #login-v2 {
     background-position: bottom !important;
 }
+
+#loginError {
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+    top: 20px;
+}
