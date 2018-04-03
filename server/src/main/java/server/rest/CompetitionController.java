@@ -3,11 +3,11 @@ package server.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import server.model.Competition;
-import server.model.Fixture;
-import server.model.LeagueTable;
-import server.model.Team;
-import server.service.CompetitionService;
+import server.model.football.Competition;
+import server.model.football.Fixture;
+import server.model.football.LeagueTable;
+import server.model.football.Team;
+import server.service.impl.CompetitionService;
 
 import javax.inject.Inject;
 import java.util.List;

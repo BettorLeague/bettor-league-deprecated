@@ -3,7 +3,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {AuthService} from "../../shared/services/auth/auth.service";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
-import {SidenavService} from "../../shared/services/sideNav/sidenav.service";
+import {SidenavService} from "../../shared/services/layout/sidenav.service";
 
 @Component({
   selector: 'app-header',

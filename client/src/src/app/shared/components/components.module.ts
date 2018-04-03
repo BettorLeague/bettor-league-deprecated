@@ -1,25 +1,21 @@
 import { NgModule } from '@angular/core';
 import {MaterialModule} from "./material/material.module";
-import {ConfirmationDialogsService} from "./dialog/confirmation-dialog.service";
-import {ConfirmationDialogComponent} from "./dialog/confirmation-dialog.component";
 import {CommonModule} from "@angular/common";
+import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
 
 @NgModule({
-  providers: [
-    ConfirmationDialogsService,
-  ],
   imports: [
     MaterialModule,
     CommonModule
   ],
   declarations: [
-    ConfirmationDialogComponent,
+    ConfirmDialogComponent,
   ],
   exports: [
     MaterialModule
   ],
   entryComponents: [
-  ConfirmationDialogComponent
+    ConfirmDialogComponent
 ],
 })
 export class ComponentsModule { }

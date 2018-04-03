@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
-
+@import "./splash";
 @import '~@angular/material/theming';
 //@import '~font-awesome/scss/font-awesome';
 
@@ -15,9 +15,7 @@ $theme: mat-light-theme($primary, $accent, $accent-warn);
   $extra-primary: mat-palette($mat-teal);
   $extra-accent:  mat-palette($mat-yellow, 400);
   $extra-accent-warn:  mat-palette($mat-red, A200, A100, A400);
-
   $extra-theme: mat-light-theme($extra-primary, $extra-accent, $extra-accent-warn);
-
   @include angular-material-theme($extra-theme);
 }
 

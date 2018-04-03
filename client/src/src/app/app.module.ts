@@ -8,21 +8,21 @@ import {ServicesModule} from './shared/services/services.module';
 import { ROUTES } from './app.routes';
 import {PreloadAllModules, RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import { HomeComponent } from './routes/home/home.component';
+import { HomeComponent } from './routes/pages/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { UserComponent } from './routes/user/user.component';
+import { UserComponent } from './routes/pages/user/user.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import { LoginComponent } from './routes/login/login.component';
+import { LoginComponent } from './routes/authentification/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './layout/header/header.component';
 import {MaterialModule} from "./shared/components/material/material.module";
-import {SidenavService} from "./shared/services/sideNav/sidenav.service";
+import {SidenavService} from "./shared/services/layout/sidenav.service";
 import {GuardsModule} from "./guards/guards.module";
 import {TokenInterceptor} from "./shared/services/http/TokenInterceptor";
 import {AuthService} from "./shared/services/auth/auth.service";
-import { ProfileComponent } from './routes/profile/profile.component';
-import { UnauthorizeComponent } from './routes/unauthorize/unauthorize.component';
+import { ProfileComponent } from './routes/pages/profile/profile.component';
+import { UnauthorizeComponent } from './routes/error/403/unauthorize.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { FooterComponent } from './layout/footer/footer.component';
 import {ComponentsModule} from "./shared/components/components.module";
@@ -32,9 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 export function initUserFactory(authService: AuthService) {
-    return () => authService.refreshUser();
+  if(authService.currentUser) return () => authService.refreshUser(); else return () => null;
 }
-
 
 @NgModule({
   declarations: [
