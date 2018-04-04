@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files
 @import '../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 @import "./splash";
 @import '~@angular/material/theming';
@@ -34,4 +34,15 @@ button:focus {
 .cardContainer{
   padding-top: 15px;
 }
+*/
+// Import Fuse main library
+@import "../@fuse/scss/core";
 
+
+button:focus {
+  outline: none;
+}
+
+.cardContainer{
+  padding-top: 15px;
+}

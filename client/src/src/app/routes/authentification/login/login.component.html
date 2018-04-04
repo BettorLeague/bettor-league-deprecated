@@ -1,96 +1,103 @@
-<div class="row" id="loginError">
-    <div *ngIf="error" id="errorMsg" class="col alert alert-warning alert-danger fade show" role="alert">
-        <strong>Erreur !</strong> Mauvaise combinaison user name / password.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetErrorMsg()">
-            <span aria-hidden="true">&times;</span>
+<div id="login" fxLayout="row" fxLayoutAlign="start">
+
+  <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
+
+    <div class="logo">
+      <img src="assets/images/logos/fuse.svg">
+    </div>
+
+    <div class="title"  >
+      Welcome to the FUSE!
+    </div>
+
+    <div class="description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
+      vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
+    </div>
+
+  </div>
+
+  <div id="login-form-wrapper">
+
+    <div id="login-form">
+
+      <div class="logo" fxHide.gt-xs>
+        <span>F</span>
+      </div>
+
+      <div class="title">LOGIN TO YOUR ACCOUNT</div>
+
+      <form name="loginForm" [formGroup]="loginForm" novalidate>
+
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="loginFormErrors.email.required">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error *ngIf="loginFormErrors.password.required">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
+             fxLayoutAlign="space-between center">
+          <mat-checkbox class="remember-me" aria-label="Remember Me">
+            Remember Me
+          </mat-checkbox>
+
+          <a class="forgot-password" [routerLink]="'/pages/auth/forgot-password-2'">
+            Forgot Password?
+          </a>
+        </div>
+
+        <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
+                (click)="onSubmit()"
+                [disabled]="loginForm.invalid">
+          LOGIN
         </button>
+
+      </form>
+
+      <div class="separator">
+        <span class="text">OR</span>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="start center">
+
+        <form ngNoForm action="/connect/facebook"  method="POST" class="socialForm">
+          <button type="submit" mat-raised-button class="google">
+            Log in with Google
+          </button>
+        </form>
+
+        <form ngNoForm action="/connect/facebook"  method="POST" class="socialForm">
+          <button type="submit" mat-raised-button class="facebook">
+            Log in with Facebook
+          </button>
+        </form>
+<!--
+        <button type="submit" mat-raised-button class="google">
+          Log in with Google
+        </button>
+
+        <button type="submit" mat-raised-button class="facebook">
+          Log in with Facebook
+        </button>-->
+
+
+      </div>
+
+      <div class="register" fxLayout="column" fxLayoutAlign="center center">
+        <span class="text">Don't have an account?</span>
+        <a class="link" [routerLink]="'/pages/auth/register-2'">Create an account</a>
+      </div>
     </div>
-</div>
-
-<div id="login-v2" class="row no-gutters">
-
-    <div class="    intro col-12 col-md light-fg">
-
-        <div class="d-flex flex-column align-items-center align-items-md-start text-center text-md-left py-16 py-md-32 px-12">
-
-            <div class="logo mb-8">
-                <span>
-                    Logo
-                </span>
-            </div>
-
-            <div class="title">
-                Bienvenu sur BettorLeague
-            </div>
-
-            <div class="description pt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
-            </div>
-
-        </div>
-    </div>
-
-    <div class="form-wrapper col-12 col-md-auto d-flex justify-content-center p-4 p-md-0">
-
-        <div class="form-content md-elevation-8 h-100 bg-white text-auto py-16 py-md-32 px-12">
-
-            <div class="title h5">Connecter vous à votre compte</div>
-
-            <!--<div class="description mt-2">Sed mollis velit facilisis facilisis viverra</div>-->
-
-            <form name="loginForm" novalidate class="mt-8">
-
-                <mat-form-field class="full-width">
-                    <input matInput id="userNameInput" name="username" #username="ngModel" [(ngModel)]="usernameBufferForm" placeholder="user / admin" required>
-                </mat-form-field>
-
-                <mat-form-field class="full-width">
-                    <input matInput id="passwordInput" name="password" [(ngModel)]="passwordBufferForm" type="password" placeholder="password / admin" required>
-                </mat-form-field>
-
-                <div class="remember-forgot-password row no-gutters align-items-center justify-content-between pt-4">
-
-                    <div class="form-check remember-me mb-4">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" aria-label="Remember Me" />
-                            <span class="checkbox-icon"></span>
-                            <span class="form-check-description">Se rappeler de moi</span>
-                        </label>
-                    </div>
-
-                    <a href="#" class="forgot-password text-secondary mb-4">Mot de passe oublié ?</a>
-
-                </div>
-
-                <button type="submit" mat-raised-button color="primary" (click)="onSubmit()" class="submit-button btn btn-block btn-secondary my-4 mx-auto" aria-label="LOG IN">
-                    LOG IN
-                </button>
-
-            </form>
-
-            <div class="separator">
-                <span class="text">OU</span>
-            </div>
-
-            <button type="submit" class="google btn btn-block btn-secondary my-2 mx-auto" aria-label="LOG IN">
-                                    <span>
-                                        <i class="icon-google-plus s-4"></i>
-                                        <span>Log in with Google</span>
-                                    </span>
-            </button>
-
-            <button type="submit" class="facebook btn btn-block btn-secondary my-2 mx-auto" aria-label="LOG IN">
-                                    <span>
-                                        <i class="icon-facebook s-4"></i>
-                                        <span>Log in with Facebook</span>
-                                    </span>
-            </button>
-
-            <div class="register d-flex flex-column flex-sm-row align-items-center justify-content-center mt-8 mb-6 mx-auto">
-                <span class="text mr-sm-2">Pas encore de compte ?</span>
-                <a class="link text-secondary" href="#">Crée un compte ?</a>
-            </div>
-
-        </div>
-    </div>
+  </div>
 </div>

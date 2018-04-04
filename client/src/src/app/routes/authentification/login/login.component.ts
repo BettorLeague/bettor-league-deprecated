@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginRequestModel} from "../../../shared/models/auth/login.request.model";
@@ -8,32 +8,66 @@ import {Subject} from "rxjs/Subject";
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-    usernameBufferForm : string;
-    passwordBufferForm : string;
-    loginRequest: LoginRequestModel;
+    loginRequest:LoginRequestModel;
+    loginForm: FormGroup;
+    loginFormErrors: any;
 
     returnUrl: string;
-    error: boolean = false;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        private formBuilder: FormBuilder,
         private authService : AuthService
-    ) { }
+    ) {
+      this.loginFormErrors = {email   : {}, password: {}};
+    }
 
     ngOnInit() {
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.loginForm = this.formBuilder.group({
+      email   : ['', [Validators.required]],
+      //email   : ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+
+    this.loginForm.valueChanges.subscribe(() => {
+      this.onLoginFormValuesChanged();
+    });
     }
+
+  onLoginFormValuesChanged()
+  {
+    for ( const field in this.loginFormErrors )
+    {
+      if ( !this.loginFormErrors.hasOwnProperty(field) )
+      {
+        continue;
+      }
+
+      // Clear previous errors
+      this.loginFormErrors[field] = {};
+
+      // Get the control
+      const control = this.loginForm.get(field);
+
+      if ( control && control.dirty && !control.valid )
+      {
+        this.loginFormErrors[field] = control.errors;
+      }
+    }
+  }
 
     onSubmit()
     {
         this.loginRequest = new LoginRequestModel();
-        this.loginRequest.password = this.passwordBufferForm;
-        this.loginRequest.username = this.usernameBufferForm;
+        this.loginRequest.password = this.loginForm.value.password;
+        this.loginRequest.username = this.loginForm.value.email;
 
         this.authService.login(this.loginRequest)
             .subscribe(data => {
@@ -48,17 +82,8 @@ export class LoginComponent implements OnInit {
                     );
                 },
                 error => {
-                    this.error = true;
-                    setTimeout(
-                        () => {
-                            this.resetErrorMsg();
-                        }, 3000
-                    );
                 });
 
     }
 
-    resetErrorMsg() {
-        this.error = false;
-    }
 }
