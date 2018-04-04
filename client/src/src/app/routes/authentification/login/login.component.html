@@ -2,24 +2,25 @@
 
   <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
 
-    <div class="logo">
+    <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
       <img src="assets/images/logos/fuse.svg">
     </div>
 
-    <div class="title"  >
+    <div class="title"  [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
       Welcome to the FUSE!
     </div>
 
-    <div class="description">
+    <div class="description"  [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
       vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
     </div>
 
   </div>
 
-  <div id="login-form-wrapper">
+  <div id="login-form-wrapper"
+       [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
 
-    <div id="login-form">
+  <div id="login-form">
 
       <div class="logo" fxHide.gt-xs>
         <span>F</span>
@@ -82,21 +83,13 @@
             Log in with Facebook
           </button>
         </form>
-<!--
-        <button type="submit" mat-raised-button class="google">
-          Log in with Google
-        </button>
-
-        <button type="submit" mat-raised-button class="facebook">
-          Log in with Facebook
-        </button>-->
 
 
       </div>
 
       <div class="register" fxLayout="column" fxLayoutAlign="center center">
         <span class="text">Don't have an account?</span>
-        <a class="link" [routerLink]="'/pages/auth/register-2'">Create an account</a>
+        <a class="link" [routerLink]="'/register'">Create an account</a>
       </div>
     </div>
   </div>

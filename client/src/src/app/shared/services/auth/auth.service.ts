@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {LoginRequestModel} from "../../models/auth/login.request.model";
 import {UserModel} from "../../models/user/user.model";
 import {UserTokenModel} from "../../models/auth/user.token.model";
+import {RegisterRequestModel} from "../../models/auth/register.request.model";
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,10 @@ export class AuthService {
 
   public login(loginRequest: LoginRequestModel): Observable<any> {
     return this.http.post('/auth/login',loginRequest);
+  }
+
+  public signup(signupRequest: RegisterRequestModel): Observable<any> {
+    return this.http.post('/auth/signup',signupRequest);
   }
 
   public refresh(): Observable<any> {

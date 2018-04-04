@@ -26,6 +26,7 @@ import { UnauthorizeComponent } from './routes/error/403/unauthorize.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { FooterComponent } from './layout/footer/footer.component';
 import {ComponentsModule} from "./shared/components/components.module";
+import {RegisterComponent} from "./routes/authentification/register/register.component";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -44,7 +45,8 @@ export function initUserFactory(authService: AuthService) {
     HeaderComponent,
     ProfileComponent,
     UnauthorizeComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

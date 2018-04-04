@@ -51,6 +51,16 @@ export class HeaderComponent implements OnInit {
     return this.authService.currentUser;
   }
 
+  isOpen():boolean{
+    if (
+      !this.routerService.url.includes('login') &&
+      !this.routerService.url.includes('403') &&
+      !this.routerService.url.includes('register')){
+      return true;
+    }
+    return false;
+  }
+
 
 
 }
