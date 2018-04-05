@@ -2,23 +2,24 @@
 
   <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
 
-    <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+    <div class="logo" *fuseIfOnDom [@animate]="{value:'*',params:{scale:'0.2'}}">
       <img src="assets/images/logos/fuse.svg">
     </div>
 
-    <div class="title"  [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+    <div class="title" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
       Welcome to the FUSE!
     </div>
 
-    <div class="description"  [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+    <div class="description" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
       vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
     </div>
 
   </div>
 
-  <div id="login-form-wrapper"
+  <div id="login-form-wrapper" fusePerfectScrollbar *fuseIfOnDom
        [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+
 
   <div id="login-form">
 

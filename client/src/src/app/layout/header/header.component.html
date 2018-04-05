@@ -3,27 +3,34 @@
   <div class="container">
     <div class="row">
       <div class="col align-self-start 	d-lg-none" style="padding: 0">
-        <button mat-icon-button (click)="openSidenav()"><mat-icon>menu</mat-icon></button>
+        <button class="user-button" mat-icon-button (click)="openSidenav()"><mat-icon>menu</mat-icon></button>
       </div>
 
       <div class="col align-self-start 	d-none d-lg-block" style="padding: 0">
-        <button  id="homeLink" mat-button routerLink="/">{{ 'Nav.Home' | translate}}</button>
-        <button  id="userLink" mat-button routerLink="/user">{{ 'Nav.User' | translate }}</button>
+        <button  class="user-button" id="homeLink" mat-button routerLink="/">{{ 'Nav.Home' | translate}}</button>
+        <button  class="user-button" id="userLink" mat-button routerLink="/user">{{ 'Nav.User' | translate }}</button>
 
       </div>
       <div class="align-self-end">
+
         <mat-menu #appMenu="matMenu"  [overlapTrigger]="false" yPosition="below" >
           <button mat-menu-item (click)="translate.use(lang)" *ngFor="let lang of translate.langs">{{lang}}</button>
         </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="appMenu">
-          <mat-icon>language</mat-icon> {{translate.currentLang}}
+
+        <button mat-button [matMenuTriggerFor]="appMenu" class="user-button">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon>language</mat-icon> {{translate.currentLang}}
+          </div>
         </button>
       </div>
 
       <div class="align-self-end">
-        <button mat-button id="more" [matMenuTriggerFor]="more">
-          <mat-icon>face</mat-icon> {{hasSignedIn() ? getCurrentUser().username : 'guest' }}
+
+        <button mat-button [matMenuTriggerFor]="more" class="user-button">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon>face</mat-icon> {{hasSignedIn() ? getCurrentUser().username : 'guest' }}
+          </div>
         </button>
 
         <mat-menu #more="matMenu" [overlapTrigger]="false" yPosition="below">

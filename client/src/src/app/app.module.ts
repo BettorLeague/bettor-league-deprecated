@@ -27,13 +27,14 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { FooterComponent } from './layout/footer/footer.component';
 import {ComponentsModule} from "./shared/components/components.module";
 import {RegisterComponent} from "./routes/authentification/register/register.component";
+import {FuseModule} from "../@fuse/fuse.module";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 export function initUserFactory(authService: AuthService) {
-  if(authService.currentUser) return () => authService.refreshUser(); else return () => null;
+  if(authService.getToken != null) return () => authService.refreshUser(); else return () => null;
 }
 
 @NgModule({
@@ -58,6 +59,7 @@ export function initUserFactory(authService: AuthService) {
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    FuseModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
     TranslateModule.forRoot({
       loader: {

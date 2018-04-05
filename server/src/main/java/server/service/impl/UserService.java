@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import server.model.AuthorityName;
 import server.model.User;
 import server.repository.AuthorityRepository;
 import server.repository.UserRepository;
@@ -74,7 +75,7 @@ public class UserService implements server.service.UserService, UserDetailsServi
         user.setEmail(jwtSignupRequest.getEmail());
         user.setEnabled(true);
         List<Authority> authorities = new ArrayList<>();
-        authorities.add(authorityRepository.findOne(new Long(1)));
+        authorities.add(authorityRepository.findByName(AuthorityName.ROLE_USER));
         user.setAuthorities(authorities);
         userRepository.save(user);
         return new ResponseEntity<>(user,HttpStatus.OK);
