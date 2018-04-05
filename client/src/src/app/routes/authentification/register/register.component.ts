@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit
 
       this.authService.signup(this.registerRequest)
         .subscribe(data => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/mail-confirm']);
           },
           error => {
           //afficher une popup d'erreur

@@ -2,34 +2,23 @@
 
   <div class="container">
     <div class="row">
-      <div class="col align-self-start 	d-lg-none" style="padding: 0">
-        <button class="user-button" mat-icon-button (click)="openSidenav()"><mat-icon>menu</mat-icon></button>
+      <div class="col align-self-start 	d-lg-none">
+        <button class="user-button" mat-button (click)="openSidenav()"><mat-icon>menu</mat-icon></button>
       </div>
 
-      <div class="col align-self-start 	d-none d-lg-block" style="padding: 0">
-        <button  class="user-button" id="homeLink" mat-button routerLink="/">{{ 'Nav.Home' | translate}}</button>
-        <button  class="user-button" id="userLink" mat-button routerLink="/user">{{ 'Nav.User' | translate }}</button>
-
+      <div class="col align-self-start 	d-none d-lg-block" >
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <button  class="user-button"  mat-button routerLink="/">{{ 'Nav.Home' | translate}}</button>
+          <button  class="user-button"  mat-button routerLink="/user">{{ 'Nav.User' | translate }}</button>
+        </div>
       </div>
-      <div class="align-self-end">
-
-        <mat-menu #appMenu="matMenu"  [overlapTrigger]="false" yPosition="below" >
-          <button mat-menu-item (click)="translate.use(lang)" *ngFor="let lang of translate.langs">{{lang}}</button>
-        </mat-menu>
-
-
-        <button mat-button [matMenuTriggerFor]="appMenu" class="user-button">
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-icon>language</mat-icon> {{translate.currentLang}}
-          </div>
-        </button>
-      </div>
-
       <div class="align-self-end">
 
         <button mat-button [matMenuTriggerFor]="more" class="user-button">
           <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-icon>face</mat-icon> {{hasSignedIn() ? getCurrentUser().username : 'guest' }}
+            <img class="avatar" src="../../../assets/images/avatars/profile.jpg">
+            <span class="username mr-12" fxHide fxShow.gt-sm>{{hasSignedIn() ? getCurrentUser().username : 'guest' }}</span>
+            <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
           </div>
         </button>
 
@@ -48,6 +37,20 @@
           </button>
         </mat-menu>
       </div>
+      <div class="align-self-end">
+
+        <mat-menu #appMenu="matMenu"  [overlapTrigger]="false" yPosition="below" >
+          <button mat-menu-item (click)="translate.use(lang)" *ngFor="let lang of translate.langs">{{lang}}</button>
+        </mat-menu>
+
+
+        <button mat-button [matMenuTriggerFor]="appMenu" class="user-button">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon>language</mat-icon> {{translate.currentLang}}
+          </div>
+        </button>
+      </div>
+
     </div>
 
   </div>

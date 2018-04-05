@@ -1,21 +1,31 @@
-<div class="container cardContainer">
-  <div class="row">
-    <div class="col">
-      <div class="jumbotron">
-        <h1 id="profileMsg" class="display-4">Profile Page</h1>
+<div id="profilePage" class="page-layout simple" fusePerfectScrollbar>
 
-        <p>User Name: {{authService.currentUser.username}}</p>
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-sm-24" fxLayout="column" fxLayoutAlign="center center">
 
-        <p>Email: {{authService.currentUser.email}}</p>
-
-        <p>First Name: {{authService.currentUser.firstname}}</p>
-
-        <p>Last Name: {{authService.currentUser.lastname}}</p>
-
-        <p>Account Enabled: {{authService.currentUser.enabled}}</p>
-      </div>
-
+    <div class="hero-text mb-32">
+      <h1>Welcome to our page</h1>
     </div>
+
   </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content p-24 mat-white-bg">
+
+    <h1  class="display-4">Profile Page</h1>
+
+    <p>User Name: {{authService.currentUser.username}}</p>
+
+    <p>Email: {{authService.currentUser.email}}</p>
+
+    <p>First Name: {{authService.currentUser.firstname}}</p>
+
+    <p>Last Name: {{authService.currentUser.lastname}}</p>
+
+    <p>Account Enabled: {{authService.currentUser.enabled}}</p>
+
+  </div>
+  <!-- / CONTENT -->
 
 </div>

@@ -28,6 +28,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import {ComponentsModule} from "./shared/components/components.module";
 import {RegisterComponent} from "./routes/authentification/register/register.component";
 import {FuseModule} from "../@fuse/fuse.module";
+import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -43,6 +44,7 @@ export function initUserFactory(authService: AuthService) {
     HomeComponent,
     UserComponent,
     LoginComponent,
+    MailConfirmComponent,
     HeaderComponent,
     ProfileComponent,
     UnauthorizeComponent,
