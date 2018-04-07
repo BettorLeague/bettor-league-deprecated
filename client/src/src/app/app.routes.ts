@@ -10,6 +10,8 @@ import {ProfileComponent} from "./routes/pages/profile/profile.component";
 import {UnauthorizeComponent} from "./routes/error/403/unauthorize.component";
 import {RegisterComponent} from "./routes/authentification/register/register.component";
 import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
+import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
+import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 
 export const ROUTES: Routes = [
   { path: '',      component: HomeComponent },
@@ -19,6 +21,8 @@ export const ROUTES: Routes = [
   { path: 'login',  component: LoginComponent , canActivate: [GuestGuard]},
   { path: 'register',  component: RegisterComponent , canActivate: [GuestGuard]},
   { path: 'mail-confirm',  component: MailConfirmComponent , canActivate: [GuestGuard]},
+  { path: 'forgot-password',  component: ForgotPasswordComponent , canActivate: [GuestGuard]},
   { path: 'profile',  component: ProfileComponent, canActivate: [UserGuard] },
+  { path: 'confidentialite',  component: ConfidentialiteComponent },
   { path: '**',    component: HomeComponent }
 ];

@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ import server.model.User;
 import server.security.JwtTokenUtil;
 import server.dto.JwtAuthenticationResponse;
 import server.dto.JwtSignupRequest;
-import server.service.impl.UserService;
+import server.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,14 +39,14 @@ public class AuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
-        User user = this.userService.getUserByUsernameOrEmail(authenticationRequest.getUsername());
+        User user = this.userServiceImpl.getUserByUsernameOrEmail(authenticationRequest.getUsername());
         if (isNull(user)){
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", authenticationRequest.getUsername()));
         }
@@ -73,7 +72,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }else {
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
-            UserDetails user =  userService.loadUserByUsername(username);
+            UserDetails user =  userServiceImpl.loadUserByUsername(username);
             String refreshedToken = jwtTokenUtil.refreshToken(authToken);
             return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
         }
@@ -86,7 +85,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }else {
             String username = jwtTokenUtil.getUsernameFromToken(token);
-            User user = userService.getUserByUsername(username);
+            User user = userServiceImpl.getUserByUsername(username);
             return new ResponseEntity<>(user,HttpStatus.OK);
         }
     }
@@ -94,7 +93,7 @@ public class AuthenticationController {
     @ApiResponses(value = {@ApiResponse(code = 409, message = "Username / Email is already in use")})
     @RequestMapping(value = "${jwt.route.authentication.signup}", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody JwtSignupRequest jwtSignupRequest, Device device){
-        return userService.userSignUp(jwtSignupRequest);
+        return userServiceImpl.userSignUp(jwtSignupRequest);
     }
 
 

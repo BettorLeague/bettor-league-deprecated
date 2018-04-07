@@ -14,22 +14,23 @@ import server.repository.AuthorityRepository;
 import server.repository.UserRepository;
 import server.model.Authority;
 import server.dto.JwtSignupRequest;
+import server.service.UserService;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Component
-public class UserService implements server.service.UserService, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
     private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository){
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder,
+                           AuthorityRepository authorityRepository){
         this.authorityRepository = authorityRepository;
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
 

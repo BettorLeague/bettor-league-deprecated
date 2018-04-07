@@ -30,6 +30,8 @@ import {RegisterComponent} from "./routes/authentification/register/register.com
 import {FuseModule} from "../@fuse/fuse.module";
 import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
 import {CookieService} from "ngx-cookie-service";
+import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
+import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -46,11 +48,13 @@ export function initUserFactory(authService: AuthService) {
     UserComponent,
     LoginComponent,
     MailConfirmComponent,
+    ForgotPasswordComponent,
     HeaderComponent,
     ProfileComponent,
     UnauthorizeComponent,
     FooterComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfidentialiteComponent
   ],
   imports: [
     BrowserModule,

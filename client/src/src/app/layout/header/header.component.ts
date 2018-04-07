@@ -56,6 +56,7 @@ export class HeaderComponent implements OnInit {
       !this.routerService.url.includes('login') &&
       !this.routerService.url.includes('mail-confirm') &&
       !this.routerService.url.includes('403') &&
+      !this.routerService.url.includes('forgot-password') &&
       !this.routerService.url.includes('register')){
       return true;
     }
