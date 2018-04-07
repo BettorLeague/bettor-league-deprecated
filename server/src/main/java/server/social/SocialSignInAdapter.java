@@ -21,16 +21,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 @Service
-public class FacebookSignInAdapter implements SignInAdapter {
-
-    @Value("${app.url}")
-    private String appUrl;
+public class SocialSignInAdapter implements SignInAdapter {
 
     private final UserService userService;
 
     private JwtTokenUtil jwtTokenUtil;
 
-    public FacebookSignInAdapter(UserService userService,JwtTokenUtil jwtTokenUtil) {
+    public SocialSignInAdapter(UserService userService, JwtTokenUtil jwtTokenUtil) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
     }
@@ -57,11 +54,7 @@ public class FacebookSignInAdapter implements SignInAdapter {
         Cookie authCookie = new Cookie("Authorization", token);
         authCookie.setPath( "/" );
         authCookie.setHttpOnly( false );
-        authCookie.setMaxAge( 80000000 );
-
         response.addCookie(authCookie);
-        response.addHeader("Authorization",token);
-
-        return appUrl+"/profile";
+        return "/profile";
     }
 }

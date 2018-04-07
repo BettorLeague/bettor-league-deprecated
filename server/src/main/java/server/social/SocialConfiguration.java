@@ -17,6 +17,7 @@ import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.util.StringUtils;
 
@@ -32,11 +33,16 @@ public class SocialConfiguration implements SocialConfigurer {
 
     private static final Logger log = LoggerFactory.getLogger(SocialConfiguration.class);
 
-    private final FacebookConnectionSignup connectionSignUp;
+    private final SocialConnectionSignup connectionSignUp;
 
     @Getter @Setter
     @NestedConfigurationProperty
     private SocialConnection facebook;
+
+
+    @Getter @Setter
+    @NestedConfigurationProperty
+    private SocialConnection google;
 
     @Getter
     @Setter
@@ -79,6 +85,7 @@ public class SocialConfiguration implements SocialConfigurer {
         // Facebook configuration
         final String facebookClientId = facebook.getClientId();
         final String facebookClientSecret = facebook.getClientSecret();
+
         if (!StringUtils.isEmpty(facebookClientId) && !StringUtils.isEmpty(facebookClientSecret)) {
             log.debug("Configuring FacebookConnectionFactory...");
             final FacebookConnectionFactory facebookConnectionFactory =
@@ -87,6 +94,22 @@ public class SocialConfiguration implements SocialConfigurer {
             connectionFactoryConfigurer.addConnectionFactory(facebookConnectionFactory);
         } else {
             log.warn("Cannot configure FacebookConnectionFactory id or secret is null");
+        }
+
+
+
+        final String googleClientId = google.getClientId();
+        final String googleClientSecret = google.getClientSecret();
+
+        if (!StringUtils.isEmpty(googleClientId) && !StringUtils.isEmpty(googleClientSecret)) {
+            log.debug("Configuring GoogleConnectionFactory");
+            final GoogleConnectionFactory googleConnectionFactory =
+                    new GoogleConnectionFactory(googleClientId, googleClientSecret);
+            googleConnectionFactory.setScope("https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email");
+            connectionFactoryConfigurer.addConnectionFactory(
+                    googleConnectionFactory);
+        } else {
+            log.warn("Cannot configure GoogleConnectionFactory id or secret null");
         }
 
     }

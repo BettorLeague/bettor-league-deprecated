@@ -20,7 +20,7 @@ import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class FacebookConnectionSignup implements ConnectionSignUp {
+public class SocialConnectionSignup implements ConnectionSignUp {
 
 
     @Autowired

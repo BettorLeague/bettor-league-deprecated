@@ -86,7 +86,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }else {
             String username = jwtTokenUtil.getUsernameFromToken(token);
-            UserDetails user = userService.loadUserByUsername(username);
+            User user = userService.getUserByUsername(username);
             return new ResponseEntity<>(user,HttpStatus.OK);
         }
     }
