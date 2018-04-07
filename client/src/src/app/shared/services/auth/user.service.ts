@@ -13,5 +13,7 @@ export class UserService {
   public allUser(): Observable<any> {
     return this.http.get('/api/user/all');
   }
+
+
 }
 

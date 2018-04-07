@@ -21,7 +21,7 @@ export class FuseIfOnDomDirective implements AfterContentChecked
         {
             setTimeout(() => {
                 this.viewContainer.createEmbeddedView(this.templateRef);
-            }, 300);
+            }, 500);
             this.isCreated = true;
         }
         else if ( this.isCreated && !document.body.contains(this.element.nativeElement) )

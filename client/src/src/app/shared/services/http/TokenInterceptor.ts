@@ -16,11 +16,11 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const idToken = this.auth.getToken();
+    const token = this.auth.getToken();
 
-    if (idToken){
+    if (token != null){
       request = request.clone({
-        setHeaders: { Authorization: `${idToken}`}
+        setHeaders: { Authorization: `${token}`}
       });
     }else{
       request = request.clone();

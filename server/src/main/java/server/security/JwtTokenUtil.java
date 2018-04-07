@@ -77,7 +77,7 @@ public class JwtTokenUtil implements Serializable {
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
-
+/*
     private String generateAudience(Device device) {
         String audience = AUDIENCE_UNKNOWN;
         if (device.isNormal()) {
@@ -88,19 +88,19 @@ public class JwtTokenUtil implements Serializable {
             audience = AUDIENCE_MOBILE;
         }
         return audience;
-    }
+    }*/
 
     private Boolean ignoreTokenExpiration(String token) {
         String audience = getAudienceFromToken(token);
         return (AUDIENCE_TABLET.equals(audience) || AUDIENCE_MOBILE.equals(audience));
     }
 
-    public String generateToken(User user, Device device) {
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, user.getUsername(), generateAudience(device));
+        return doGenerateToken(claims, user.getUsername());
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String subject, String audience) {
+    private String doGenerateToken(Map<String, Object> claims, String subject) {
         final Date createdDate = clock.now();
         final Date expirationDate = calculateExpirationDate(createdDate);
 
@@ -109,7 +109,6 @@ public class JwtTokenUtil implements Serializable {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
-                .setAudience(audience)
                 .setIssuedAt(createdDate)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, secret)

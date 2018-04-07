@@ -65,6 +65,10 @@
 		<!-- SOCIAL -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
 		</dependency>
 		<!-- DATABASE -->

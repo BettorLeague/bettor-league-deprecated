@@ -1,7 +1,7 @@
 <mat-sidenav-container class="appContainer" (backdropClick)="sidenav.close()" >
 
   <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" >
-    <mat-nav-list>
+    <mat-nav-list >
       <h3 mat-subheader class="mat-elevation-z1" >Menu</h3>
       <mat-divider></mat-divider>
       <a mat-list-item routerLink="/home" (click)="sidenav.close()" > {{ 'Nav.Home' | translate}}  </a>

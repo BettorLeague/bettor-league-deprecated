@@ -4,7 +4,7 @@ import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/anim
 import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable()
-export class FuseSplashScreenService
+export class SplashScreenService
 {
     splashScreenEl;
     public player: AnimationPlayer;
@@ -16,7 +16,7 @@ export class FuseSplashScreenService
     )
     {
         // Get the splash screen element
-        this.splashScreenEl = this.document.body.querySelector('#fuse-splash-screen');
+        this.splashScreenEl = this.document.body.querySelector('#splash-screen');
 
         // If the splash screen element exists...
         if ( this.splashScreenEl )

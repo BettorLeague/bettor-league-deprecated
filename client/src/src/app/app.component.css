@@ -9,3 +9,8 @@
 .mat-sidenav {
   width: 200px;
 }
+
+a.mat-list-item:hover{
+  text-decoration: none !important;
+
+}

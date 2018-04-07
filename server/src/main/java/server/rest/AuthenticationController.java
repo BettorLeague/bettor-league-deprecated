@@ -60,7 +60,7 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        final String token = jwtTokenUtil.generateToken(user, device);
+        final String token = jwtTokenUtil.generateToken(user);
 
         // Return the token
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));

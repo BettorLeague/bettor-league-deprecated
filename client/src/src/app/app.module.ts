@@ -29,13 +29,14 @@ import {ComponentsModule} from "./shared/components/components.module";
 import {RegisterComponent} from "./routes/authentification/register/register.component";
 import {FuseModule} from "../@fuse/fuse.module";
 import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
+import {CookieService} from "ngx-cookie-service";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 export function initUserFactory(authService: AuthService) {
-  if(authService.getToken != null) return () => authService.refreshUser(); else return () => null;
+    return () => authService.refreshUser();
 }
 
 @NgModule({
@@ -83,8 +84,9 @@ export function initUserFactory(authService: AuthService) {
       useFactory: initUserFactory,
       deps: [AuthService],
       multi: true
-    }
-    ,
+    },
+    CookieService,
+
     SidenavService
   ],
   bootstrap: [AppComponent]

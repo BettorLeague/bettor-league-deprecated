@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {TranslateService} from "@ngx-translate/core";
 import {SidenavService} from "./shared/services/layout/sidenav.service";
-import {FuseSplashScreenService} from "../@fuse/services/splash-screen.service";
+import {SplashScreenService} from "../@fuse/services/splash-screen.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(
 
-    private fuseSplashScreen: FuseSplashScreenService,
+    private splashScreenService: SplashScreenService,
     private sidenavService : SidenavService
   ) {
   }

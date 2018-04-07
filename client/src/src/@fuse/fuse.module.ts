@@ -1,6 +1,7 @@
-import {FuseSplashScreenService} from "./services/splash-screen.service";
+
 import {NgModule} from "@angular/core";
 import {FuseDirectivesModule} from "./directives/directives";
+import {SplashScreenService} from "./services/splash-screen.service";
 
 
 @NgModule({
@@ -8,7 +9,7 @@ import {FuseDirectivesModule} from "./directives/directives";
     FuseDirectivesModule
   ],
   providers: [
-    FuseSplashScreenService
+    SplashScreenService
   ],
   exports  : [
     FuseDirectivesModule

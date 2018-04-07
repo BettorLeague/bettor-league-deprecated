@@ -1,6 +1,9 @@
 package server.social;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
@@ -15,7 +18,13 @@ import java.util.Arrays;
 import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class FacebookConnectionSignup implements ConnectionSignUp {
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -27,14 +36,14 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
     public String execute(Connection<?> connection) {
         final UserProfile userProfile = connection.fetchUserProfile();
         User user = new User();
-        user.setUsername(userProfile.getUsername());
-        user.setPassword(randomAlphabetic(8));
+        user.setUsername(userProfile.getFirstName());
+        user.setPassword(passwordEncoder.encode(randomAlphabetic(8)));
         user.setEmail(userProfile.getEmail());
         user.setFirstname(userProfile.getFirstName());
         user.setLastname(userProfile.getLastName());
         user.setEnabled(true);
         user.setAuthorities(Arrays.asList(authorityRepository.findByName(AuthorityName.ROLE_USER)));
         userRepository.save(user);
-        return user.getUsername();
+        return userProfile.getEmail();
     }
 }

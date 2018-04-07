@@ -46,7 +46,9 @@
 
         <button mat-button [matMenuTriggerFor]="appMenu" class="user-button">
           <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-icon>language</mat-icon> {{translate.currentLang}}
+            <mat-icon>language</mat-icon>
+            <span fxHide fxShow.gt-sm>{{translate.currentLang}}</span>
+            <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
           </div>
         </button>
       </div>
