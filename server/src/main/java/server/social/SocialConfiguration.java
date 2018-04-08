@@ -127,4 +127,5 @@ public class SocialConfiguration implements SocialConfigurer {
         return inMemoryUsersConnectionRepository;
     }
 
+
 }
