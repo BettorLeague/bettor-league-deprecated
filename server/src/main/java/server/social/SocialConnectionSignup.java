@@ -41,9 +41,9 @@ public class SocialConnectionSignup implements ConnectionSignUp {
         final String email = userProfile.getEmail();
         final String firstName = userProfile.getFirstName();
         final String lastName = userProfile.getLastName();
-        log.error(email+" "+firstName+" "+lastName+" ");
-        if (!email.isEmpty() && !firstName.isEmpty() && !lastName.isEmpty()) {
-            User user = userRepository.findByEmail(email);
+        log.info(email+" "+firstName+" "+lastName+" ");
+        if (!email.isEmpty()) {
+            User user = userRepository.findByEmailOrUsername(email,firstName);
             if (isNull(user)) {
                 user = new User();
                 user.setUsername(firstName);
@@ -54,16 +54,15 @@ public class SocialConnectionSignup implements ConnectionSignUp {
                 user.setEnabled(true);
                 user.setAuthorities(Arrays.asList(authorityRepository.findByName(AuthorityName.ROLE_USER)));
                 userRepository.save(user);
-                log.info("New person: {} was successfully authenticated by email: {}", user.getUsername(), email);
+                log.info("New person: {} was successfully Signup by email: {}", user.getUsername(), email);
 
             } else {
                 log.info("Existing person: {} was successfully authenticated by email: {}", user.getUsername(), email);
             }
         } else {
-            // TODO: 02.02.2018 Handle blank email with error on a client side
             log.error("Failed to authenticate person with blank email from connection: {}", connection);
         }
 
-        return userProfile.getEmail();
+        return email;
     }
 }

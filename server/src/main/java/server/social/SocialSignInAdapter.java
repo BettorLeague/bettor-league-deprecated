@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.connect.Connection;
@@ -18,6 +19,8 @@ import server.service.impl.UserServiceImpl;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+
+import static java.util.Objects.isNull;
 
 @Service
 @Slf4j
@@ -41,14 +44,15 @@ public class SocialSignInAdapter implements SignInAdapter {
         final UserProfile userProfile = connection.fetchUserProfile();
 
         User user = this.userServiceImpl.getUserByUsernameOrEmail(localUserId);
+        if (isNull(user)){
+            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", localUserId));
+        }
 
-        log.info("Existing person: {} by username: {}", localUserId, userProfile.getEmail());
+        log.info("Existing person: {} Signin by email: {}", localUserId, userProfile.getEmail());
 
 
         SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(
-                        user.getUsername(), null));
-
+                new UsernamePasswordAuthenticationToken(user.getEmail(), null));
 
 
         HttpServletResponse response = request.getNativeResponse(HttpServletResponse.class);

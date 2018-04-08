@@ -52,7 +52,7 @@ public class SocialConfiguration implements SocialConfigurer {
 
     }
 
-    // TODO: 01.02.2018 Figure out how to fix FB API bio error with more elegant way
+
     @PostConstruct
     private void init() {
         try {
@@ -97,7 +97,7 @@ public class SocialConfiguration implements SocialConfigurer {
         }
 
 
-
+        // Google configuration
         final String googleClientId = google.getClientId();
         final String googleClientSecret = google.getClientSecret();
 
@@ -121,8 +121,7 @@ public class SocialConfiguration implements SocialConfigurer {
 
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
-        final InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository =
-                new InMemoryUsersConnectionRepository(connectionFactoryLocator);
+        final InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository = new InMemoryUsersConnectionRepository(connectionFactoryLocator);
         inMemoryUsersConnectionRepository.setConnectionSignUp(connectionSignUp);
         return inMemoryUsersConnectionRepository;
     }

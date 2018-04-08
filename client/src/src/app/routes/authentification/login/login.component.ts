@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoginRequestModel} from "../../../shared/models/auth/login.request.model";
 import {Subject} from "rxjs/Subject";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import {MatDialog, MatDialogRef} from "@angular/material";
+import {ConfirmDialogComponent} from "../../../shared/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: 'app-login',
@@ -20,7 +22,11 @@ export class LoginComponent implements OnInit {
 
     returnUrl: string;
 
+
+    confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
+
     constructor(
+        private dialog: MatDialog,
         private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
@@ -84,8 +90,15 @@ export class LoginComponent implements OnInit {
                     );
                 },
                 error => {
+                      this.openDialog("Error "+error.status,error.error);
                 });
 
+    }
+
+    openDialog(title:string,msg:string){
+      this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent);
+      this.confirmDialogRef.componentInstance.confirmMessage = msg;
+      this.confirmDialogRef.componentInstance.confirmTitle = title;
     }
 
 
