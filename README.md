@@ -28,6 +28,7 @@ Ensure you have this installed before proceeding further
 - Angular-cli 1.6.3
 
 ## Technology Stack
+
 Component         | Technology
 ---               | ---
 Frontend          | [Angular 5](https://github.com/angular/angular) (JavaScript)
@@ -39,6 +40,7 @@ Client Build Tools| [angular-cli , npm](https://github.com/angular/angular-cli)
 Server Build Tools| [Maven](https://maven.apache.org/) (Java)
 Continuous integration | [Jenkins](https://jenkins.io)
 API Restfull de Resultat Sportif | [FootballData](https://www.football-data.org/)
+
 
 ##How do JSON Web Tokens work?
 In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local storage, but cookies can be also used), instead of the traditional approach of creating a session in the server and returning a cookie.
