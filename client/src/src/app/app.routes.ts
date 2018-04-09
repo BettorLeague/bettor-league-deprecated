@@ -12,17 +12,19 @@ import {RegisterComponent} from "./routes/authentification/register/register.com
 import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
+import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
 
 export const ROUTES: Routes = [
-  { path: '',      component: HomeComponent },
-  { path: '403',  component: UnauthorizeComponent },
-  { path: 'home',  component: HomeComponent },
-  { path: 'user',  component: UserComponent, canActivate: [AdminGuard] },
-  { path: 'login',  component: LoginComponent , canActivate: [GuestGuard]},
-  { path: 'register',  component: RegisterComponent , canActivate: [GuestGuard]},
-  { path: 'mail-confirm',  component: MailConfirmComponent , canActivate: [GuestGuard]},
+  { path: '',                 component: HomeComponent },
+  { path: '404',              component: FileNotFoundComponent},
+  { path: '403',              component: UnauthorizeComponent },
+  { path: 'home',             component: HomeComponent },
+  { path: 'user',             component: UserComponent, canActivate: [AdminGuard] },
+  { path: 'login',            component: LoginComponent , canActivate: [GuestGuard]},
+  { path: 'register',         component: RegisterComponent , canActivate: [GuestGuard]},
+  { path: 'mail-confirm',     component: MailConfirmComponent , canActivate: [GuestGuard]},
   { path: 'forgot-password',  component: ForgotPasswordComponent , canActivate: [GuestGuard]},
-  { path: 'profile',  component: ProfileComponent, canActivate: [UserGuard] },
+  { path: 'profile',          component: ProfileComponent, canActivate: [UserGuard] },
   { path: 'confidentialite',  component: ConfidentialiteComponent },
-  { path: '**',    component: HomeComponent }
+  { path: '**',               redirectTo: '/404' }
 ];

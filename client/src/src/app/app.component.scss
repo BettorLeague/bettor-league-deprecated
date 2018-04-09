@@ -1,16 +1,26 @@
 .appContainer {
   position: absolute;
-  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-}
+  top:0;
 
+}
 .mat-sidenav {
   width: 200px;
 }
 
 a.mat-list-item:hover{
   text-decoration: none !important;
+}
 
+
+main{
+  display:flex; /* 2 */
+  flex-direction:column; /* 3 */
+  height: 100%;
+}
+
+:host ::ng-deep router-outlet + *:not(nav) {
+  flex-grow: 1;
 }

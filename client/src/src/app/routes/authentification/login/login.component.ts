@@ -88,18 +88,10 @@ export class LoginComponent implements OnInit {
                                 this.router.navigate(['/profile']);
                         }
                     );
-                },
-                error => {
-                      this.openDialog("Error "+error.status,error.error);
                 });
 
     }
 
-    openDialog(title:string,msg:string){
-      this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent);
-      this.confirmDialogRef.componentInstance.confirmMessage = msg;
-      this.confirmDialogRef.componentInstance.confirmTitle = title;
-    }
 
 
 

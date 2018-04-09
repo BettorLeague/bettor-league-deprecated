@@ -2,22 +2,22 @@
 
     <div id="register-intro" fxFlex fxHide fxShow.gt-xs>
 
-        <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+        <div class="logo" *fuseIfOnDom [@animate]="{value:'*',params:{scale:'0.2'}}">
             <img src="assets/images/logos/fuse.svg">
         </div>
 
-        <div class="title"  [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+        <div class="title"  *fuseIfOnDom [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
           Welcome to Bettor League!
         </div>
 
-        <div class="description" [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+        <div class="description" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
             vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
         </div>
 
     </div>
 
-    <div id="register-form-wrapper"
+    <div id="register-form-wrapper" *fuseIfOnDom
          [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
 
         <div id="register-form">
@@ -64,11 +64,11 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="terms" fxLayout="row" fxLayoutAlign="center center">
+                <div class="terms" fxLayout="row" fxLayoutAlign="center start">
                     <mat-checkbox name="terms" aria-label="Accept" required>
                         <span>Accept</span>
                     </mat-checkbox>
-                    <a href="#">terms and conditions</a>
+                    <a href="/confidentialite">terms and conditions</a>
                 </div>
 
                 <button (click)="onSubmit()" mat-raised-button color="accent" class="submit-button" aria-label="CREATE AN ACCOUNT"
@@ -77,6 +77,32 @@
                 </button>
 
             </form>
+
+          <div class="separator">
+            <span class="text">OR</span>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="start center">
+
+
+            <form ngNoForm action="/signin/google"  method="POST" class="socialForm">
+              <button type="submit" mat-raised-button class="google">
+                Signup with Google
+              </button>
+            </form>
+
+            <form ngNoForm action="/signin/facebook"  method="POST" class="socialForm">
+              <button type="submit" mat-raised-button class="facebook">
+                Signup with Facebook
+              </button>
+            </form>
+
+
+          </div>
+
+          <div class="separator">
+            <span class="text">OR</span>
+          </div>
 
             <div class="register" fxLayout="column" fxLayoutAlign="center center">
                 <span class="text">Already have an account?</span>

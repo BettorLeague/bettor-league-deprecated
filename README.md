@@ -27,7 +27,7 @@ Ensure you have this installed before proceeding further
 - npm 5 or above,   
 - Angular-cli 1.6.3
 
-### Technology Stack
+## Technology Stack
 Component         | Technology
 ---               | ---
 Frontend          | [Angular 5](https://github.com/angular/angular) (JavaScript)
@@ -40,13 +40,29 @@ Server Build Tools| [Maven](https://maven.apache.org/) (Java)
 Continuous integration | [Jenkins](https://jenkins.io)
 API Restfull de Resultat Sportif | [FootballData](https://www.football-data.org/)
 
+##How do JSON Web Tokens work?
+In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local storage, but cookies can be also used), instead of the traditional approach of creating a session in the server and returning a cookie.
+
+Whenever the user wants to access a protected route or resource, the user agent should send the JWT, typically in the Authorization header using the Bearer schema. The content of the header should look like the following:
+
+Authorization: <token>
+
+This is a stateless authentication mechanism as the user state is never saved in server memory. The server's protected routes will check for a valid JWT in the Authorization header, and if it's present, the user will be allowed to access protected resources. As JWTs are self-contained, all the necessary information is there, reducing the need to query the database multiple times.
+
+This allows you to fully rely on data APIs that are stateless and even make requests to downstream services. It doesn't matter which domains are serving your APIs, so Cross-Origin Resource Sharing (CORS) won't be an issue as it doesn't use cookies.
+
+The following diagram shows this process:
+<div style="display:flex;justify-content:center">
+    <img src="http://nsa39.casimages.com/img/2018/04/09/180409022638805435.png" />
+</div>
+
 ## Local Environment 
 
 
-### Build Only Frontend (Angular JS)
+### Build Only Frontend (Angular 5)
 http://localhost:4200
 ```
-# Front Dev to client/src/
+cd  client/src/
 npm install
 npm start
 ```
@@ -54,8 +70,8 @@ npm start
 ### Build Front & Backend (SpringBoot Java)
 http://localhost:8080
 ```
-# Backend Dev to server/
 mvn clean install
+cd  server
 mvn spring-boot:run
 ```
 
@@ -66,15 +82,7 @@ UserName: root
 Password: root
 ```
 
-#### Useful Links 
+### Useful Links 
 
 - Swagger : http://localhost:8080/swagger-ui.html
 - Database : http://localhost:8080/database/
-
-
-## Production Environment 
-
-#### Useful Links 
-
-- App : http://www.bettorleague.ovh
-- Jenkins : http://www.jenkins.bettorleague.ovh

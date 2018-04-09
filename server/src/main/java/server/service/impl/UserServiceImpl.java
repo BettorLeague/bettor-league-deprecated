@@ -102,14 +102,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
-            return org.springframework.security.core.userdetails.User//
-                    .withUsername(username)//
-                    .password(user.getPassword())//
-                    .authorities(user.getAuthorities())//
-                    .accountExpired(false)//
-                    .accountLocked(false)//
-                    .credentialsExpired(false)//
-                    .disabled(false)//
+            return org.springframework.security.core.userdetails.User
+                    .withUsername(username)
+                    .password(user.getPassword())
+                    .authorities(user.getAuthorities())
+                    .accountExpired(false)
+                    .accountLocked(false)
+                    .credentialsExpired(false)
+                    .disabled(false)
                     .build();
         }
     }
