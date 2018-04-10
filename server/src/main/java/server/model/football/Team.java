@@ -3,6 +3,9 @@ package server.model.football;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +13,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TEAM")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Team {
 
     @Id
@@ -35,52 +41,4 @@ public class Team {
 
     @Column(name = "SQUAD_MARKET_VALUE")
     private String squadMarketValue;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getCrestUrl() {
-        return crestUrl;
-    }
-
-    public void setCrestUrl(String crestUrl) {
-        this.crestUrl = crestUrl;
-    }
-
-    public String getSquadMarketValue() {
-        return squadMarketValue;
-    }
-
-    public void setSquadMarketValue(String squadMarketValue) {
-        this.squadMarketValue = squadMarketValue;
-    }
 }

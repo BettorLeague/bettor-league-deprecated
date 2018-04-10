@@ -38,20 +38,27 @@ public class UpdateResult {
 
 
     private final Log logger = LogFactory.getLog(this.getClass());
-
+/*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getLigue1Competition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
     }
-/*
+
+    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
+    public void getMondialCompetition() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new RestTemplateInterceptor());
+        updateCompetition(restTemplate,"467");
+    }*/
+
     @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void lol(){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateFixture(restTemplate,"450",new Long(1));
-    }*/
+    }
 
 
     private void updateCompetition(RestTemplate restTemplate, String id){

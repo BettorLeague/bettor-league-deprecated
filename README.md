@@ -42,7 +42,7 @@ Continuous integration | [Jenkins](https://jenkins.io)
 API Restfull de Resultat Sportif | [FootballData](https://www.football-data.org/)
 
 
-##How do JSON Web Tokens work?
+## How do JSON Web Tokens work?
 In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local storage, but cookies can be also used), instead of the traditional approach of creating a session in the server and returning a cookie.
 
 Whenever the user wants to access a protected route or resource, the user agent should send the JWT, typically in the Authorization header using the Bearer schema. The content of the header should look like the following:

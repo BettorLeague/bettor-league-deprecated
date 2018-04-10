@@ -1,5 +1,9 @@
 package server.model.football;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -7,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "LEAGUE_TABLE")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LeagueTable {
 
     @Id
@@ -29,27 +36,4 @@ public class LeagueTable {
             inverseJoinColumns = {@JoinColumn(name = "STANDING_ID", referencedColumnName = "ID")})
     private List<Standing> standing;
 
-    public String getLeagueCaption() {
-        return leagueCaption;
-    }
-
-    public void setLeagueCaption(String leagueCaption) {
-        this.leagueCaption = leagueCaption;
-    }
-
-    public int getMatchday() {
-        return matchday;
-    }
-
-    public void setMatchday(int matchday) {
-        this.matchday = matchday;
-    }
-
-    public List<Standing> getStanding() {
-        return standing;
-    }
-
-    public void setStanding(List<Standing> standing) {
-        this.standing = standing;
-    }
 }

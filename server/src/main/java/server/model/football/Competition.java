@@ -2,6 +2,9 @@ package server.model.football;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +15,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "COMPETITION")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Competition {
 
     @Id
@@ -60,84 +66,4 @@ public class Competition {
             inverseJoinColumns = {@JoinColumn(name = "TEAM_ID", referencedColumnName = "ID")})
     @JsonIgnore
     private List<Team> teams;
-
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCaption() {
-        return caption;
-    }
-
-    public void setCaption(String caption) {
-        this.caption = caption;
-    }
-
-    public String getLeague() {
-        return league;
-    }
-
-    public void setLeague(String league) {
-        this.league = league;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public int getCurrentMatchday() {
-        return currentMatchday;
-    }
-
-    public void setCurrentMatchday(int currentMatchday) {
-        this.currentMatchday = currentMatchday;
-    }
-
-    public int getNumberOfMatchdays() {
-        return numberOfMatchdays;
-    }
-
-    public void setNumberOfMatchdays(int numberOfMatchdays) {
-        this.numberOfMatchdays = numberOfMatchdays;
-    }
-
-    public int getNumberOfGames() {
-        return numberOfGames;
-    }
-
-    public void setNumberOfGames(int numberOfGames) {
-        this.numberOfGames = numberOfGames;
-    }
-
-    public int getNumberOfTeams() {
-        return numberOfTeams;
-    }
-
-    public void setNumberOfTeams(int numberOfTeams) {
-        this.numberOfTeams = numberOfTeams;
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
 }
