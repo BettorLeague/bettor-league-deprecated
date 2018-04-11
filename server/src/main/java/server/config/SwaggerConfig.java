@@ -29,6 +29,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(Predicates.not(PathSelectors.regex("/error")))
+                .paths(Predicates.not(PathSelectors.regex("/connect")))
+                .paths(Predicates.not(PathSelectors.regex("/signin")))
                 .build()
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .securityContexts(Collections.singletonList(securityContext()))

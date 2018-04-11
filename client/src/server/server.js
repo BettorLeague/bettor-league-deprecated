@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const config = {
-  port: 9090
+  port: 8080
 };
 
 app.set('config', config);
@@ -46,7 +46,7 @@ if (!module.parent) {
 
 function start (app, config) {
   return app.listen(config.port, () => {
-    console.log('Listening on port 9090');
+    console.log('Listening on port '+config.port);
   });
 }
 

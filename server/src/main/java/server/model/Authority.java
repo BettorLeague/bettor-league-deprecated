@@ -20,6 +20,7 @@ public class Authority implements GrantedAuthority {
 
     @Id
     @Column(name = "ID")
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
