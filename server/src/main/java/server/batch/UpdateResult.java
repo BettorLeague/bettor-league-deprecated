@@ -38,27 +38,28 @@ public class UpdateResult {
 
 
     private final Log logger = LogFactory.getLog(this.getClass());
-/*
+
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getLigue1Competition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-    }
+    }/*
 
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getMondialCompetition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"467");
-    }*/
+    }
 
     @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void lol(){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
+        //updateCompetition(restTemplate,"450");
         updateFixture(restTemplate,"450",new Long(1));
-    }
+    }*/
 
 
     private void updateCompetition(RestTemplate restTemplate, String id){
@@ -77,7 +78,7 @@ public class UpdateResult {
         }
 
         updateLeagueRank(restTemplate,competition,id);
-        //updateFixture(restTemplate,id,competition.getId());
+        updateFixture(restTemplate,id,competition.getId());
 
     }
 
@@ -103,11 +104,15 @@ public class UpdateResult {
     private void updateFixture(RestTemplate restTemplate,String id,Long competitionId) {
         FixtureRequest fixtureRequest = restTemplate.getForObject("https://www.football-data.org/v1/competitions/"+id+"/fixtures", FixtureRequest.class);
         List<Fixture> fixtures = fixtureRequest.getFixtures();
-        for(Fixture fixture: fixtures){
+        for(int i = 0 ; i < fixtures.size(); i++){
+            Fixture fixture = fixtures.get(i);
             fixture.setCompetitionId(competitionId);
+            fixture.setId(new Long(i+1));
+            logger.info(fixture.getHomeTeamName()+" vs "+fixture.getAwayTeamName()+" fixture id "+fixture.getId());
             fixtureRepository.save(fixture);
         }
     }
+
 
 
 }
