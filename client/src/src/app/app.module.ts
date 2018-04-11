@@ -33,6 +33,8 @@ import {CookieService} from "ngx-cookie-service";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
+import { FootballComponent } from './routes/pages/football/football.component';
+import { RankingComponent } from './routes/pages/football/ranking/ranking.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -56,7 +58,9 @@ export function initUserFactory(authService: AuthService) {
     FileNotFoundComponent,
     FooterComponent,
     RegisterComponent,
-    ConfidentialiteComponent
+    ConfidentialiteComponent,
+    FootballComponent,
+    RankingComponent,
   ],
   imports: [
     BrowserModule,
