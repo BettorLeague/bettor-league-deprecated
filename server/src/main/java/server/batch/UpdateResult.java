@@ -108,7 +108,6 @@ public class UpdateResult {
             Fixture fixture = fixtures.get(i);
             fixture.setCompetitionId(competitionId);
             fixture.setId(new Long(i+1));
-            logger.info(fixture.getHomeTeamName()+" vs "+fixture.getAwayTeamName()+" fixture id "+fixture.getId());
             fixtureRepository.save(fixture);
         }
     }
