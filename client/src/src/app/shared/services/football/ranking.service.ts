@@ -11,4 +11,8 @@ export class RankingService {
         return this.http.get(`/api/competition/${id}/ranking`);
     }
 
+    public getCompetitionRankingAtMatchDay(id: Number, matchday: Number): Observable<any> {
+        return this.http.get(`/api/competition/${id}/ranking/${matchday}`);
+    }
+
 }

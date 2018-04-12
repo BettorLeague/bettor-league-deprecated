@@ -1,13 +1,19 @@
-<p>
-    {{ 'Nav.Ranking' | translate}}
-</p>
-
 <div class="container cardContainer">
     <mat-progress-bar
             *ngIf="!ligue1Ranking"
             [color]="'primary'"
             [mode]="'indeterminate'">
     </mat-progress-bar>
+
+    <mat-paginator
+            [length]="matchday"
+            [pageIndex]="matchday - 1"
+            [pageSize]="1"
+            [showFirstLastButtons]="true"
+            (page)="onPageChange($event)">
+
+    </mat-paginator>
+
 
     <mat-table id="userTable" #table [dataSource]="ligue1Ranking" class="mat-elevation-z8">
 
