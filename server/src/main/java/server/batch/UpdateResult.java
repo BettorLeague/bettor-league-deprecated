@@ -65,20 +65,22 @@ public class UpdateResult {
     private void updateCompetition(RestTemplate restTemplate, String id){
 
         Competition competition = restTemplate.getForObject("https://www.football-data.org/v1/competitions/"+id, Competition.class);
-
+        Long competitionId;
         if(isNull(competitionRepository.findByCaption(competition.getCaption()))){
             List<Team> teams = updateTeamCompetition(restTemplate,id);
             competition.setTeams(teams);
             competitionRepository.save(competition);
+            competitionId = competitionRepository.findByCaption(competition.getCaption()).getId();
         }else{
             Competition current = competitionRepository.findByCaption(competition.getCaption());
             current.setCurrentMatchday(competition.getCurrentMatchday());
             current.setLastUpdated(competition.getLastUpdated());
             competitionRepository.save(current);
+            competitionId = current.getId();
         }
 
         updateLeagueRank(restTemplate,competition,id);
-        updateFixture(restTemplate,id,competition.getId());
+        updateFixture(restTemplate,id,competitionId);
 
     }
 
