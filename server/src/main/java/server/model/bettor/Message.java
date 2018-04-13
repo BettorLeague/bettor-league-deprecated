@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -29,8 +28,8 @@ public class Message {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @Column(name = "MESSAGE")
-    private String message;
+    @Column(name = "CONTENT")
+    private String content;
 
 
 }
