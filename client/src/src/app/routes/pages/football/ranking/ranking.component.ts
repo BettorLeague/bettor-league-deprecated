@@ -36,6 +36,7 @@ export class RankingComponent implements OnInit {
 
     onPageChange(event){
         this.getLigue1RankingAtMatchDay(event.pageIndex);
+        this.manualMatchday = null;
     }
 
     updateManualPage(index) {

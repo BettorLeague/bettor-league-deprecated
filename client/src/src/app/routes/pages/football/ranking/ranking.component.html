@@ -9,7 +9,7 @@
         <div class="page-select">
             <div class="label">Go to page:</div>
             <mat-form-field>
-                <mat-select [ngModel]="manualPage" (ngModelChange)="updateManualPage($event)">
+                <mat-select [ngModel]="manualMatchday" (ngModelChange)="updateManualPage($event)">
                     <mat-option *ngFor="let day of matchdaysFinished" [value]="day">{{day}}</mat-option>
                 </mat-select>
             </mat-form-field>
