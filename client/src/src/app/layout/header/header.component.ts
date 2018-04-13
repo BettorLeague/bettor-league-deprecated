@@ -4,6 +4,7 @@ import {AuthService} from "../../shared/services/auth/auth.service";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
 import {SidenavService} from "../../shared/services/layout/sidenav.service";
+import {HeaderService} from "../../shared/services/layout/header.service";
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
   routerService: Router;
 
   constructor(
+    public headerService:HeaderService,
     private router: Router,
     private sidenavService: SidenavService,
     private authService: AuthService,
@@ -51,18 +53,7 @@ export class HeaderComponent implements OnInit {
     return this.authService.currentUser;
   }
 
-  isOpen():boolean{
-    if (
-      !this.routerService.url.includes('login') &&
-      !this.routerService.url.includes('mail-confirm') &&
-      !this.routerService.url.includes('403') &&
-      !this.routerService.url.includes('404') &&
-      !this.routerService.url.includes('forgot-password') &&
-      !this.routerService.url.includes('register')){
-      return true;
-    }
-    return false;
-  }
+
 
 
 

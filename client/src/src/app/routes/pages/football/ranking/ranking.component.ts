@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource} from '@angular/material';
 import { MatPaginator } from '@angular/material';
 import {RankingService} from "../../../../shared/services/football/ranking.service";
 
@@ -9,6 +9,7 @@ import {RankingService} from "../../../../shared/services/football/ranking.servi
     styleUrls: ['./ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
+    @ViewChild(MatSort) sort: MatSort;
 
     ligue1Ranking: MatTableDataSource<any>;
     matchday: number;
@@ -31,6 +32,8 @@ export class RankingComponent implements OnInit {
             for(let i = 0; i < this.matchday; i++){
                 this.matchdaysFinished.push(i+1);
             }
+
+          this.ligue1Ranking.sort = this.sort;
         });
     }
 

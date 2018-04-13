@@ -66,4 +66,5 @@ public class Competition {
             inverseJoinColumns = {@JoinColumn(name = "TEAM_ID", referencedColumnName = "ID")})
     @JsonIgnore
     private List<Team> teams;
+
 }

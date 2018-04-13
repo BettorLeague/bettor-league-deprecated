@@ -57,8 +57,8 @@ public class UpdateResult {
     public void lol(){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
-        //updateCompetition(restTemplate,"450");
-        updateFixture(restTemplate,"450",new Long(1));
+        updateCompetition(restTemplate,"450");
+        //updateFixture(restTemplate,"450",new Long(1));
     }*/
 
 

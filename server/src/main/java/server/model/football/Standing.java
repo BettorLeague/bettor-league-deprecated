@@ -46,5 +46,14 @@ public class Standing {
     @Column(name = "GOAL_DIFFERENCE")
     private int goalDifference;
 
+    @Column(name = "DRAWS")
+    private int draws;
+
+    @Column(name = "LOSSES")
+    private int losses;
+
+    @Column(name = "WINS")
+    private int wins;
+
 
 }

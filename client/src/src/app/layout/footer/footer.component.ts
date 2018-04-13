@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {HeaderService} from "../../shared/services/layout/header.service";
 
 @Component({
   selector: 'app-footer',
@@ -8,22 +9,10 @@ import {Router} from "@angular/router";
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(public headerService:HeaderService) { }
 
   ngOnInit() {
   }
 
-  isOpen():boolean{
-    if (
-      !this.router.url.includes('login') &&
-      !this.router.url.includes('mail-confirm') &&
-      !this.router.url.includes('403') &&
-      !this.router.url.includes('404') &&
-      !this.router.url.includes('forgot-password') &&
-      !this.router.url.includes('register')){
-      return true;
-    }
-    return false;
-  }
 
 }

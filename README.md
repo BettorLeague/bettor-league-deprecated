@@ -58,6 +58,11 @@ The following diagram shows this process:
     <img src="http://nsa39.casimages.com/img/2018/04/09/180409022638805435.png" />
 </div>
 
+## Football Match Modeling
+<div style="display:flex;justify-content:center">
+    <img src="http://api.football-data.org/docs/v1/state_diagram_fixturestatus.png" />
+</div>
+
 ## Local Environment 
 
 

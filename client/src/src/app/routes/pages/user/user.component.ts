@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
 
   public getAllUser() {
     this.userService.allUser().subscribe(data => {
-      this.dataSource = new MatTableDataSource<any>(data);
+        this.dataSource = new MatTableDataSource<any>(data);
     });
   }
 
