@@ -27,6 +27,6 @@ export const ROUTES: Routes = [
   { path: 'forgot-password',  component: ForgotPasswordComponent , canActivate: [GuestGuard]},
   { path: 'profile',          component: ProfileComponent, canActivate: [UserGuard] },
   { path: 'confidentialite',  component: ConfidentialiteComponent },
-  { path: 'football',         component: FootballComponent },
+  { path: 'football',         component: FootballComponent, canActivate: [UserGuard] },
   { path: '**',               redirectTo: '/404' }
 ];
