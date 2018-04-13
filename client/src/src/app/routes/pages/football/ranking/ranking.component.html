@@ -5,14 +5,25 @@
             [mode]="'indeterminate'">
     </mat-progress-bar>
 
-    <mat-paginator
-            [length]="matchday"
-            [pageIndex]="matchday - 1"
-            [pageSize]="1"
-            [showFirstLastButtons]="true"
-            (page)="onPageChange($event)">
+    <div class="paginator-container">
+        <div class="page-select">
+            <div class="label">Go to page:</div>
+            <mat-form-field>
+                <mat-select [ngModel]="manualPage" (ngModelChange)="updateManualPage($event)">
+                    <mat-option *ngFor="let day of matchdaysFinished" [value]="day">{{day}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-    </mat-paginator>
+        <mat-paginator
+                [length]="matchday"
+                [pageIndex]="matchday - 1"
+                [pageSize]="1"
+                [showFirstLastButtons]="true"
+                (page)="onPageChange($event)">
+
+        </mat-paginator>
+    </div>
 
 
     <mat-table id="userTable" #table [dataSource]="ligue1Ranking" class="mat-elevation-z8">
