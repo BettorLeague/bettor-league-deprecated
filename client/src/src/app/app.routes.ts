@@ -11,6 +11,7 @@ import {UnauthorizeComponent} from "./routes/error/403/unauthorize.component";
 import {RegisterComponent} from "./routes/authentification/register/register.component";
 import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
+import {FootballComponent} from "./routes/pages/football/football.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
 
@@ -26,5 +27,6 @@ export const ROUTES: Routes = [
   { path: 'forgot-password',  component: ForgotPasswordComponent , canActivate: [GuestGuard]},
   { path: 'profile',          component: ProfileComponent, canActivate: [UserGuard] },
   { path: 'confidentialite',  component: ConfidentialiteComponent },
+  { path: 'football',         component: FootballComponent },
   { path: '**',               redirectTo: '/404' }
 ];

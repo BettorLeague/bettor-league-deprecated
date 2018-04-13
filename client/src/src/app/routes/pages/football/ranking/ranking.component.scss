@@ -1,0 +1,30 @@
+.buts
+{
+  color: #21ba45;
+}
+
+.buts-contre
+{
+  color: #db2828
+}
+
+.center
+{
+  text-align: center;
+}
+
+.page-select {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+
+  .label {
+    margin: 0 4px;
+  }
+}
+
+.paginator-container {
+  margin: 32px;
+  display: flex;
+  align-items: center;
+}

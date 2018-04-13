@@ -1,25 +1,27 @@
 <mat-sidenav-container class="appContainer" (backdropClick)="sidenav.close()" >
 
-  <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" >
-    <mat-nav-list >
-      <h3 mat-subheader class="mat-elevation-z1" >Menu</h3>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/home" (click)="sidenav.close()" > {{ 'Nav.Home' | translate}}  </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item  routerLink="/user" (click)="sidenav.close()" > {{ 'Nav.User' | translate }} </a>
-      <mat-divider></mat-divider>
-    </mat-nav-list>
-  </mat-sidenav>
+    <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" >
+        <mat-nav-list >
+            <h3 mat-subheader class="mat-elevation-z1" >Menu</h3>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/home" (click)="sidenav.close()" > {{ 'Nav.Home' | translate}}  </a>
+            <mat-divider></mat-divider>
+            <a mat-list-item  routerLink="/user" (click)="sidenav.close()" > {{ 'Nav.User' | translate }} </a>
+            <mat-divider></mat-divider>
+            <a mat-list-item  routerLink="/football" (click)="sidenav.close()" >Football</a>
+            <mat-divider></mat-divider>
+        </mat-nav-list>
+    </mat-sidenav>
 
 
-  <mat-sidenav-content>
-    <main>
-      <app-header></app-header>
-      <router-outlet></router-outlet>
-      <app-footer></app-footer>
-    </main>
+    <mat-sidenav-content>
+        <main>
+            <app-header></app-header>
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+        </main>
 
 
-  </mat-sidenav-content>
+    </mat-sidenav-content>
 
 </mat-sidenav-container>

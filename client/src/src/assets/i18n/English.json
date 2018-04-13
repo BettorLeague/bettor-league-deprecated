@@ -3,9 +3,19 @@
     "Home" : "Home",
     "User" : "User",
     "Login" : "Login",
-    "Todo" : "Todo Item"
+    "Todo" : "Todo Item",
+    "Ranking": "Ranking"
   },
+
   "HOME": {
     "TITLE": "Hello Angular"
+  },
+
+  "Ranking":{
+    "equipe": "Team",
+    "matchs joués": "Played games",
+    "buts": "Goals",
+    "buts contre": "Goals against",
+    "difference buts": "Goal difference"
   }
 }

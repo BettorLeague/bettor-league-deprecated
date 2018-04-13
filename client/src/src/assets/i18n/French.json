@@ -3,9 +3,19 @@
     "Home" : "Accueil",
     "User" : "Utilisateur",
     "Login" : "Se connecter",
-    "Todo" : "Tâche à faire"
+    "Todo" : "Tâche à faire",
+    "Ranking": "Classement"
   },
+
   "HOME": {
     "TITLE": "Bonjour Angular"
+  },
+
+  "Ranking":{
+    "equipe": "Equipe",
+    "matchs joués": "Matchs jourés",
+    "buts": "Buts",
+    "buts contre": "Buts contre",
+    "difference buts": "Differences de buts"
   }
 }
