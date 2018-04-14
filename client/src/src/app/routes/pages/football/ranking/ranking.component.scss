@@ -1,11 +1,14 @@
-.buts
+.green
 {
   color: #21ba45;
 }
 
-.buts-contre
+.red
 {
-  color: #db2828
+  color: #db2828;
+}
+.orange{
+  color: #fbbd08;
 }
 
 .center
@@ -29,6 +32,7 @@
   align-items: center;
   background: white;
   justify-content: space-between;
+  width: 100%;
 }
 
 .rankingContainer{
@@ -38,24 +42,45 @@
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-
+.rankingContainer .mat-table{
+  width: 100%;
+}
 .rankingContainer .mat-header-row {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
-
   position: sticky;
   top: -.5px;
   background: white;
   z-index: 100;
 }
 
+.rankingContainer .mat-row{
+  height: 60px;
+}
+.rankingContainer .mat-row:hover{
+  background: rgba(0,0,0,.03);
+}
 
 
-.mat-column-Equipe {
+
+.mat-column-teamName {
   flex: 0 0 30%;
 }
+
+.mat-column-position,.mat-column-points,.mat-column-playedGames,.mat-column-wins,.mat-column-draws,.mat-column-losses,.mat-column-goals,.mat-column-goalsAgainst,.mat-column-goalDifference{
+  flex: 0 0 8%;
+}
+
 
 .blason {
   width: 40px;
   height:auto;
   max-height: 40px
+}
+
+.name-blason {
+  display: flex;
+  padding: 0px 5px;
+}
+.name-blason span{
+  margin: auto 10px;
 }

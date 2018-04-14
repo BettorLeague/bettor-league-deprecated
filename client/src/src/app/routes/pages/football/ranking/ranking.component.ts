@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import { MatPaginator } from '@angular/material';
 import {RankingService} from "../../../../shared/services/football/ranking.service";
+import {StandingModel} from "../../../../shared/models/football/ranking/standing.model";
 
 @Component({
     selector: 'app-ranking',
@@ -10,47 +11,37 @@ import {RankingService} from "../../../../shared/services/football/ranking.servi
 })
 export class RankingComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
-
-    ligue1Ranking: MatTableDataSource<any>;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    displayedColumns = ['position', 'teamName', 'points', 'playedGames','wins','draws','losses', 'goals', 'goalsAgainst', 'goalDifference'];
+    ligue1Ranking = new MatTableDataSource();
     matchday: number;
-    manualMatchday: number;
-    matchdaysFinished = [];
+    totalmatch:number[] = [];
+    lastmatch:number;
 
     constructor(private rankingService: RankingService) {
         this.getLigue1CurrentRanking();
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     getLigue1CurrentRanking(){
         this.rankingService.getCompetitionRanking(1).subscribe(data => {
+            this.lastmatch = data.matchday;
             this.matchday = data.matchday;
-            this.ligue1Ranking = new MatTableDataSource<any>(data.standing);
-            for(let i = 0; i < this.matchday; i++){
-                this.matchdaysFinished.push(i+1);
+            for(let i = 1; i <= this.matchday ; i++){
+              this.totalmatch.push(i);
             }
-
-          this.ligue1Ranking.sort = this.sort;
+            this.ligue1Ranking.data =  data.standing;
+            this.ligue1Ranking.sort = this.sort;
+            console.log(this.totalmatch);
         });
     }
 
-    onPageChange(event){
-        this.getLigue1RankingAtMatchDay(event.pageIndex);
-        this.manualMatchday = null;
-    }
-
-    updateManualPage(index) {
-        this.manualMatchday = index;
-        this.paginator.pageIndex = index - 1;
-        this.getLigue1RankingAtMatchDay(this.manualMatchday);
-    }
-
-    getLigue1RankingAtMatchDay(matchday: number){
-        this.rankingService.getCompetitionRankingAtMatchDay(1, matchday).subscribe(data => {
-            this.ligue1Ranking = new MatTableDataSource<any>(data.standing);
+    getLigue1RankingAtMatchDay(){
+        this.rankingService.getCompetitionRankingAtMatchDay(1, this.matchday).subscribe(data => {
+            this.ligue1Ranking.data = data.standing;
+            this.ligue1Ranking.sort = this.sort;
         });
     }
 

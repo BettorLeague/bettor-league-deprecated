@@ -1,4 +1,5 @@
 <div class="rankingContainer">
+
     <mat-progress-bar
             *ngIf="!ligue1Ranking"
             [color]="'primary'"
@@ -6,88 +7,92 @@
     </mat-progress-bar>
 
     <div class="paginator-container">
+
         <div class="page-select">
-            <div class="label">Go to page : </div>
+
             <mat-form-field >
-                <mat-select  [ngModel]="manualMatchday" (ngModelChange)="updateManualPage($event)">
-                    <mat-option *ngFor="let day of matchdaysFinished" [value]="day">{{day}}</mat-option>
+                <mat-select [ngModel]="matchday" (ngModelChange)="getLigue1RankingAtMatchDay()">
+                    <mat-option *ngFor="let day of totalmatch" [value]="day"> Classement de la {{day}}ème journée</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
-
-        <mat-paginator
-                [length]="matchday"
-                [pageIndex]="matchday - 1"
-                [pageSize]="1"
-                [showFirstLastButtons]="true"
-                (page)="onPageChange($event)">
-        </mat-paginator>
     </div>
 
 
-    <mat-table id="userTable" #table [dataSource]="ligue1Ranking" matSort>
-
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+    <mat-table #table [dataSource]="ligue1Ranking" matSort>
 
         <!-- Position Column -->
-        <ng-container matColumnDef="Position">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Position </mat-header-cell>
+        <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <span fxHide fxShow.gt-sm>Position</span> </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 {{element.position}}
             </mat-cell>
         </ng-container>
 
         <!-- Equipe -->
-        <ng-container matColumnDef="Equipe">
+        <ng-container matColumnDef="teamName">
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Ranking.equipe' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.teamName}} </mat-cell>
-        </ng-container>
-
-        <!-- Blason -->
-        <ng-container matColumnDef="Blason">
-            <mat-header-cell *matHeaderCellDef> Blason</mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <img  src={{element.crestURI}} alt="" style="width: 40px;height:auto;max-height: 40px">
+              <div class="name-blason">
+                <img  src={{element.crestURI}} alt="" class="blason">
+                <span fxHide fxShow.gt-sm>{{element.teamName}}</span>
+              </div>
             </mat-cell>
         </ng-container>
 
         <!-- Points -->
-        <ng-container matColumnDef="Points">
+        <ng-container matColumnDef="points">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Points </mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.points}}</mat-cell>
         </ng-container>
 
         <!-- Matchs joués -->
-        <ng-container matColumnDef="Matchs joués">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Ranking.matchs joués' | translate }}</mat-header-cell>
+        <ng-container matColumnDef="playedGames">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>J</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.playedGames}} </mat-cell>
         </ng-container>
 
+      <!-- Gagné -->
+      <ng-container matColumnDef="wins">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> G </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="green">{{element.wins}}</mat-cell>
+      </ng-container>
+
+      <!-- Nul -->
+      <ng-container matColumnDef="draws">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> N </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="orange">{{element.draws}}</mat-cell>
+      </ng-container>
+
+      <!-- Nul -->
+      <ng-container matColumnDef="losses">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> P </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="red">{{element.losses}}</mat-cell>
+      </ng-container>
+
         <!-- Buts -->
-        <ng-container matColumnDef="Buts">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Ranking.buts' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="buts"> {{element.goals}} </mat-cell>
+        <ng-container matColumnDef="goals">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>BM</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.goals}} </mat-cell>
         </ng-container>
 
         <!-- Buts contre -->
-        <ng-container matColumnDef="Buts contre">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Ranking.buts contre' | translate }}</mat-header-cell>
-            <mat-cell *matCellDef="let element" class="buts-contre"> {{element.goalsAgainst}} </mat-cell>
+        <ng-container matColumnDef="goalsAgainst">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>BE</mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.goalsAgainst}} </mat-cell>
         </ng-container>
 
         <!-- Goal difference -->
-        <ng-container matColumnDef="Difference de buts">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Ranking.difference buts' | translate }}</mat-header-cell>
+        <ng-container matColumnDef="goalDifference">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Diff</mat-header-cell>
             <mat-cell *matCellDef="let element">
                  {{element.goalDifference}}
             </mat-cell>
         </ng-container>
 
 
-        <mat-header-row *matHeaderRowDef="['Position','Blason', 'Equipe', 'Points', 'Matchs joués', 'Buts', 'Buts contre', 'Difference de buts']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['Position','Blason', 'Equipe', 'Points', 'Matchs joués', 'Buts', 'Buts contre', 'Difference de buts']"></mat-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
-
 </div>

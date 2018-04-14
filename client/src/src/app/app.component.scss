@@ -29,6 +29,12 @@ main{
   top:64px !important;
 }
 
+@media screen and (max-width: 640px) {
+  .stickyHeader{
+    top:56px !important;
+  }
+}
+
 
 :host ::ng-deep router-outlet + *:not(nav) {
   flex-grow: 1;
@@ -42,6 +48,3 @@ app-header{
   z-index: 2;
 }
 
-app-footer{
-  margin-top: 20px;
-}

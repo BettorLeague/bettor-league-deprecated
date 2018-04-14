@@ -93,3 +93,8 @@ Password: root
 
 - Swagger : http://localhost:8080/swagger-ui.html
 - Database : http://localhost:8080/database/
+
+Espace disque :
+```
+du -h --max-depth=1
+```
