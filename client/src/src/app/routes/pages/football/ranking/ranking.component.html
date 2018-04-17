@@ -11,7 +11,7 @@
         <div class="page-select">
 
             <mat-form-field >
-                <mat-select [ngModel]="matchday" (ngModelChange)="getLigue1RankingAtMatchDay()">
+                <mat-select [ngModel]="matchday" (selectionChange)="getLigue1RankingAtMatchDay()">
                     <mat-option *ngFor="let day of totalmatch" [value]="day"> Classement de la {{day}}ème journée</mat-option>
                 </mat-select>
             </mat-form-field>
