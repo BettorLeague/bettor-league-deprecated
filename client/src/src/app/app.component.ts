@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
-import {TranslateService} from "@ngx-translate/core";
 import {SidenavService} from "./shared/services/layout/sidenav.service";
 import {SplashScreenService} from "../@fuse/services/splash-screen.service";
 import {Router} from "@angular/router";
