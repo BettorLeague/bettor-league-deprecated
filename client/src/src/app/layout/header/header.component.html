@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z1" *ngIf="headerService.isOpen()">
+<mat-toolbar class="mat-elevation-z1 mat-white-500-bg" *ngIf="headerService.isOpen()">
 
     <div class="container nav-container">
         <div class="row">
@@ -13,13 +13,14 @@
                 </div>
             </div>
 
+          <div *ngIf="!hasSignedIn()" class="align-self-end toolbar-separator"></div>
             <div class="align-self-end" *ngIf="!hasSignedIn()">
                 <button mat-button class="user-button"  routerLink="/login" >
                   <mat-icon>exit_to_app</mat-icon>
                   <span>Connexion</span>
                 </button>
             </div>
-
+          <div *ngIf="hasSignedIn()" class="align-self-end toolbar-separator"></div>
             <div class="align-self-end" *ngIf="hasSignedIn()">
 
                 <button mat-button [matMenuTriggerFor]="more" class="user-button">
@@ -42,6 +43,7 @@
                 </mat-menu>
             </div>
 
+          <div *ngIf="hasSignedIn()" class="align-self-end toolbar-separator"></div>
           <div class="align-self-end" *ngIf="hasSignedIn()">
             <button mat-button [matMenuTriggerFor]="appConcours" class="user-button">
               <div fxLayout="row" fxLayoutAlign="center center">
@@ -54,13 +56,14 @@
             <mat-menu #appConcours="matMenu"  [overlapTrigger]="false" yPosition="below" >
               <button mat-menu-item routerLink="/football">Mon coucours</button>
               <mat-divider ></mat-divider>
-              <button  mat-menu-item routerLink="/football" >
+              <button  mat-menu-item routerLink="/contest" >
                 <span>Tous les concours</span>
               </button>
             </mat-menu>
 
           </div>
 
+          <div class="align-self-end toolbar-separator"></div>
             <div class="align-self-end">
 
                 <mat-menu #appMenu="matMenu"  [overlapTrigger]="false" yPosition="below" >
@@ -71,13 +74,16 @@
                 <button mat-button [matMenuTriggerFor]="appMenu" class="user-button">
                     <div fxLayout="row" fxLayoutAlign="center center">
                         <mat-icon>language</mat-icon>
-                        <span class="username ml-12 mr-12" fxHide fxShow.gt-sm>{{translate.currentLang}}</span>
+                        <span class="username ml-12 mr-12"fxHide fxShow.gt-sm>{{translate.currentLang}}</span>
                         <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                     </div>
                 </button>
             </div>
 
+          <div class="align-self-end toolbar-separator"></div>
+
         </div>
+
 
     </div>
 </mat-toolbar>

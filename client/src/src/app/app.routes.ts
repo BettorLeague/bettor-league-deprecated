@@ -14,6 +14,7 @@ import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confident
 import {FootballComponent} from "./routes/pages/football/football.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
+import {ContestComponent} from "./routes/pages/contest/contest.component";
 
 export const ROUTES: Routes = [
   { path: '',                 component: HomeComponent },
@@ -28,5 +29,6 @@ export const ROUTES: Routes = [
   { path: 'profile',          component: ProfileComponent, canActivate: [UserGuard] },
   { path: 'confidentialite',  component: ConfidentialiteComponent },
   { path: 'football',         component: FootballComponent, canActivate: [UserGuard] },
+  { path: 'contest',         component: ContestComponent, canActivate: [UserGuard] },
   { path: '**',               redirectTo: '/404' }
 ];

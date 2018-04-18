@@ -35,6 +35,7 @@ import {ForgotPasswordComponent} from "./routes/authentification/forgot-password
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
 import { FootballComponent } from './routes/pages/football/football.component';
 import { RankingComponent } from './routes/pages/football/ranking/ranking.component';
+import { ContestComponent } from './routes/pages/contest/contest.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -61,6 +62,7 @@ export function initUserFactory(authService: AuthService) {
     ConfidentialiteComponent,
     FootballComponent,
     RankingComponent,
+    ContestComponent,
   ],
   imports: [
     BrowserModule,

@@ -55,10 +55,12 @@
 
 .rankingContainer .mat-row{
   height: 60px;
+  position: relative;
 }
+/*
 .rankingContainer .mat-row:hover{
   background: rgba(0,0,0,.03);
-}
+}*/
 
 
 
@@ -73,8 +75,10 @@
 
 .blason {
   width: 40px;
-  height:auto;
-  max-height: 40px
+  height: 40px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .name-blason {
@@ -83,4 +87,7 @@
 }
 .name-blason span{
   margin: auto 10px;
+}
+.rankingContainer .mat-row:nth-child(even){
+  background: rgba(0,0,0,.03);
 }

@@ -35,7 +35,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Ranking.equipe' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div class="name-blason">
-                <img  src={{element.team.crestUrl}} alt="" class="blason">
+                <div class="blason" [style.backgroundImage]="'url('+ element.team.crestUrl +')'" ></div>
                 <span fxHide fxShow.gt-sm>{{element.teamName}}</span>
               </div>
             </mat-cell>
@@ -93,6 +93,6 @@
 
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <mat-row matRipple *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 </div>
