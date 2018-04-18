@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -28,11 +29,14 @@ public class Standing {
     @Column(name = "TEAM_NAME")
     private String teamName;
 
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "STANDING_TEAM",
+            joinColumns = {@JoinColumn(name = "STANDING_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "TEAM_ID", referencedColumnName = "ID")})
+    private Team team;
+
     @Column(name = "PLAYED_GAMES")
     private int playedGames;
-
-    @Column(name = "CREST_URI")
-    private String crestURI;
 
     @Column(name = "POINTS")
     private int points;
@@ -54,6 +58,5 @@ public class Standing {
 
     @Column(name = "WINS")
     private int wins;
-
 
 }

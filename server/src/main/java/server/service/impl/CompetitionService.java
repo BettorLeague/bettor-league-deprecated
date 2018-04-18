@@ -1,5 +1,6 @@
 package server.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -10,24 +11,30 @@ import server.model.football.Team;
 import server.repository.football.CompetitionRepository;
 import server.repository.football.FixtureRepository;
 import server.repository.football.LeagueTableRepository;
+import server.repository.football.TeamRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.isNull;
 
 @Component
+@Slf4j
 public class CompetitionService {
 
     private final CompetitionRepository competitionRepository;
     private final LeagueTableRepository leagueTableRepository;
     private final FixtureRepository fixtureRepository;
+    private final TeamRepository teamRepository;
 
     public CompetitionService(CompetitionRepository competitionRepository,
+                              TeamRepository teamRepository,
                               FixtureRepository fixtureRepository,
                               LeagueTableRepository leagueTableRepository){
         this.competitionRepository = competitionRepository;
         this.leagueTableRepository = leagueTableRepository;
         this.fixtureRepository = fixtureRepository;
+        this.teamRepository = teamRepository;
     }
 
 
@@ -50,6 +57,14 @@ public class CompetitionService {
         if (competitionRepository.exists(id)) {
             Competition competition = this.competitionRepository.findOne(id);
             return new ResponseEntity<>(competition.getTeams(),HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<Team> getTeamByName(String name) {
+        if (teamRepository.existsByName(name)) {
+            Team team = this.teamRepository.findByName(name);
+            return new ResponseEntity<>(team,HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -93,6 +108,43 @@ public class CompetitionService {
         }else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamName(Long competitionId,String teamName) {
+        Competition competition = competitionRepository.findOne(competitionId);
+        if (!isNull(competition)) {
+
+            List<Fixture> last5Match = new ArrayList<>();
+            List<Fixture> allTeammatch = this.fixtureRepository.findByCompetitionIdAndHomeTeamNameOrAwayTeamName(competitionId,teamName,teamName);
+
+            for(int i = allTeammatch.size() ; last5Match.size() < 5 && i > 0 ; i--){
+                Fixture fixture = allTeammatch.get(i-1);
+                if (fixture.getStatus().equals("FINISHED")) last5Match.add(fixture);
+            }
+
+            return new ResponseEntity<>(last5Match,HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamNameAndMatchDay(Long competitionId,String teamName,int matchDay) {
+        Competition competition = competitionRepository.findOne(competitionId);
+        if (!isNull(competition)) {
+
+            List<Fixture> last5Match = new ArrayList<>();
+            List<Fixture> allTeammatch = this.fixtureRepository.findByCompetitionIdAndHomeTeamNameOrAwayTeamName(competitionId,teamName,teamName);
+
+            for(int i = matchDay -1 ; last5Match.size() < 5 && i > 0 ; i--){
+                Fixture fixture = allTeammatch.get(i-1);
+                if (fixture.getStatus().equals("FINISHED")) last5Match.add(fixture);
+            }
+
+            return new ResponseEntity<>(last5Match,HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+
 
 
 

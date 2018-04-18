@@ -44,8 +44,8 @@ public class UpdateResult {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-    }/*
-
+    }
+/*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getMondialCompetition() {
         RestTemplate restTemplate = new RestTemplate();
@@ -58,7 +58,6 @@ public class UpdateResult {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-        //updateFixture(restTemplate,"450",new Long(1));
     }*/
 
 
@@ -98,6 +97,12 @@ public class UpdateResult {
         for(int i = 1 ; i <= current.getCurrentMatchday(); i++){
             if(isNull(leagueTableRepository.findByLeagueCaptionAndMatchday(current.getCaption(),i))){
                 LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/"+id+"/leagueTable?matchday="+i,LeagueTable.class);
+                leagueTable.getStanding().forEach(standing -> {
+                    Team team = teamRepository.findByName(standing.getTeamName());
+                    if(!isNull(team)){
+                        standing.setTeam(team);
+                    }
+                });
                 leagueTableRepository.save(leagueTable);
             }
         }
@@ -112,6 +117,7 @@ public class UpdateResult {
             fixture.setId(new Long(i+1));
             fixtureRepository.save(fixture);
         }
+        logger.info("finish");
     }
 
 

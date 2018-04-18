@@ -1,8 +1,9 @@
+import {TeamModel} from "./team.model";
+
 export class StandingModel{
   position: number;
   teamName: string;
   playedGames: number;
-  crestURI: string;
   points: number;
   goals: number;
   wins: number;
@@ -10,4 +11,5 @@ export class StandingModel{
   draws:number;
   goalsAgainst: number;
   goalDifference: number;
+  team:TeamModel;
 }
