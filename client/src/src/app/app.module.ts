@@ -36,6 +36,7 @@ import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component
 import { FootballComponent } from './routes/pages/football/football.component';
 import { RankingComponent } from './routes/pages/football/ranking/ranking.component';
 import { ContestComponent } from './routes/pages/contest/contest.component';
+import {PipeModule} from "./shared/pipe/pipe.module";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -75,6 +76,7 @@ export function initUserFactory(authService: AuthService) {
     FlexLayoutModule,
     HttpClientModule,
     FuseModule,
+    PipeModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
     TranslateModule.forRoot({
       loader: {
