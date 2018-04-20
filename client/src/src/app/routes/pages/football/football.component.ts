@@ -9,8 +9,6 @@ export class FootballComponent implements OnInit {
   selectedIndex: number = 0;
   totalTabs: number = 2;
 
-  SWIPE_ACTION = {LEFT : 'swipeLeft', RIGHT : 'swiperight'};
-
   constructor() { }
 
   ngOnInit() {

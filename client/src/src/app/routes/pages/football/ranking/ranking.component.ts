@@ -34,7 +34,6 @@ export class RankingComponent implements OnInit {
             }
             this.ligue1Ranking.data =  data.standing;
             this.ligue1Ranking.sort = this.sort;
-            console.log(this.totalmatch);
         });
     }
 
