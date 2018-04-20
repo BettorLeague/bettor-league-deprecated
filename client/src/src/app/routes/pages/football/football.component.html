@@ -1,5 +1,5 @@
 
-    <mat-tab-group class="w-100-p footballTabs">
+    <mat-tab-group [(selectedIndex)]="selectedIndex" class="w-100-p footballTabs" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
       <mat-tab label="{{ 'Nav.Ranking' | translate }}">
         <div class="container">
           <div class="row">
