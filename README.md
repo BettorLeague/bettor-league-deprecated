@@ -94,7 +94,15 @@ Password: root
 - Swagger : http://localhost:8080/swagger-ui.html
 - Database : http://localhost:8080/database/
 
-Espace disque :
+Verifier l'espace disque d'un dossier :
 ```
 du -h --max-depth=1
+```
+
+Jenkins script :
+```
+#!/bin/bash
+JENKINS_NODE_COOKIE=dontKillMe
+ps aux | grep server | awk '{print $2}' | xargs kill -9
+java -jar server/target/server-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod --server.port=8081 &
 ```

@@ -1,13 +1,9 @@
-<div class="tab-container w-100-p" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
-    <mat-tab-group mat-scroll-y [(selectedIndex)]="selectedIndex" >
-      <mat-tab label="{{ 'Nav.Ranking' | translate }}">
-        <div class="container">
-          <div class="row">
-            <app-ranking class="w-100-p"></app-ranking>
-          </div>
-        </div>
+<div class="tab-container w-100-p " (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
+    <mat-tab-group  (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" [(selectedIndex)]="selectedIndex" >
+      <mat-tab (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" label="{{ 'Nav.Ranking' | translate }}">
+          <app-ranking></app-ranking>
       </mat-tab>
-      <mat-tab label="Tab 2">Content 2</mat-tab>
+      <mat-tab (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" label="Tab 2">Content 2</mat-tab>
     </mat-tab-group>
 
 </div>

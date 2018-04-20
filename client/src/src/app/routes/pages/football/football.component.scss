@@ -14,3 +14,7 @@
 :host ::ng-deep .tab-container .mat-tab-list{
   @extend .row;
 }
+:host ::ng-deep .tab-container .mat-tab-header{
+  //background: white;
+}
+

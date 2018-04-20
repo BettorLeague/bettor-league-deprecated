@@ -65,11 +65,19 @@
 
 
 .mat-column-teamName {
-  flex: 0 0 30%;
+  flex: 1 0 35%;
+}
+@media screen and (max-width: 640px) {
+  .mat-column-teamName {
+    flex: 1 0 20%;
+  }
 }
 
-.mat-column-position,.mat-column-points,.mat-column-playedGames,.mat-column-wins,.mat-column-draws,.mat-column-losses,.mat-column-goals,.mat-column-goalsAgainst,.mat-column-goalDifference{
-  flex: 0 0 8%;
+.mat-column-position,.mat-column-playedGames,.mat-column-wins,.mat-column-draws,.mat-column-losses,.mat-column-goals,.mat-column-goalsAgainst,.mat-column-goalDifference{
+  flex: 1 0 6%;
+}
+.mat-column-points{
+  flex: 1 0 12%;
 }
 
 

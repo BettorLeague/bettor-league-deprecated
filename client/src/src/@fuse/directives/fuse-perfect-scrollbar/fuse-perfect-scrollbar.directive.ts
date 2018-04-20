@@ -1,6 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
-import { Subscription } from 'rxjs/Subscription';
 
 import PerfectScrollbar from 'perfect-scrollbar';
 
@@ -10,8 +9,6 @@ import PerfectScrollbar from 'perfect-scrollbar';
 })
 export class FusePerfectScrollbarDirective implements OnInit, AfterViewInit, OnDestroy
 {
-  isDisableCustomScrollbars = false;
-  isMobile = false;
   isInitialized = true;
   ps: PerfectScrollbar;
 
@@ -22,23 +19,10 @@ export class FusePerfectScrollbarDirective implements OnInit, AfterViewInit, OnD
   {
   }
 
-  ngOnInit()
-  {
-
-    if ( this.platform.ANDROID || this.platform.IOS )
-    {
-      this.isMobile = true;
-    }
-  }
+  ngOnInit() {}
 
   ngAfterViewInit()
   {
-    if ( this.isMobile || this.isDisableCustomScrollbars )
-    {
-      this.isInitialized = false;
-      return;
-    }
-
     // Initialize the perfect-scrollbar
     this.ps = new PerfectScrollbar(this.element.nativeElement, {
       wheelPropagation: true
@@ -51,7 +35,6 @@ export class FusePerfectScrollbarDirective implements OnInit, AfterViewInit, OnD
     {
       return;
     }
-
 
     // Destroy the perfect-scrollbar
     this.ps.destroy();
