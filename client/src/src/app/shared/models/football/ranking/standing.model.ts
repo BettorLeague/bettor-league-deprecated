@@ -1,3 +1,4 @@
+import {FixtureModel} from "../fixture/fixture.model";
 import {TeamModel} from "./team.model";
 
 export class StandingModel{
@@ -12,4 +13,5 @@ export class StandingModel{
   goalsAgainst: number;
   goalDifference: number;
   team:TeamModel;
+  last5match:FixtureModel[];
 }

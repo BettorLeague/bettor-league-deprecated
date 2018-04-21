@@ -33,8 +33,8 @@ import {CookieService} from "ngx-cookie-service";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
-import { FootballComponent } from './routes/pages/football/football.component';
-import { RankingComponent } from './routes/pages/football/ranking/ranking.component';
+import { FootballComponent } from './routes/contest/football/football.component';
+import { RankingComponent } from './routes/contest/football/ranking/ranking.component';
 import { ContestComponent } from './routes/pages/contest/contest.component';
 import {PipeModule} from "./shared/pipe/pipe.module";
 

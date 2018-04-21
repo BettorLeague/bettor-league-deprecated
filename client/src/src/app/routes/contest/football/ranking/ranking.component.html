@@ -6,7 +6,7 @@
       <div class="page-select">
 
         <mat-form-field >
-          <mat-select [(ngModel)]="matchday" (selectionChange)="getLigue1RankingAtMatchDay()">
+          <mat-select [(ngModel)]="matchday" (selectionChange)="getRankingAtMatchDay()">
             <mat-option *ngFor="let day of totalmatch" [value]="day"> Classement de la {{day}}ème journée</mat-option>
           </mat-select>
         </mat-form-field>
@@ -90,6 +90,16 @@
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef mat-sort-header>Diff</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
           {{element.goalDifference}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Goal difference -->
+      <ng-container  matColumnDef="forme">
+        <mat-header-cell *matHeaderCellDef>Forme</mat-header-cell>
+        <mat-cell  *matCellDef="let element">
+          <div>
+            <span *ngFor="let match of element.last5match">{{isTeamWinMatch(element.team.name,match)}}</span>
+          </div>
         </mat-cell>
       </ng-container>
 

@@ -1,6 +1,7 @@
 export class TeamModel{
-  name:string;
-  code:string;
-  shortName:string;
-  crestUrl:string;
+  id: number;
+  name: string;
+  code: string;
+  shortName: string;
+  crestUrl: string;
 }

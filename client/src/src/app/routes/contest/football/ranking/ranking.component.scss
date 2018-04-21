@@ -65,7 +65,7 @@
 
 
 .mat-column-teamName {
-  flex: 1 0 35%;
+  flex: 1 0 25%;
 }
 @media screen and (max-width: 640px) {
   .mat-column-teamName {
@@ -77,6 +77,10 @@
   flex: 1 0 6%;
 }
 .mat-column-points{
+  flex: 1 0 12%;
+}
+
+.mat-column-forme{
   flex: 1 0 12%;
 }
 

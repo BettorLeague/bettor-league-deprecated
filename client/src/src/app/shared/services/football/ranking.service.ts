@@ -15,4 +15,9 @@ export class RankingService {
         return this.http.get(`/api/competition/${id}/ranking/${matchday}`);
     }
 
+    public getLast5matchByCompetitionIdAndTeamIdAndMatchDay(competitionId:number,teamId:number,matchDay:number):Observable<any>{
+      return this.http.get(`api/competition/${competitionId}/last_5_match/${teamId}/${matchDay}`);
+
+    }
+
 }
