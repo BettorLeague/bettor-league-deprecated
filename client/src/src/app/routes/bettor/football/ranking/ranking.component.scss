@@ -2,7 +2,6 @@
 {
   color: #21ba45;
 }
-
 .red
 {
   color: #db2828;
@@ -10,7 +9,18 @@
 .orange{
   color: #fbbd08;
 }
-
+.backRed{
+  background: #db2828 ;
+}
+.backGreen{
+  background: #21ba45;
+}
+.backOrange{
+  background: #fbbd08;
+}
+.backGray{
+  background: #bbb;
+}
 .center
 {
   text-align: center;
@@ -77,11 +87,11 @@
   flex: 1 0 6%;
 }
 .mat-column-points{
-  flex: 1 0 12%;
+  flex: 1 0 10%;
 }
 
 .mat-column-forme{
-  flex: 1 0 12%;
+  flex: 1 0 13%;
 }
 
 
@@ -102,4 +112,15 @@
 }
 .rankingContainer .mat-row:nth-child(even){
   background: rgba(0,0,0,.03);
+}
+.dot{
+  flex: 1;
+  border-radius: 50%;
+  margin: 5px;
+  max-width: 15px;
+}
+.dot::before{
+  content: "";
+  display: block;
+  padding-top: 100%;
 }

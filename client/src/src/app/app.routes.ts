@@ -11,10 +11,10 @@ import {UnauthorizeComponent} from "./routes/error/403/unauthorize.component";
 import {RegisterComponent} from "./routes/authentification/register/register.component";
 import {MailConfirmComponent} from "./routes/authentification/mail-confirm/mail-confirm.component";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
-import {FootballComponent} from "./routes/contest/football/football.component";
+import {FootballComponent} from "./routes/bettor/football/football.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
-import {ContestComponent} from "./routes/pages/contest/contest.component";
+import {ContestComponent} from "./routes/bettor/contest/contest.component";
 
 export const ROUTES: Routes = [
   { path: '',                 component: HomeComponent },

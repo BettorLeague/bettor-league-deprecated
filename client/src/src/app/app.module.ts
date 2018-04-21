@@ -33,9 +33,9 @@ import {CookieService} from "ngx-cookie-service";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
-import { FootballComponent } from './routes/contest/football/football.component';
-import { RankingComponent } from './routes/contest/football/ranking/ranking.component';
-import { ContestComponent } from './routes/pages/contest/contest.component';
+import { FootballComponent } from './routes/bettor/football/football.component';
+import { RankingComponent } from './routes/bettor/football/ranking/ranking.component';
+import { ContestComponent } from './routes/bettor/contest/contest.component';
 import {PipeModule} from "./shared/pipe/pipe.module";
 
 // AoT requires an exported function for factories

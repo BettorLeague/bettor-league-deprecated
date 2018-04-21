@@ -95,10 +95,10 @@
 
       <!-- Goal difference -->
       <ng-container  matColumnDef="forme">
-        <mat-header-cell *matHeaderCellDef>Forme</mat-header-cell>
-        <mat-cell  *matCellDef="let element">
-          <div>
-            <span *ngFor="let match of element.last5match">{{isTeamWinMatch(element.team.name,match)}}</span>
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef>Forme</mat-header-cell>
+        <mat-cell  fxHide fxShow.gt-sm *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <span [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) == 'l') ? 'backRed' : 'backOrange'" *ngFor="let match of element.last5match" class="dot" ngClass=""></span>
           </div>
         </mat-cell>
       </ng-container>

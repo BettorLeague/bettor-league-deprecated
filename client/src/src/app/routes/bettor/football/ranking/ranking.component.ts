@@ -21,8 +21,7 @@ export class RankingComponent implements OnInit {
 
     onSearch = true;
 
-    constructor(
-      private rankingService: RankingService) {
+    constructor(private rankingService: RankingService) {
         this.getCurrentRanking();
     }
 
@@ -84,13 +83,13 @@ export class RankingComponent implements OnInit {
         if(match.result.goalsHomeTeam > match.result.goalsAwayTeam){
           return "w";
         } else if (match.result.goalsHomeTeam == match.result.goalsAwayTeam) {
-          return "n";
+          return "d";
         }else return "l"
       }else{
         if(match.result.goalsHomeTeam > match.result.goalsAwayTeam){
           return "l"
         } else if (match.result.goalsHomeTeam == match.result.goalsAwayTeam) {
-          return "n"
+          return "d"
         }else return "w"
       }
     }
