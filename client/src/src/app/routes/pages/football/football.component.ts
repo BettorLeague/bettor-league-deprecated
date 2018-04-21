@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FootballComponent implements OnInit {
   selectedIndex: number = 0;
-  totalTabs: number = 2;
+  totalTabs: number = 5;
 
   constructor() { }
 

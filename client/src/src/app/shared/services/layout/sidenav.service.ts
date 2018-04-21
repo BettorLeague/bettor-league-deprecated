@@ -4,10 +4,15 @@ import { MatSidenav } from '@angular/material';
 @Injectable()
 export class SidenavService {
   private sidenav: MatSidenav;
+  private notifSidenav: MatSidenav;
 
 
   public setSidenav(sidenav: MatSidenav) {
     this.sidenav = sidenav;
+  }
+
+  public setNotifSidenav(sidenav:MatSidenav){
+    this.notifSidenav = sidenav;
   }
 
   public open() {
@@ -21,5 +26,9 @@ export class SidenavService {
 
   public toggle(): void {
     this.sidenav.toggle();
+  }
+
+  public toggleNotif():void{
+    this.notifSidenav.toggle();
   }
 }

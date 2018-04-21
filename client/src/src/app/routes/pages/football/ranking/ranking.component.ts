@@ -11,37 +11,57 @@ import {StandingModel} from "../../../../shared/models/football/ranking/standing
 })
 export class RankingComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     displayedColumns = ['position', 'teamName', 'points', 'playedGames','wins','draws','losses', 'goals', 'goalsAgainst', 'goalDifference'];
     ligue1Ranking = new MatTableDataSource();
+
     matchday: number;
     totalmatch:number[] = [];
     lastmatch:number;
 
-    constructor(private rankingService: RankingService) {
+    onSearch = true;
+
+    constructor(
+      private rankingService: RankingService) {
         this.getLigue1CurrentRanking();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+
+    }
 
 
     getLigue1CurrentRanking(){
+      this.resetModel();
         this.rankingService.getCompetitionRanking(1).subscribe(data => {
             this.lastmatch = data.matchday;
             this.matchday = data.matchday;
             for(let i = 1; i <= this.matchday ; i++){
               this.totalmatch.push(i);
             }
-            this.ligue1Ranking.data =  data.standing;
-            this.ligue1Ranking.sort = this.sort;
+            setTimeout(() => {
+              this.ligue1Ranking.data =  data.standing;
+              this.ligue1Ranking.sort = this.sort;
+              this.onSearch = false;
+            }, 1000);
         });
     }
 
     getLigue1RankingAtMatchDay(){
+      this.resetModel();
         this.rankingService.getCompetitionRankingAtMatchDay(1, this.matchday).subscribe(data => {
-            this.ligue1Ranking.data = data.standing;
-            this.ligue1Ranking.sort = this.sort;
+            setTimeout(() => {
+              this.ligue1Ranking.data =  data.standing;
+              this.ligue1Ranking.sort = this.sort;
+              this.onSearch = false;
+            }, 1000);
         });
+    }
+
+
+    resetModel(){
+      this.onSearch = true;
+      this.ligue1Ranking = new MatTableDataSource();
     }
 
 }

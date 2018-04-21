@@ -36,10 +36,10 @@ public class CompetitionController {
         return this.competitionService.getAllTeamOfCompetition(competitionId);
     }
 
-    @RequestMapping(path = "/api/team/{teamName}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/competition/team/{teamId}", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<Team> getTeamByName(@PathVariable("teamName") String teamName) {
-        return this.competitionService.getTeamByName(teamName);
+    public ResponseEntity<Team> getTeamByName(@PathVariable("teamId") Long teamId) {
+        return this.competitionService.getTeamById(teamId);
     }
 
     @RequestMapping(path = "/api/competition/{competitionId}/ranking", method = RequestMethod.GET)
@@ -66,16 +66,16 @@ public class CompetitionController {
         return this.competitionService.getMatchOfCompetitionByMatchDay(competitionId,matchDay);
     }
 
-    @RequestMapping(path = "/api/competition/{competitionId}/last_5_match/{teamName}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/competition/{competitionId}/last_5_match/{teamId}", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamName(@PathVariable("competitionId") Long competitionId,@PathVariable("teamName") String teamName) {
-        return this.competitionService.get5LastMatchOfCompetitionByTeamName(competitionId,teamName);
+    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamName(@PathVariable("competitionId") Long competitionId,@PathVariable("teamId") Long teamId) {
+        return this.competitionService.get5LastMatchOfCompetitionByTeamNameAndMatchDay(competitionId,teamId,-1);
     }
 
-    @RequestMapping(path = "/api/competition/{competitionId}/last_5_match/{teamName}/{matchday}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/competition/{competitionId}/last_5_match/{teamId}/{matchday}", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamNameAndMatchDay(@PathVariable("competitionId") Long competitionId,@PathVariable("teamName") String teamName, @PathVariable("matchday") int matchDay) {
-        return this.competitionService.get5LastMatchOfCompetitionByTeamNameAndMatchDay(competitionId,teamName,matchDay);
+    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamNameAndMatchDay(@PathVariable("competitionId") Long competitionId,@PathVariable("teamId") Long teamId, @PathVariable("matchday") int matchDay) {
+        return this.competitionService.get5LastMatchOfCompetitionByTeamNameAndMatchDay(competitionId,teamId,matchDay);
     }
 
 

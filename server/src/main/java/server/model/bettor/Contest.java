@@ -1,6 +1,5 @@
 package server.model.bettor;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import server.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -25,10 +23,17 @@ public class Contest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CAPTION", length = 200, unique = true)
+    @Column(name = "CAPTION")
     @NotNull
-    @Size(min = 4, max = 200)
     private String caption;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToOne(cascade = CascadeType.MERGE)
+    @NotNull
+    @JoinTable(name = "CONTEST_ADMIN",
+            joinColumns = {@JoinColumn(name = "CONTEST_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")})
+    private User user;
 
     @Column(name = "TYPE", length = 50)
     @NotNull

@@ -13,8 +13,7 @@ import server.repository.football.FixtureRepository;
 import server.repository.football.LeagueTableRepository;
 import server.repository.football.TeamRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Objects.isNull;
 
@@ -69,6 +68,14 @@ public class CompetitionService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    public ResponseEntity<Team> getTeamById(Long teamId) {
+        if (teamRepository.exists(teamId)) {
+            Team team = this.teamRepository.findOne(teamId);
+            return new ResponseEntity<>(team,HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
     public ResponseEntity<LeagueTable> getRankingOfCompetition(Long id) {
         if (competitionRepository.exists(id)) {
@@ -109,34 +116,26 @@ public class CompetitionService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamName(Long competitionId,String teamName) {
+    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamNameAndMatchDay(Long competitionId,Long teamId,int matchDay) {
         Competition competition = competitionRepository.findOne(competitionId);
-        if (!isNull(competition)) {
+        Team team = teamRepository.findOne(teamId);
+        if (!isNull(competition) && !isNull(team)) {
 
             List<Fixture> last5Match = new ArrayList<>();
-            List<Fixture> allTeammatch = this.fixtureRepository.findByCompetitionIdAndHomeTeamNameOrAwayTeamName(competitionId,teamName,teamName);
+            List<Fixture> allTeammatch = this.fixtureRepository.findByCompetitionIdAndHomeTeamNameOrAwayTeamName(competitionId,team.getName(),team.getName());
 
-            for(int i = allTeammatch.size() ; last5Match.size() < 5 && i > 0 ; i--){
+            for(int i = (matchDay == -1)? allTeammatch.size() : matchDay -1 ; last5Match.size() < 5 && i > 0 ; i--){
                 Fixture fixture = allTeammatch.get(i-1);
                 if (fixture.getStatus().equals("FINISHED")) last5Match.add(fixture);
             }
 
-            return new ResponseEntity<>(last5Match,HttpStatus.OK);
-        }else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+            last5Match.sort(new Comparator<Fixture>() {
+                @Override
+                public int compare(Fixture o1, Fixture o2) {
+                    return Integer.compare(o1.getMatchday(),o2.getMatchday());
+                }
+            });
 
-    public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamNameAndMatchDay(Long competitionId,String teamName,int matchDay) {
-        Competition competition = competitionRepository.findOne(competitionId);
-        if (!isNull(competition)) {
-
-            List<Fixture> last5Match = new ArrayList<>();
-            List<Fixture> allTeammatch = this.fixtureRepository.findByCompetitionIdAndHomeTeamNameOrAwayTeamName(competitionId,teamName,teamName);
-
-            for(int i = matchDay -1 ; last5Match.size() < 5 && i > 0 ; i--){
-                Fixture fixture = allTeammatch.get(i-1);
-                if (fixture.getStatus().equals("FINISHED")) last5Match.add(fixture);
-            }
 
             return new ResponseEntity<>(last5Match,HttpStatus.OK);
         }else

@@ -1,5 +1,6 @@
 package server.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @Inject
+    @Autowired
     private UserServiceImpl userServiceImpl;
-
 
 
     @RequestMapping(path = "/api/user/all", method = RequestMethod.GET)

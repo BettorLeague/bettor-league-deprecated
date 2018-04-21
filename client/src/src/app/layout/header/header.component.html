@@ -3,15 +3,19 @@
     <div class="container nav-container">
         <div class="row">
 
-            <div class="col align-self-start 	d-lg-none">
+          <div fxShow fxHide.gt-sm class="align-self-end toolbar-separator"></div>
+            <div class=" align-self-start 	d-lg-none">
                 <button class="user-button" mat-button (click)="openSidenav()"><mat-icon>menu</mat-icon></button>
             </div>
+          <div fxShow fxHide.gt-sm class="align-self-end toolbar-separator"></div>
 
-            <div class="col align-self-start 	d-none d-lg-block" >
+            <div class=" align-self-start 	d-none d-lg-block" >
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <button  class="user-button"  mat-button routerLink="/">{{ 'Nav.Home' | translate}}</button>
                 </div>
             </div>
+
+          <div class="col align-self-start"></div>
 
           <div *ngIf="!hasSignedIn()" class="align-self-end toolbar-separator"></div>
             <div class="align-self-end" *ngIf="!hasSignedIn()">
@@ -81,6 +85,17 @@
             </div>
 
           <div class="align-self-end toolbar-separator"></div>
+
+
+          <div class="align-self-end" *ngIf="hasSignedIn()" >
+            <button mat-button (click)="sidenavService.toggleNotif()" class="user-button">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="icon">format_list_bulleted</mat-icon>
+              </div>
+            </button>
+          </div>
+
+          <div class="align-self-end toolbar-separator" *ngIf="hasSignedIn()" ></div>
 
         </div>
 

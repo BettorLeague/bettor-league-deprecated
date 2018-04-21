@@ -9,14 +9,19 @@
         </mat-nav-list>
     </mat-sidenav>
 
+    <mat-sidenav #sidenav2 position="end">
+      <mat-nav-list >
+        <h3 mat-subheader class="mat-elevation-z1" >Notification</h3>
+        <mat-divider></mat-divider>
+      </mat-nav-list>
+    </mat-sidenav>
 
     <mat-sidenav-content>
-        <main [ngClass]="headerService.isOpen() ? 'stickyHeader' : ''" fusePerfectScrollbar>
+        <main  #main [ngClass]="headerService.isOpen() ? 'stickyHeader' : ''" fusePerfectScrollbar>
             <app-header></app-header>
-            <router-outlet></router-outlet>
+            <router-outlet (deactivate)="onDeactivate(main)"></router-outlet>
             <app-footer></app-footer>
         </main>
-
 
     </mat-sidenav-content>
 

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public headerService:HeaderService,
     private router: Router,
-    private sidenavService: SidenavService,
+    public sidenavService: SidenavService,
     private authService: AuthService,
     private translateService: TranslateService) {
 

@@ -1,10 +1,5 @@
 <div class="rankingContainer container">
   <div class="row">
-    <mat-progress-bar
-      *ngIf="!ligue1Ranking"
-      [color]="'primary'"
-      [mode]="'indeterminate'">
-    </mat-progress-bar>
 
     <div class="paginator-container">
 
@@ -18,6 +13,13 @@
       </div>
 
     </div>
+
+
+    <mat-progress-bar
+      *ngIf="onSearch"
+      [color]="'primary'"
+      [mode]="'indeterminate'">
+    </mat-progress-bar>
 
 
     <mat-table #table [dataSource]="ligue1Ranking" matSort>

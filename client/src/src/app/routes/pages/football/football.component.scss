@@ -1,20 +1,46 @@
-
 @import '~bootstrap/scss/bootstrap-grid.scss';
+@import '~@angular/material/theming';
 
 .tab-container{
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
+  //overflow: hidden;
+}
+
+@media screen and (max-width: 800px) {
+  .tab-container{
+    overflow: hidden;
+  }
+}
+.blueBackground{
+  background-color: #039be5;
+}
+
+.tab-container .title-header{
+  z-index: 3;
 }
 
 :host ::ng-deep .tab-container .mat-tab-label-container {
-    @extend .container;
+  @extend .container;
 }
 
 :host ::ng-deep .tab-container .mat-tab-list{
   @extend .row;
 }
 :host ::ng-deep .tab-container .mat-tab-header{
-  //background: white;
+  @extend .blueBackground;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  @include mat-elevation(2);
+}
+
+:host ::ng-deep .tab-container .mat-ink-bar{
+  background: white;
+}
+
+:host ::ng-deep .tab-container .mat-tab-label, :host ::ng-deep .tab-container .mat-tab-link,:host ::ng-deep .tab-container .mat-tab-label.mat-tab-label-active{
+  color: white;
 }
 
