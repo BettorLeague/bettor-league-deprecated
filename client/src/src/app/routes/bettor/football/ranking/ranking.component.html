@@ -98,7 +98,7 @@
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef>Forme</mat-header-cell>
         <mat-cell  fxHide fxShow.gt-sm *matCellDef="let element">
           <div fxLayout="row" fxLayoutAlign="space-between start">
-            <span  matTooltip="{{match.homeTeamName}} {{match.result.goalsHomeTeam}} - {{match.result.goalsAwayTeam}} {{match.awayTeamName}}" [matTooltipPosition]="'above'" [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) == 'l') ? 'backRed' : 'backOrange'" *ngFor="let match of element.last5match" class="dot" ngClass="">
+            <span  matTooltip="{{match.homeTeamName}} {{match.result.goalsHomeTeam}} - {{match.result.goalsAwayTeam}} {{match.awayTeamName}}" matTooltipPosition="above" [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) == 'l') ? 'backRed' : 'backOrange'" *ngFor="let match of element.last5match" class="dot" ngClass="">
             </span>
           </div>
         </mat-cell>

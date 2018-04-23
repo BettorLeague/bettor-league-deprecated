@@ -15,6 +15,8 @@ import {FootballComponent} from "./routes/bettor/football/football.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
 import {ContestComponent} from "./routes/bettor/contest/contest.component";
+import {AboutComponent} from "./routes/pages/about/about.component";
+import {ContactComponent} from "./routes/pages/contact/contact.component";
 
 export const ROUTES: Routes = [
   { path: '',                 component: HomeComponent },
@@ -28,6 +30,8 @@ export const ROUTES: Routes = [
   { path: 'forgot-password',  component: ForgotPasswordComponent , canActivate: [GuestGuard]},
   { path: 'profile',          component: ProfileComponent, canActivate: [UserGuard] },
   { path: 'confidentialite',  component: ConfidentialiteComponent },
+  { path: 'about',            component: AboutComponent },
+  { path: 'contact',          component: ContactComponent },
   { path: 'football',         component: FootballComponent, canActivate: [UserGuard] },
   { path: 'contest',         component: ContestComponent, canActivate: [UserGuard] },
   { path: '**',               redirectTo: '/404' }

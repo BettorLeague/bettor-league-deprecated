@@ -37,6 +37,8 @@ import { FootballComponent } from './routes/bettor/football/football.component';
 import { RankingComponent } from './routes/bettor/football/ranking/ranking.component';
 import { ContestComponent } from './routes/bettor/contest/contest.component';
 import {PipeModule} from "./shared/pipe/pipe.module";
+import { AboutComponent } from './routes/pages/about/about.component';
+import { ContactComponent } from './routes/pages/contact/contact.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -64,6 +66,8 @@ export function initUserFactory(authService: AuthService) {
     FootballComponent,
     RankingComponent,
     ContestComponent,
+    AboutComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

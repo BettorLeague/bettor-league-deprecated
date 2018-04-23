@@ -48,7 +48,6 @@ export class RankingComponent implements OnInit {
               this.onSearch = false;
             }, 1000);
         });
-        console.log(this.ligue1Ranking);
     }
 
     getRankingAtMatchDay(){
