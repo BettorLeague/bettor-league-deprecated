@@ -30,21 +30,19 @@ public class UpdateResult {
     @Inject
     private LeagueTableRepository leagueTableRepository;
 
-    @Inject
-    private StandingRepository standingRepository;
 
     @Inject
     private FixtureRepository fixtureRepository;
 
 
     private final Log logger = LogFactory.getLog(this.getClass());
-/*
+
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getLigue1Competition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-    }
+    }/*
 
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getMondialCompetition() {
