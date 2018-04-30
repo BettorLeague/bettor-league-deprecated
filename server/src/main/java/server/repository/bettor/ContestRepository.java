@@ -7,6 +7,7 @@ import server.model.bettor.ContestType;
 import java.util.List;
 
 public interface ContestRepository extends JpaRepository<Contest, Long> {
-    Contest findByUserId(Long id);
+    Contest findByOwnerId(Long id);
     List<Contest> findAllByType(ContestType type);
+    List<Contest> findAllByTypeAndOwnerId(ContestType type,Long ownerId);
 }

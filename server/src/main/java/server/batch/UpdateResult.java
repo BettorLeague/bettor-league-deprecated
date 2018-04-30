@@ -38,14 +38,14 @@ public class UpdateResult {
 
 
     private final Log logger = LogFactory.getLog(this.getClass());
-
+/*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getLigue1Competition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
     }
-/*
+
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getMondialCompetition() {
         RestTemplate restTemplate = new RestTemplate();
@@ -65,17 +65,25 @@ public class UpdateResult {
 
         Competition competition = restTemplate.getForObject("https://www.football-data.org/v1/competitions/"+id, Competition.class);
         Long competitionId;
+
         if(isNull(competitionRepository.findByCaption(competition.getCaption()))){
+
             List<Team> teams = updateTeamCompetition(restTemplate,id);
             competition.setTeams(teams);
             competitionRepository.save(competition);
             competitionId = competitionRepository.findByCaption(competition.getCaption()).getId();
+
         }else{
+
             Competition current = competitionRepository.findByCaption(competition.getCaption());
+            if(current.getLastUpdated().before(competition.getLastUpdated())){
+                updateLeagueRankAfterChange(restTemplate,id);
+            }
             current.setCurrentMatchday(competition.getCurrentMatchday());
             current.setLastUpdated(competition.getLastUpdated());
             competitionRepository.save(current);
             competitionId = current.getId();
+
         }
 
         updateLeagueRank(restTemplate,competition,id);
@@ -94,6 +102,7 @@ public class UpdateResult {
 
     private void updateLeagueRank(RestTemplate restTemplate,Competition competition,String id){
         Competition current = competitionRepository.findByCaption(competition.getCaption());
+
         for(int i = 1 ; i <= current.getCurrentMatchday(); i++){
             if(isNull(leagueTableRepository.findByLeagueCaptionAndMatchday(current.getCaption(),i))){
                 LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/"+id+"/leagueTable?matchday="+i,LeagueTable.class);
@@ -106,6 +115,18 @@ public class UpdateResult {
                 leagueTableRepository.save(leagueTable);
             }
         }
+
+    }
+
+    private void updateLeagueRankAfterChange(RestTemplate restTemplate, String id){
+        LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/"+id+"/leagueTable",LeagueTable.class);
+        leagueTable.getStanding().forEach(standing -> {
+            Team team = teamRepository.findByName(standing.getTeamName());
+            if(!isNull(team)){
+                standing.setTeam(team);
+            }
+        });
+        leagueTableRepository.save(leagueTable);
     }
 
     private void updateFixture(RestTemplate restTemplate,String id,Long competitionId) {

@@ -1,15 +1,17 @@
 <mat-toolbar *ngIf="headerService.isOpen()" >
+  <div class="container-fluid">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="space-between center" fxFlex>
 
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="space-between center" fxFlex>
+      <div fxLayout="row" fxLayoutAlign="start center"  fxShow.gt-xs>
+        <button  mat-button routerLink="/confidentialite">Politique de confidentialite</button>
+        <button  mat-button routerLink="/about">À Propos</button>
+        <button  mat-button routerLink="/contact">Nous contacter</button>
+      </div>
 
-    <div fxLayout="row" fxLayoutAlign="start center"  fxShow.gt-xs>
-
-      <button  mat-button routerLink="/confidentialite">Politique de confidentialite</button>
-      <button  mat-button routerLink="/about">À Propos</button>
-      <button  mat-button routerLink="/contact">Nous contacter</button>
     </div>
-
   </div>
+
+
 
 </mat-toolbar>
 

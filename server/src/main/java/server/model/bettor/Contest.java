@@ -1,5 +1,6 @@
 package server.model.bettor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,13 +28,9 @@ public class Contest {
     @NotNull
     private String caption;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToOne(cascade = CascadeType.MERGE)
+    @Column(name = "OWNER_ID")
     @NotNull
-    @JoinTable(name = "CONTEST_ADMIN",
-            joinColumns = {@JoinColumn(name = "CONTEST_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")})
-    private User user;
+    private Long ownerId;
 
     @Column(name = "TYPE", length = 50)
     @NotNull
@@ -49,6 +46,7 @@ public class Contest {
     @JoinTable(name = "CONTEST_PLAYER",
             joinColumns = {@JoinColumn(name = "CONTEST_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID")})
+    @JsonIgnore
     private List<Player> players;
 
     @LazyCollection(LazyCollectionOption.FALSE)

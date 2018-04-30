@@ -10,7 +10,7 @@ import {CookieService} from "ngx-cookie-service";
 @Injectable()
 export class AuthService {
 
-  currentUser : UserModel;
+  currentUser : UserModel = new UserModel();
 
   constructor(private http: HttpClient,private cookieService: CookieService) {
   }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -35,5 +36,6 @@ public class LeagueTable {
             joinColumns = {@JoinColumn(name = "LEAGUE_TABLE_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "STANDING_ID", referencedColumnName = "ID")})
     private List<Standing> standing;
+
 
 }
