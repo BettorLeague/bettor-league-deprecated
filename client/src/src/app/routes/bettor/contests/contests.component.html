@@ -26,15 +26,14 @@
 
         <mat-form-field class="course-search">
 
-          <input matInput placeholder="Search for a competition" [(ngModel)]="searchTerm"
-                 (input)="filterCoursesByTerm()">
+          <input matInput placeholder="Search for a competition">
 
         </mat-form-field>
 
         <mat-form-field class="category-selector">
-
-          <mat-select placeholder="Select Category" [(ngModel)]="currentCategory"
-                      (change)="filterCoursesByCategory()">
+          filter
+<!--
+          <mat-select placeholder="Select Category" >
             <mat-option [value]="'all'">
               All
             </mat-option>
@@ -42,7 +41,7 @@
               {{ category.label }}
             </mat-option>
           </mat-select>
-
+-->
         </mat-form-field>
 
       </div>
