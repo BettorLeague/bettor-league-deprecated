@@ -42,8 +42,8 @@ public class UpdateResult {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-    }/*
-
+    }
+/*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getMondialCompetition() {
         RestTemplate restTemplate = new RestTemplate();
@@ -75,7 +75,7 @@ public class UpdateResult {
 
             Competition current = competitionRepository.findByCaption(competition.getCaption());
             if(current.getLastUpdated().before(competition.getLastUpdated())){
-                updateLeagueRankAfterChange(restTemplate,id);
+                updateLeagueRankAfterChange(restTemplate,id,current);
             }
             current.setCurrentMatchday(competition.getCurrentMatchday());
             current.setLastUpdated(competition.getLastUpdated());
@@ -116,7 +116,7 @@ public class UpdateResult {
 
     }
 
-    private void updateLeagueRankAfterChange(RestTemplate restTemplate, String id){
+    private void updateLeagueRankAfterChange(RestTemplate restTemplate, String id,Competition current){
         LeagueTable leagueTable = restTemplate.getForObject("http://api.football-data.org/v1/competitions/"+id+"/leagueTable",LeagueTable.class);
         leagueTable.getStanding().forEach(standing -> {
             Team team = teamRepository.findByName(standing.getTeamName());
@@ -124,6 +124,7 @@ public class UpdateResult {
                 standing.setTeam(team);
             }
         });
+        leagueTable.setId(leagueTableRepository.findByLeagueCaptionAndMatchday(current.getCaption(),current.getCurrentMatchday()).getId());
         leagueTableRepository.save(leagueTable);
     }
 
