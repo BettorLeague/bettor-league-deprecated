@@ -137,7 +137,7 @@ public class UpdateResult {
             fixture.setId(new Long(i+1));
             fixtureRepository.save(fixture);
         }
-        logger.info("finish");
+        logger.info("Cron Finish");
     }
 
 

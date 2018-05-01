@@ -3,6 +3,7 @@ package server.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import server.batch.UpdateResult;
 import server.model.football.Competition;
 import server.model.football.Fixture;
 import server.model.football.LeagueTable;
@@ -17,6 +18,16 @@ public class CompetitionController {
 
     @Inject
     private CompetitionService competitionService;
+
+    @Inject
+    private UpdateResult updateResult;
+
+    @RequestMapping(path = "/api/competition/update", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void runCron() {
+        this.updateResult.getLigue1Competition();
+    }
+
 
     @RequestMapping(path = "/api/competition/all", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -77,6 +88,8 @@ public class CompetitionController {
     public ResponseEntity<List<Fixture>> get5LastMatchOfCompetitionByTeamNameAndMatchDay(@PathVariable("competitionId") Long competitionId,@PathVariable("teamId") Long teamId, @PathVariable("matchday") int matchDay) {
         return this.competitionService.get5LastMatchOfCompetitionByTeamNameAndMatchDay(competitionId,teamId,matchDay);
     }
+
+
 
 
 
