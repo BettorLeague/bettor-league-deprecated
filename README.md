@@ -93,6 +93,7 @@ Password: root
 
 - Swagger : http://localhost:8080/swagger-ui.html
 - Database : http://localhost:8080/database/
+- Semantic UI : https://edcarroll.github.io/ng2-semantic-ui/
 
 Verifier l'espace disque d'un dossier :
 ```

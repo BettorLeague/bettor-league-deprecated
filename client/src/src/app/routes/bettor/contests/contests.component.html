@@ -1,0 +1,132 @@
+<div id="contestPage" class="page-layout simple" >
+
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="hero-text">
+      <mat-icon class="hero-icon">school</mat-icon>
+      <h1>CONCOURS PUBLIC</h1>
+      <h3>
+        Our courses will step you through the process of building a small application, or adding a new feature
+        to an existing application.
+      </h3>
+    </div>
+
+  </div>
+  <!-- / HEADER -->
+
+
+
+  <div class="content p-24">
+
+    <div fxLayout="column" fxLayoutAlign="center">
+
+      <div class="filters" fxLayout="column" fxLayoutAlign="center center"
+           fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+        <mat-form-field class="course-search">
+
+          <input matInput placeholder="Search for a competition" [(ngModel)]="searchTerm"
+                 (input)="filterCoursesByTerm()">
+
+        </mat-form-field>
+
+        <mat-form-field class="category-selector">
+
+          <mat-select placeholder="Select Category" [(ngModel)]="currentCategory"
+                      (change)="filterCoursesByCategory()">
+            <mat-option [value]="'all'">
+              All
+            </mat-option>
+            <mat-option *ngFor="let category of categories" [value]="category.value">
+              {{ category.label }}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="courses" fxLayout="row wrap" fxLayoutAlign="center">
+
+        <div class="course"  [routerLink]="'/contest/1'" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
+
+          <div class="course-content" fxLayout="column">
+
+            <div class="header" fxLayout="row" fxLayoutAlign="center center" [ngClass]="'football-bg'">
+
+              <div class="category" fxFlex>
+                Football
+              </div>
+
+              <div class="length" fxLayout="row" fxLayoutAlign="center center">
+                <div class="min">2017 / 2018</div>
+              </div>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+              <div fxFlex fxLayoutAlign="center center">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg"/>
+              </div>
+              <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex>
+                <div class="h1">Ligue 1</div>
+                <div class="updated">nb Participant</div>
+              </div>
+            </div>
+
+
+            <div class="footer grey-50-bg" fxLayout="row" fxLayoutAlign="center center">
+
+              <button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="course"  [routerLink]="'/contest/1'" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
+
+          <div class="course-content" fxLayout="column">
+
+            <div class="header" fxLayout="row" fxLayoutAlign="center center" [ngClass]="'football-bg'">
+
+              <div class="category" fxFlex>
+                Football
+              </div>
+
+              <div class="length" fxLayout="row" fxLayoutAlign="center center">
+                <div class="min">2017 / 2018</div>
+              </div>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+              <div fxFlex fxLayoutAlign="center center">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/f/f7/FIFA_World_Cup_2018_Logo.png"/>
+              </div>
+              <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex>
+                <div class="h1">Coupe du monde</div>
+                <div class="updated">nb Participant</div>
+              </div>
+            </div>
+
+
+            <div class="footer grey-50-bg" fxLayout="row" fxLayoutAlign="center center">
+              <button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

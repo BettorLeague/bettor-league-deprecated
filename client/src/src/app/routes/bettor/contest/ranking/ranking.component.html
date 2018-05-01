@@ -4,12 +4,24 @@
     <div class="paginator-container">
 
       <div class="page-select">
-
+<!--
         <mat-form-field >
           <mat-select [(ngModel)]="matchday" (selectionChange)="getRankingAtMatchDay()">
             <mat-option *ngFor="let day of totalmatch" [value]="day"> Classement de la {{day}}ème journée</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field>-->
+
+        <sui-pagination
+                        (pageChange)="getRankingAtMatchDay()"
+                        [hasNavigationLinks]="true"
+                        [hasBoundaryLinks]="true"
+                        [collectionSize]="lastmatch"
+                        [pageSize]="1"
+                        [maxSize]="4"
+                        [canRotate]="true"
+                        [hasEllipses]="false"
+                        [(page)]="matchday">
+        </sui-pagination>
       </div>
 
     </div>

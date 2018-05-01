@@ -30,7 +30,10 @@
   display: flex;
   align-items: center;
   font-size: 12px;
-  padding: 0px 10px;
+  padding: 15px;
+  overflow: hidden;
+  flex: 1 0 auto;
+  justify-content: center;
 
   .label {
     margin: 0 4px;

@@ -4,7 +4,7 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {ServicesModule} from './shared/services/services.module';
-
+import {SuiModule} from 'ng2-semantic-ui';
 import { ROUTES } from './app.routes';
 import {PreloadAllModules, RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
@@ -33,12 +33,12 @@ import {CookieService} from "ngx-cookie-service";
 import {ConfidentialiteComponent} from "./routes/pages/confidentialite/confidentialite.component";
 import {ForgotPasswordComponent} from "./routes/authentification/forgot-password/forgot-password.component";
 import {FileNotFoundComponent} from "./routes/error/404/file-not-found.component";
-import { FootballComponent } from './routes/bettor/football/football.component';
-import { RankingComponent } from './routes/bettor/football/ranking/ranking.component';
-import { ContestComponent } from './routes/bettor/contest/contest.component';
+import { RankingComponent } from './routes/bettor/contest/ranking/ranking.component';
 import {PipeModule} from "./shared/pipe/pipe.module";
 import { AboutComponent } from './routes/pages/about/about.component';
 import { ContactComponent } from './routes/pages/contact/contact.component';
+import {ContestComponent} from "./routes/bettor/contest/contest.component";
+import {ContestsComponent} from "./routes/bettor/contests/contests.component";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -63,9 +63,9 @@ export function initUserFactory(authService: AuthService) {
     FooterComponent,
     RegisterComponent,
     ConfidentialiteComponent,
-    FootballComponent,
-    RankingComponent,
     ContestComponent,
+    RankingComponent,
+    ContestsComponent,
     AboutComponent,
     ContactComponent,
   ],
@@ -81,6 +81,7 @@ export function initUserFactory(authService: AuthService) {
     HttpClientModule,
     FuseModule,
     PipeModule,
+    SuiModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
     TranslateModule.forRoot({
       loader: {

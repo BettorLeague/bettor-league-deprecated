@@ -1,58 +1,46 @@
-@import "../../../../@fuse/scss/fuse";
+@import '../../../../../node_modules/bootstrap/scss/bootstrap-grid';
+@import '../../../../../node_modules/@angular/material/theming';
 
-#contestPage {
+.tab-container{
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  //overflow: hidden;
+}
 
-  .header {
-    flex: 1 0 auto;
-    max-height: 160px;
-    background: #1A237E;
-    background: linear-gradient(to right, #0E2A3B 0%, #34306B 100%);
-
-
-    .hero-text {
-
-      h1 {
-        color: white;
-        font-size: 48px;
-        font-weight: 300;
-        letter-spacing: 0.01em;
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: 16px;
-
-        @include media-breakpoint-down('xs') {
-          font-size: 24px;
-        }
-      }
-
-      h3 {
-        color: rgba(255, 255, 255, 0.75);
-        max-width: 480px;
-        text-align: center;
-        font-weight: 300;
-        letter-spacing: 0.03em;
-        margin: 0;
-
-        @include media-breakpoint-down('xs') {
-          font-size: 14px;
-        }
-      }
-    }
-  }
-
-  .content {
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-
-    .fuse-card{
-      display: flex;
-      flex-direction: column;
-      min-width: 300px !important;
-      max-width: 300px !important;
-    }
-    .fuse-card img{
-      flex-grow: 1;
-    }
+@media screen and (max-width: 800px) {
+  .tab-container{
+    overflow: hidden;
   }
 }
+.blueBackground{
+  background-color: #039be5;
+}
+
+.tab-container .title-header{
+  z-index: 3;
+}
+
+:host ::ng-deep .tab-container .mat-tab-label-container {
+  @extend .container;
+}
+
+:host ::ng-deep .tab-container .mat-tab-list{
+  @extend .row;
+}
+:host ::ng-deep .tab-container .mat-tab-header{
+  @extend .blueBackground;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  @include mat-elevation(2);
+}
+
+:host ::ng-deep .tab-container .mat-ink-bar{
+  background: white;
+}
+
+:host ::ng-deep .tab-container .mat-tab-label, :host ::ng-deep .tab-container .mat-tab-link,:host ::ng-deep .tab-container .mat-tab-label.mat-tab-label-active{
+  color: white;
+}
+
