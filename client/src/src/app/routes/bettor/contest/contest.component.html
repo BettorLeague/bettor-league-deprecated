@@ -3,7 +3,7 @@
   <div class="container-fluid  pt-8 pb-8 mat-light-blue-600-bg title-header">
     <div class="container">
       <div class="row">
-        <div class="w-100-p" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="w-100-p py-8" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex fxLayout="column" >
             <h1>Ligue 1 2017-2018</h1>
             <h3>Public Contest</h3>
@@ -18,15 +18,16 @@
 
     <mat-tab-group  [(selectedIndex)]="selectedIndex" >
 
+      <mat-tab  label="Pronostics"> <app-prediction></app-prediction> </mat-tab>
+
+      <mat-tab  label="Classement"> <app-standing></app-standing> </mat-tab>
+
+      <mat-tab  label="Messages"> <app-message></app-message> </mat-tab>
+
+      <mat-tab  label="Paramètres"> <app-settings></app-settings> </mat-tab>
+
       <mat-tab  label="Championnat"> <app-ranking></app-ranking> </mat-tab>
 
-      <mat-tab  label="Pronostics">Pronostics</mat-tab>
-
-      <mat-tab  label="Paramètres">Paramètres</mat-tab>
-
-      <mat-tab  label="Classement">Classement</mat-tab>
-
-      <mat-tab  label="Messages">Messages</mat-tab>
     </mat-tab-group>
 
 </div>

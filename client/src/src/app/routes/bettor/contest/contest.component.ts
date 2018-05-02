@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contest.component.scss']
 })
 export class ContestComponent implements OnInit {
+
   selectedIndex: number = 0;
   totalTabs: number = 5;
+
 
   constructor() { }
 

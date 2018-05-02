@@ -12,6 +12,8 @@
         </mat-form-field>-->
 
         <sui-pagination
+                        *ngIf="matchday"
+                        [(page)]="matchday"
                         (pageChange)="getRankingAtMatchDay()"
                         [hasNavigationLinks]="true"
                         [hasBoundaryLinks]="true"
@@ -19,8 +21,7 @@
                         [pageSize]="1"
                         [maxSize]="4"
                         [canRotate]="true"
-                        [hasEllipses]="false"
-                        [(page)]="matchday">
+                        [hasEllipses]="false">
         </sui-pagination>
       </div>
 

@@ -28,6 +28,10 @@
 :host ::ng-deep .tab-container .mat-tab-list{
   @extend .row;
 }
+
+:host ::ng-deep .tab-container .mat-tab-group ,:host ::ng-deep .tab-container .mat-tab-body-wrapper{
+  flex-grow: 1;
+}
 :host ::ng-deep .tab-container .mat-tab-header{
   @extend .blueBackground;
   z-index: 2;
