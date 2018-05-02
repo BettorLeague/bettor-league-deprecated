@@ -39,6 +39,10 @@ import { AboutComponent } from './routes/pages/about/about.component';
 import { ContactComponent } from './routes/pages/contact/contact.component';
 import {ContestComponent} from "./routes/bettor/contest/contest.component";
 import {ContestsComponent} from "./routes/bettor/contests/contests.component";
+import { PredictionComponent } from './routes/bettor/contest/prediction/prediction.component';
+import { MessageComponent } from './routes/bettor/contest/message/message.component';
+import { SettingsComponent } from './routes/bettor/contest/settings/settings.component';
+import { StandingComponent } from './routes/bettor/contest/standing/standing.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -68,6 +72,10 @@ export function initUserFactory(authService: AuthService) {
     ContestsComponent,
     AboutComponent,
     ContactComponent,
+    PredictionComponent,
+    MessageComponent,
+    SettingsComponent,
+    StandingComponent,
   ],
   imports: [
     BrowserModule,
