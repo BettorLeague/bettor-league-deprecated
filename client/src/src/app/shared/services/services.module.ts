@@ -4,6 +4,7 @@ import {UserService} from "./auth/user.service";
 import {SidenavService} from "./layout/sidenav.service";
 import {RankingService} from "./football/ranking.service";
 import {HeaderService} from "./layout/header.service";
+import {CompetitionService} from "./football/competition.service";
 
 @NgModule({
   providers: [
@@ -11,6 +12,7 @@ import {HeaderService} from "./layout/header.service";
     UserService,
     SidenavService,
     RankingService,
+    CompetitionService,
     HeaderService
   ]
 })
