@@ -1,9 +1,19 @@
 .predictionContainer{
   display: flex;
   flex-direction: column;
-  height: 100%;
   border-left: 1px solid rgba(0, 0, 0, 0.12);
   border-right: 1px solid rgba(0, 0, 0, 0.12);
+  overflow: hidden;
 }
 
+.mat-column-result{
+  flex: 1 1 50%;
+}
 
+.predictionContainer .mat-row:nth-child(even){
+  background: rgba(0,0,0,.03);
+}
+.predictionContainer .mat-row{
+  height: 60px;
+  position: relative;
+}

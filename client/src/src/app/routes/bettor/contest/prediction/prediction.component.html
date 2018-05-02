@@ -1,7 +1,7 @@
 <div class="predictionContainer mat-white-bg container">
   <div class="row" fxLayout="column">
-    <div fxLayout="row" fxFlex fxLayoutAlign="flex-end">
-      <button class="mx-16 mt-8" mat-raised-button color="accent">Pronostiquer </button>
+    <div class="extra-theme" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
+      <button class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
     <div  class="w-100-p pb-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
@@ -27,11 +27,11 @@
     </mat-progress-bar>
 
     <mat-divider></mat-divider>
-    <mat-table #table class="w-100-p" [dataSource]="currentMatch" matSort>
+    <mat-table #table class="w-100-p" [dataSource]="currentMatch">
 
       <!-- Date -->
       <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef >Date</mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{element.date |  date:'EEEE, MMMM d, yyyy h:mm:ss a'}}
         </mat-cell>
@@ -39,19 +39,29 @@
 
       <!-- Result -->
       <ng-container matColumnDef="result">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Result</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef >Result</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{element.homeTeamName}} vs {{element.awayTeamName}}
+          <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="0 0 30%">{{element.homeTeamName}}</div>
+            <div fxFlex="0 0 10%" >
+              <div class="blason {{ getClass(element.homeTeamName) }}"></div>
+            </div>
+            <div fxFlex="0 0 10%"> VS </div>
+            <div fxFlex="0 0 10%">
+              <div class="blason {{ getClass(element.awayTeamName) }}"></div>
+            </div>
+            <div fxFlex="0 0 30%">{{element.awayTeamName}}</div>
+          </div>
         </mat-cell>
       </ng-container>
 
-      <!-- Prediction -->
+      <!-- Prediction
       <ng-container matColumnDef="prediction">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Prediction</mat-header-cell>
         <mat-cell *matCellDef="let element">
 
         </mat-cell>
-      </ng-container>
+      </ng-container>-->
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row  *matRowDef="let row; columns: displayedColumns"></mat-row>

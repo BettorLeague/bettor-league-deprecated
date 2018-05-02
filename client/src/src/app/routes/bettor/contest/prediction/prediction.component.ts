@@ -12,9 +12,8 @@ import {MatSort} from "@angular/material";
 })
 export class PredictionComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns= ["date","result","prediction"];
+  displayedColumns= ["date","result"];
 
   competitionId:number;
   competition:CompetitionModel;
@@ -39,7 +38,6 @@ export class PredictionComponent implements OnInit {
 
   getCompetitionById(){
     this.competitionService.getCompetitionById(this.competitionId).subscribe(data => {
-
       this.competition = data;
       this.currentMatchday = this.competition.currentMatchday;
       this.getMatchByDay(this.competition.currentMatchday);
@@ -57,6 +55,11 @@ export class PredictionComponent implements OnInit {
         this.onSearch = false;
       },1000);
     })
+  }
+
+  getClass(teamName:string){
+    return teamName.split(" ").join("_");
+
   }
 
 }

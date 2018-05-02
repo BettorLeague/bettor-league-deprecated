@@ -17,6 +17,7 @@ export class RankingComponent implements OnInit {
 
     displayedColumns = ['position', 'teamName', 'points', 'playedGames','wins','draws','losses', 'goals', 'goalsAgainst', 'goalDifference','forme'];
     ligue1Ranking = new MatTableDataSource();
+    ligue1RankingPrevious;
 
     matchday: number;
     totalmatch:number[] = [];
@@ -102,5 +103,11 @@ export class RankingComponent implements OnInit {
         }else return "w"
       }
     }
+
+  getClass(teamName:string){
+    return teamName.split(" ").join("_");
+
+  }
+
 
 }

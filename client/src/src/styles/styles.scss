@@ -38,9 +38,20 @@ button:focus {
 // Import Fuse main library
 @import "../@fuse/scss/core";
 @import "./splash";
+@import "./blason";
 @import "~bootstrap/dist/css/bootstrap.css";
 
+.extra-theme {
+  $extra-primary: mat-palette($mat-indigo);
+  $extra-accent:  mat-palette($mat-green);
+  $extra-accent-warn:  mat-palette($mat-red, A200, A100, A400);
+  $extra-theme: mat-light-theme($extra-primary, $extra-accent, $extra-accent-warn);
+  @include angular-material-theme($extra-theme);
+}
 
+.extra-theme .mat-raised-button.mat-accent, .extra-theme .mat-fab.mat-accent, .extra-theme .mat-mini-fab.mat-accent{
+  color: white;
+}
 
 button:focus {
   outline: none;
