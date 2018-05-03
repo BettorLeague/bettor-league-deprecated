@@ -30,9 +30,9 @@
     <mat-table #table class="w-100-p" [dataSource]="currentMatch">
 
       <!-- Date -->
-      <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef >Date</mat-header-cell>
-        <mat-cell *matCellDef="let element">
+      <ng-container matColumnDef="date" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >Date</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
           {{element.date |  date:'EEEE, MMMM d, yyyy h:mm:ss a'}}
         </mat-cell>
       </ng-container>
@@ -41,16 +41,30 @@
       <ng-container matColumnDef="result">
         <mat-header-cell *matHeaderCellDef >Result</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="0 0 30%">{{element.homeTeamName}}</div>
-            <div fxFlex="0 0 10%" >
+
+          <div class="py-8" fxHide.gt-sm fxFlex fxLayout="row" fxLayoutAlign="center center">
+            {{element.date |  date:'EEEE, MMMM d, yyyy h:mm:ss a'}}
+          </div>
+
+          <div class="py-8" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="0 0 20%">{{element.homeTeamName}}</div>
+            <div fxFlex="0 0 10%" fxLayout="row" fxLayoutAlign="center center">
               <div class="blason {{ getClass(element.homeTeamName) }}"></div>
             </div>
-            <div fxFlex="0 0 10%"> VS </div>
-            <div fxFlex="0 0 10%">
+
+            <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 10%"  fxLayout="row" fxLayoutAlign="center center"> - </div>
+            <div *ngIf="element.status == 'FINISHED'"  fxFlex="0 0 20%"  fxLayout="row" fxLayoutAlign="center center">
+              <span >
+                <span  class="ui label labelScore"><span>{{element.result.goalsHomeTeam}}</span></span>
+                -
+                <span  class="ui label labelScore"><span>{{element.result.goalsAwayTeam}}</span></span>
+              </span>
+            </div>
+
+            <div fxFlex="0 0 10%" fxLayout="row" fxLayoutAlign="center center">
               <div class="blason {{ getClass(element.awayTeamName) }}"></div>
             </div>
-            <div fxFlex="0 0 30%">{{element.awayTeamName}}</div>
+            <div fxFlex="0 0 20%">{{element.awayTeamName}}</div>
           </div>
         </mat-cell>
       </ng-container>

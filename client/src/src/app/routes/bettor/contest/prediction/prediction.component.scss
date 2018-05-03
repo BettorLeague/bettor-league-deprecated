@@ -7,7 +7,7 @@
 }
 
 .mat-column-result{
-  flex: 1 1 50%;
+  flex: 1 1 40%;
 }
 
 .predictionContainer .mat-row:nth-child(even){
@@ -16,4 +16,25 @@
 .predictionContainer .mat-row{
   height: 60px;
   position: relative;
+}
+
+.predictionContainer .mat-column-result{
+  text-align: center;
+}
+
+
+@media screen and (max-width: 992px) {
+  .predictionContainer .mat-row{
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .predictionContainer .mat-row{
+    height: 130px;
+  }
+}
+
+.labelScore{
+  font-size: 15px !important;
 }
