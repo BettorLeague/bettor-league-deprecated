@@ -3,7 +3,8 @@ import {FixtureModel} from "../../../../shared/models/football/fixture/fixture.m
 import {ActivatedRoute, Router} from "@angular/router";
 import {CompetitionService} from "../../../../shared/services/football/competition.service";
 import {CompetitionModel} from "../../../../shared/models/football/competition/competition.model";
-import {MatSort} from "@angular/material";
+import {MatSort, MatTableDataSource} from "@angular/material";
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-prediction',
@@ -11,7 +12,8 @@ import {MatSort} from "@angular/material";
   styleUrls: ['./prediction.component.scss']
 })
 export class PredictionComponent implements OnInit {
-
+  onPredict = false;
+  predictColumns = ["Select","Day","HomeTeam","HomeScore","AwayScore","AwayTeam","Info"];
 
   displayedColumns= ["date","result"];
 
@@ -19,7 +21,8 @@ export class PredictionComponent implements OnInit {
   competition:CompetitionModel;
 
   currentMatchday:number;
-  currentMatch:FixtureModel[];
+  currentMatch = null;
+  selectionMatch = new SelectionModel<FixtureModel>(true, []);
 
   onSearch = true;
 
@@ -50,7 +53,7 @@ export class PredictionComponent implements OnInit {
     this.currentMatch = null;
     this.competitionService.getMatchFromCompetitionByIdAndMatchDay(this.competitionId,day).subscribe(data => {
       setTimeout(() => {
-        this.currentMatch = data;
+        this.currentMatch = new MatTableDataSource<FixtureModel>(data);
         this.currentMatchday = day;
         this.onSearch = false;
       },1000);
@@ -60,6 +63,21 @@ export class PredictionComponent implements OnInit {
   getClass(teamName:string){
     return teamName.split(" ").join("_");
 
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    console.log(this.currentMatch)
+    const numSelected = this.selectionMatch.selected.length;
+    const numRows = this.currentMatch.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selectionMatch.clear() :
+      this.currentMatch.data.forEach(row => this.selectionMatch.select(row));
   }
 
 }

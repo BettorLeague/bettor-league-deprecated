@@ -42,7 +42,7 @@ button:focus {
 @import "~bootstrap/dist/css/bootstrap.css";
 
 .extra-theme {
-  $extra-primary: mat-palette($mat-indigo);
+  $extra-primary: mat-palette($mat-gray, A200);
   $extra-accent:  mat-palette($mat-green);
   $extra-accent-warn:  mat-palette($mat-red, A200, A100, A400);
   $extra-theme: mat-light-theme($extra-primary, $extra-accent, $extra-accent-warn);
@@ -53,6 +53,9 @@ button:focus {
   color: white;
 }
 
+.extra-theme .mat-raised-button.mat-primary, .extra-theme .mat-fab.mat-primary .extra-theme .mat-mini-fab.mat-primary{
+  color: rgba(0,0,0,.6);
+}
 button:focus {
   outline: none;
 }

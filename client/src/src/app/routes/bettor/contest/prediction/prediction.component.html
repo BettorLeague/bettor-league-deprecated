@@ -1,7 +1,7 @@
-<div class="predictionContainer mat-white-bg container">
+<div class="predictionContainer mat-white-bg container" *ngIf="!onPredict">
   <div class="row" fxLayout="column">
     <div class="extra-theme" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
-      <button class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
+      <button [disabled]="!currentMatch" (click)="onPredict = true" class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
     <div  class="w-100-p pb-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
@@ -52,7 +52,13 @@
               <div class="blason {{ getClass(element.homeTeamName) }}"></div>
             </div>
 
-            <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 10%"  fxLayout="row" fxLayoutAlign="center center"> - </div>
+            <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 20%"  fxLayout="row" fxLayoutAlign="center center">
+              <span >
+                <span  class="ui label labelScore"><span> - </span></span>
+                -
+                <span  class="ui label labelScore"><span> - </span></span>
+              </span>
+            </div>
             <div *ngIf="element.status == 'FINISHED'"  fxFlex="0 0 20%"  fxLayout="row" fxLayoutAlign="center center">
               <span >
                 <span  class="ui label labelScore"><span>{{element.result.goalsHomeTeam}}</span></span>
@@ -84,4 +90,91 @@
 
   </div>
 
+</div>
+
+
+<div class="predictionContainer mat-white-bg container" *ngIf="onPredict">
+  <div class="row" fxLayout="column">
+    <div class="extra-theme pb-16" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
+      <button (click)="onPredict = false" class="mx-16 mt-8" color="accent" mat-raised-button > Save </button>
+      <button (click)="onPredict = false" class="mx-16 mt-8" color="warn" mat-raised-button > Return</button>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-table #table class="w-100-p" [dataSource]="currentMatch">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="Select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-slide-toggle (change)="$event ? masterToggle() : null"
+                        [checked]="selectionMatch.hasValue() && isAllSelected()">
+          </mat-slide-toggle>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-slide-toggle (click)="$event.stopPropagation()"
+                        (change)="$event ? selectionMatch.toggle(row) : null"
+                        [checked]="selectionMatch.isSelected(row)">
+          </mat-slide-toggle>
+        </td>
+      </ng-container>
+
+      <!-- Date -->
+      <ng-container matColumnDef="Day" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >Date</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+          {{currentMatchday}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- HomeTeam -->
+      <ng-container matColumnDef="HomeTeam" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >HomeTeam</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="flex-end">
+            <div fxFlex="0 0 50%" >{{element.homeTeamName}}</div>
+            <div fxFlex="0 0 50%">
+              <div class="blason {{ getClass(element.homeTeamName) }}"></div>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- HomeScore -->
+      <ng-container matColumnDef="HomeScore" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >HomeScore</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        </mat-cell>
+      </ng-container>
+
+      <!-- AwayScore -->
+      <ng-container matColumnDef="AwayScore" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >AwayScore</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        </mat-cell>
+      </ng-container>
+
+      <!-- AwayTeam -->
+      <ng-container matColumnDef="AwayTeam" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >AwayTeam</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="0 0 50%" fxLayoutAlign="flex-start">
+              <div class="blason {{ getClass(element.awayTeamName) }}"></div>
+            </div>
+            <div fxFlex="0 0 50%" >{{element.awayTeamName}}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Info -->
+      <ng-container matColumnDef="Info" >
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >Info</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="predictColumns"></mat-header-row>
+      <mat-row  *matRowDef="let row; columns: predictColumns"></mat-row>
+    </mat-table>
+  </div>
 </div>
