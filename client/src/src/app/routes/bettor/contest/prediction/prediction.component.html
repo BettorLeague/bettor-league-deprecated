@@ -3,13 +3,13 @@
   <div class="row" fxLayout="column" *fuseIfOnDom [@animate]="{value:'*',params:{y:'100%'}}">
 
     <div class="extra-theme" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
-      <button [disabled]="!currentMatch" (click)="onPredict = true" class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
+      <button [disabled]="!selectedMatch" (click)="onPredict = true" class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
 
     <div  class="w-100-p pb-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
-        (pageChange)="getMatchByDay(currentMatchday)"
-        [(page)]="currentMatchday"
+        (pageChange)="getMatchByDay()"
+        [(page)]="selectedDay"
         [hasNavigationLinks]="true"
         [hasBoundaryLinks]="true"
         [collectionSize]="competitionService.currentCompetition.numberOfMatchdays"
@@ -29,7 +29,7 @@
     </mat-progress-bar>
 
     <mat-divider></mat-divider>
-    <mat-table #table class="w-100-p" [dataSource]="currentMatch">
+    <mat-table #table class="w-100-p" [dataSource]="selectedMatch">
 
       <!-- Date -->
       <ng-container matColumnDef="date" >
@@ -101,7 +101,7 @@
       <button (click)="onPredict = false" class="mx-12 mt-8" color="warn" mat-raised-button > Return</button>
     </div>
     <mat-divider></mat-divider>
-    <mat-table #table class="w-100-p" [dataSource]="currentMatch">
+    <mat-table #table class="w-100-p" [dataSource]="selectedMatch">
 
       <ng-container matColumnDef="Select">
         <mat-header-cell *matHeaderCellDef>

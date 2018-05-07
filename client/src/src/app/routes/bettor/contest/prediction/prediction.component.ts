@@ -21,8 +21,8 @@ export class PredictionComponent implements OnInit {
   displayedColumns= ["date","result"];
 
   onSearch = true;
-  currentMatchday:number;
-  currentMatch;
+  selectedDay:number;
+  selectedMatch;
 
 
   selectionMatch = new SelectionModel<FixtureModel>(true, []);
@@ -32,22 +32,27 @@ export class PredictionComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               public contestService:ContestService,
               public competitionService:CompetitionService) {
-    this.getMatchByDay(this.competitionService.currentCompetition.currentMatchday);
+    this.initModel();
+    this.getMatchByDay();
   }
 
   ngOnInit() {}
 
-  resetModel(){
-    this.onSearch = true;
-    this.currentMatch = new MatTableDataSource<FixtureModel>();
+  initModel(){
+    this.resetModel();
+    this.selectedDay = this.competitionService.currentCompetition.currentMatchday;
   }
 
-  getMatchByDay(day:number){
+  resetModel(){
+    this.onSearch = true;
+    this.selectedMatch = new MatTableDataSource<FixtureModel>();
+  }
+
+  getMatchByDay(){
     this.resetModel();
-    this.competitionService.getMatchFromCompetitionByIdAndMatchDay(this.contestService.currentContest.competitionId,day).subscribe(data => {
+    this.competitionService.getMatchFromCompetitionByIdAndMatchDay(this.contestService.currentContest.competitionId,this.selectedDay).subscribe(data => {
       setTimeout(() => {
-        this.currentMatchday = day;
-        this.currentMatch.data = data;
+        this.selectedMatch.data = data;
         this.onSearch = false;
       },1000);
     });
@@ -60,9 +65,9 @@ export class PredictionComponent implements OnInit {
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    console.log(this.currentMatch)
+    console.log(this.selectedMatch)
     const numSelected = this.selectionMatch.selected.length;
-    const numRows = this.currentMatch.data.length;
+    const numRows = this.selectedMatch.data.length;
     return numSelected === numRows;
   }
 
@@ -70,7 +75,7 @@ export class PredictionComponent implements OnInit {
   masterToggle() {
     this.isAllSelected() ?
       this.selectionMatch.clear() :
-      this.currentMatch.data.forEach(row => this.selectionMatch.select(row));
+      this.selectedMatch.data.forEach(row => this.selectionMatch.select(row));
   }
 
 }
