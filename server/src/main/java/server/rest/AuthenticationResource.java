@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import static java.util.Objects.isNull;
 
 @RestController
-public class AuthenticationController {
+public class AuthenticationResource {
 
     @Value("${jwt.header}")
     private String tokenHeader;

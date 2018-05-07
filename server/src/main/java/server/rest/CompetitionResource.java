@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
-public class CompetitionController {
+public class CompetitionResource {
 
     @Inject
     private CompetitionService competitionService;

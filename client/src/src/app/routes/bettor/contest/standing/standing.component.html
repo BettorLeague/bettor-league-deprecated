@@ -1,4 +1,51 @@
 <div class="standingContainer mat-white-bg container">
   <div class="row" fxLayout="column">
+
+    <mat-table #table class="w-100-p" >
+
+      <!-- Rank -->
+      <ng-container matColumnDef="Rank" >
+        <mat-header-cell *matHeaderCellDef >Rank</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+
+        </mat-cell>
+      </ng-container>
+
+      <!-- Player -->
+      <ng-container matColumnDef="Player" >
+        <mat-header-cell  *matHeaderCellDef >Player</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+        </mat-cell>
+      </ng-container>
+
+      <!-- Points -->
+      <ng-container matColumnDef="Points" >
+        <mat-header-cell  *matHeaderCellDef >Points</mat-header-cell>
+        <mat-cell  *matCellDef="let element">
+
+        </mat-cell>
+      </ng-container>
+
+      <!-- GoodPrediction -->
+      <ng-container matColumnDef="GoodPrediction" >
+        <mat-header-cell *matHeaderCellDef >GoodPrediction</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+
+        </mat-cell>
+      </ng-container>
+
+      <!-- ExactResult -->
+      <ng-container matColumnDef="ExactResult" >
+        <mat-header-cell  *matHeaderCellDef >ExactResult</mat-header-cell>
+        <mat-cell  *matCellDef="let element">
+
+        </mat-cell>
+      </ng-container>
+
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row  *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
   </div>
 </div>

@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
-public class BettorController {
+public class BettorResource {
 
     @Autowired
     private BettorService bettorService;
@@ -33,6 +33,12 @@ public class BettorController {
         }else {
             return new ResponseEntity<>(this.bettorService.addContest(contest), HttpStatus.OK);
         }
+    }
+
+    @RequestMapping(path = "/api/bettor/contest/public/{contestId}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Contest> getPublicContestById(@PathVariable("contestId") Long contestId) {
+        return new ResponseEntity<>(this.bettorService.getContestById(contestId), HttpStatus.OK);
     }
 
     @RequestMapping(path = "/api/bettor/contest/{contestId}/players/", method = RequestMethod.GET)

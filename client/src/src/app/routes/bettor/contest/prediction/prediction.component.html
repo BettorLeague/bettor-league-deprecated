@@ -1,5 +1,5 @@
-<div class="predictionContainer mat-white-bg container" *ngIf="!onPredict">
-  <div class="row" fxLayout="column">
+<div class="predictionContainer mat-white-bg container" *ngIf="!onPredict" >
+  <div class="row" fxLayout="column" *fuseIfOnDom [@animate]="{value:'*',params:{y:'100%'}}">
     <div class="extra-theme" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
       <button [disabled]="!currentMatch" (click)="onPredict = true" class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
@@ -52,18 +52,18 @@
               <div class="blason {{ getClass(element.homeTeamName) }}"></div>
             </div>
 
-            <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 20%"  fxLayout="row" fxLayoutAlign="center center">
+            <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
               <span >
-                <span  class="ui label labelScore"><span> - </span></span>
-                -
-                <span  class="ui label labelScore"><span> - </span></span>
+                <span  class="ui label labelScore mx-8"><span> - </span></span>
+
+                <span  class="ui label labelScore mx-8"><span> - </span></span>
               </span>
             </div>
-            <div *ngIf="element.status == 'FINISHED'"  fxFlex="0 0 20%"  fxLayout="row" fxLayoutAlign="center center">
+            <div *ngIf="element.status == 'FINISHED'"  fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
               <span >
-                <span  class="ui label labelScore"><span>{{element.result.goalsHomeTeam}}</span></span>
-                -
-                <span  class="ui label labelScore"><span>{{element.result.goalsAwayTeam}}</span></span>
+                <span  class="ui label labelScore mx-8"><span>{{element.result.goalsHomeTeam}}</span></span>
+
+                <span  class="ui label labelScore mx-8"><span>{{element.result.goalsAwayTeam}}</span></span>
               </span>
             </div>
 
@@ -94,27 +94,27 @@
 
 
 <div class="predictionContainer mat-white-bg container" *ngIf="onPredict">
-  <div class="row" fxLayout="column">
+  <div class="row" fxLayout="column"  [@animate]="{value:'*',params:{delay:'200ms',y:'100%'}}">
     <div class="extra-theme pb-16" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
-      <button (click)="onPredict = false" class="mx-16 mt-8" color="accent" mat-raised-button > Save </button>
-      <button (click)="onPredict = false" class="mx-16 mt-8" color="warn" mat-raised-button > Return</button>
+      <button (click)="onPredict = false" class="mx-12 mt-8" color="accent" mat-raised-button > Save </button>
+      <button (click)="onPredict = false" class="mx-12 mt-8" color="warn" mat-raised-button > Return</button>
     </div>
     <mat-divider></mat-divider>
     <mat-table #table class="w-100-p" [dataSource]="currentMatch">
 
       <!-- Checkbox Column -->
       <ng-container matColumnDef="Select">
-        <th mat-header-cell *matHeaderCellDef>
+        <mat-header-cell *matHeaderCellDef>
           <mat-slide-toggle (change)="$event ? masterToggle() : null"
                         [checked]="selectionMatch.hasValue() && isAllSelected()">
           </mat-slide-toggle>
-        </th>
-        <td mat-cell *matCellDef="let row">
+        </mat-header-cell>>
+        <mat-cell *matCellDef="let row">
           <mat-slide-toggle (click)="$event.stopPropagation()"
                         (change)="$event ? selectionMatch.toggle(row) : null"
                         [checked]="selectionMatch.isSelected(row)">
           </mat-slide-toggle>
-        </td>
+        </mat-cell>
       </ng-container>
 
       <!-- Date -->
@@ -127,11 +127,11 @@
 
       <!-- HomeTeam -->
       <ng-container matColumnDef="HomeTeam" >
-        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >HomeTeam</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
-          <div fxLayout="row" fxLayoutAlign="flex-end">
-            <div fxFlex="0 0 50%" >{{element.homeTeamName}}</div>
-            <div fxFlex="0 0 50%">
+        <mat-header-cell  *matHeaderCellDef >HomeTeam</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="0 0 60%" fxHide fxShow.gt-sm>{{element.homeTeamName}}</div>
+            <div fxFlex="0 0 40%">
               <div class="blason {{ getClass(element.homeTeamName) }}"></div>
             </div>
           </div>
@@ -140,35 +140,48 @@
 
       <!-- HomeScore -->
       <ng-container matColumnDef="HomeScore" >
-        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >HomeScore</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        <mat-header-cell  *matHeaderCellDef >HomeScore</mat-header-cell>
+        <mat-cell  *matCellDef="let element">
+          <div class="ui input" fxFlex="1 1 80%" fxLayout="row" fxLayoutAlign="center center">
+            <input type="number">
+          </div>
         </mat-cell>
       </ng-container>
 
       <!-- AwayScore -->
       <ng-container matColumnDef="AwayScore" >
-        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >AwayScore</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        <mat-header-cell *matHeaderCellDef >AwayScore</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="ui input" fxFlex="1 1 80%" fxLayout="row" fxLayoutAlign="center center">
+            <input type="number">
+          </div>
         </mat-cell>
       </ng-container>
 
       <!-- AwayTeam -->
       <ng-container matColumnDef="AwayTeam" >
-        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >AwayTeam</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        <mat-header-cell  *matHeaderCellDef >AwayTeam</mat-header-cell>
+        <mat-cell  *matCellDef="let element">
           <div fxLayout="row" fxLayoutAlign="center center">
-            <div fxFlex="0 0 50%" fxLayoutAlign="flex-start">
+            <div fxFlex="0 0 40%" fxLayoutAlign="flex-start">
               <div class="blason {{ getClass(element.awayTeamName) }}"></div>
             </div>
-            <div fxFlex="0 0 50%" >{{element.awayTeamName}}</div>
+            <div fxFlex="0 0 60%" fxHide fxShow.gt-sm>{{element.awayTeamName}}</div>
           </div>
         </mat-cell>
       </ng-container>
 
       <!-- Info -->
       <ng-container matColumnDef="Info" >
-        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >Info</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
+        <mat-header-cell  fxHide fxShow.gt-sm *matHeaderCellDef ></mat-header-cell>
+        <mat-cell  fxHide fxShow.gt-sm *matCellDef="let element">
+          <table class="ui unstackable single line small very compact center aligned celled table mob-hide" disabled="disabled">
+            <tbody><tr>
+              <td>1</td>
+              <td>N</td>
+              <td>2</td>
+            </tr>
+            </tbody></table>
         </mat-cell>
       </ng-container>
 

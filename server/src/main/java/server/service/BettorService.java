@@ -10,4 +10,5 @@ public interface BettorService {
     List<Contest> getAllPrivateContestByOwnerId(Long ownerId);
     List<Player>  getPlayersByContestId(Long contestId);
     Contest addContest(Contest contest);
+    Contest getContestById(Long contestId);
 }

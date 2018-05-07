@@ -35,6 +35,9 @@ public class Competition {
     @Size(min = 2, max = 10)
     private String league;
 
+    @Column(name = "CREST_URL")
+    private String crestUrl;
+
     @Column(name = "YEAR", length = 4)
     @NotNull
     @Size(min = 4, max = 4)

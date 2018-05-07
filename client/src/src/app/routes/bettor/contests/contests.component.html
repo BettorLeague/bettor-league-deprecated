@@ -5,7 +5,6 @@
 
     <div class="hero-text">
       <mat-icon class="hero-icon">school</mat-icon>
-
       <h1>CONCOURS PUBLIC</h1>
       <h3>
         Our courses will step you through the process of building a small application, or adding a new feature
@@ -49,9 +48,10 @@
       </div> -->
 
 
-      <div class="courses" fxLayout="row wrap" fxLayoutAlign="center">
+      <div class="courses" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'50'}"
+           *fuseIfOnDom>
 
-        <div class="course"  [routerLink]="'/contest/1'" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
+        <div class="course" [routerLink]="'/contest/1'" [@animate]="{value:'*',params:{y:'100%'}}"  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
 
           <div class="course-content" fxLayout="column">
 
@@ -79,8 +79,7 @@
 
 
             <div class="footer grey-50-bg" fxLayout="row" fxLayoutAlign="center center">
-
-              <button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>
+              <!--<button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>-->
             </div>
 
           </div>
@@ -88,7 +87,7 @@
         </div>
 
 
-        <div class="course"  [routerLink]="'/contest/1'" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
+        <div class="course"  [routerLink]="'/contest/1'" [@animate]="{value:'*',params:{y:'100%'}}" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
 
           <div class="course-content" fxLayout="column">
 
@@ -116,7 +115,7 @@
 
 
             <div class="footer grey-50-bg" fxLayout="row" fxLayoutAlign="center center">
-              <button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>
+              <!--<button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>-->
             </div>
 
           </div>

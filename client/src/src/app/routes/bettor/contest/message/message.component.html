@@ -1,4 +1,41 @@
 <div class="messageContainer mat-white-bg container">
   <div class="row" fxLayout="column">
+
+
+    <footer  fxLayout="column" fxLayoutAlign="start start">
+      <div  class="comment-count" fxLayout="row" fxLayoutAlign="start center">
+        comments
+        <mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+      </div>
+
+      <div class="comment" fxLayout="row" fxFlexFill >
+        <img  class="avatar"/>
+
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <span class="username"></span>
+            <span class="time"></span>
+          </div>
+          <div class="message">
+            sd
+          </div>
+          <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+            <a href="#" class="reply-button">Reply</a>
+            <mat-icon fxFlex class="report-button s-16">flag</mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="reply" fxLayout="row" fxFlexFill>
+        <img src="assets/images/avatars/profile.jpg" class="avatar"/>
+
+        <form fxFlex>
+          <textarea placeholder="Add a comment..."></textarea>
+          <button mat-raised-button color="accent" class="post-comment-button" aria-label="Post Comment">
+            Post Comment
+          </button>
+        </form>
+      </div>
+    </footer>
   </div>
 </div>

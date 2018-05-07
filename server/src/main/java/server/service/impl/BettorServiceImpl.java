@@ -35,4 +35,8 @@ public class BettorServiceImpl implements BettorService{
     public List<Contest> getAllPrivateContestByOwnerId(Long ownerId){
         return contestRepository.findAllByTypeAndOwnerId(ContestType.PRIVATE,ownerId);
     }
+
+    public Contest getContestById(Long contestId){
+        return contestRepository.findOne(contestId);
+    }
 }

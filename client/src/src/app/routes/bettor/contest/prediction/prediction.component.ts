@@ -5,11 +5,13 @@ import {CompetitionService} from "../../../../shared/services/football/competiti
 import {CompetitionModel} from "../../../../shared/models/football/competition/competition.model";
 import {MatSort, MatTableDataSource} from "@angular/material";
 import {SelectionModel} from '@angular/cdk/collections';
+import {fuseAnimations} from "../../../../../@fuse/animations";
 
 @Component({
   selector: 'app-prediction',
   templateUrl: './prediction.component.html',
-  styleUrls: ['./prediction.component.scss']
+  styleUrls: ['./prediction.component.scss'],
+  animations   : fuseAnimations
 })
 export class PredictionComponent implements OnInit {
   onPredict = false;

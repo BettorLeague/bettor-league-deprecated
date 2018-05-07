@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./standing.component.scss']
 })
 export class StandingComponent implements OnInit {
+  displayedColumns = ['Rank', 'Player', 'Points', 'GoodPrediction','ExactResult'];
 
   constructor() { }
 

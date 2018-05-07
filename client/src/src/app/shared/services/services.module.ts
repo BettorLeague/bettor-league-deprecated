@@ -5,6 +5,7 @@ import {SidenavService} from "./layout/sidenav.service";
 import {RankingService} from "./football/ranking.service";
 import {HeaderService} from "./layout/header.service";
 import {CompetitionService} from "./football/competition.service";
+import {ContestService} from "./bettor/contest.service";
 
 @NgModule({
   providers: [
@@ -13,6 +14,7 @@ import {CompetitionService} from "./football/competition.service";
     SidenavService,
     RankingService,
     CompetitionService,
+    ContestService,
     HeaderService
   ]
 })

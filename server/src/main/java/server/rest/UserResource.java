@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
-public class UserController {
+public class UserResource {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
