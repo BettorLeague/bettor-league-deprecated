@@ -2,7 +2,7 @@
 
 module.exports = (app) => {
 
-    app.get("/api/competition/all", (req, res) => {
+    app.get("/api/competition", (req, res) => {
         res.send([
         {
             "id": 1,
@@ -13,7 +13,8 @@ module.exports = (app) => {
             "numberOfMatchdays": 38,
             "numberOfGames": 380,
             "numberOfTeams": 20,
-            "lastUpdated": 1523221805000
+            "lastUpdated": 1523221805000,
+            "crestUrl": "https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg",
         }
     ]);
 });

@@ -16,14 +16,11 @@ export class ContestComponent implements OnInit {
   selectedIndex: number = 0;
   totalTabs: number = 5;
 
-  competition:CompetitionModel;
-  contest:ContestModel;
-  contestId: number;
-
+  public contestId: number;
 
   constructor(private route: ActivatedRoute,
-              private competitionService:CompetitionService,
-              private contestService:ContestService) { }
+              public competitionService:CompetitionService,
+              public contestService:ContestService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -44,23 +41,24 @@ export class ContestComponent implements OnInit {
   initModel(){
     this.resetModel();
     this.getContestById();
-    this.getCompetitionById();
   }
 
   resetModel(){
-    this.contest = null;
-    this.competition = null;
+    this.competitionService.currentCompetition = null;
+    this.contestService.currentContest = null;
   }
 
   getContestById(){
     this.contestService.getPublicContestById(this.contestId).subscribe(data => {
-      this.contest = data;
+      this.contestService.currentContest = data;
+      this.getCompetitionById();
     })
+
   }
 
   getCompetitionById(){
-    this.competitionService.getCompetitionById(this.contest.competitionId).subscribe(data => {
-      this.competition = data;
+    this.competitionService.getCompetitionById(this.contestService.currentContest.competitionId).subscribe(data => {
+      this.competitionService.currentCompetition = data;
     })
   }
 

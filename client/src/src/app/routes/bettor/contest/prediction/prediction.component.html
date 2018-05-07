@@ -1,16 +1,18 @@
-<div class="predictionContainer mat-white-bg container" *ngIf="!onPredict" >
+<div class="predictionContainer mat-white-bg container" *ngIf="!onPredict " >
+
   <div class="row" fxLayout="column" *fuseIfOnDom [@animate]="{value:'*',params:{y:'100%'}}">
+
     <div class="extra-theme" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
       <button [disabled]="!currentMatch" (click)="onPredict = true" class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
+
     <div  class="w-100-p pb-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
-        *ngIf="competition"
-        [(page)]="currentMatchday"
         (pageChange)="getMatchByDay(currentMatchday)"
+        [(page)]="currentMatchday"
         [hasNavigationLinks]="true"
         [hasBoundaryLinks]="true"
-        [collectionSize]="competition.numberOfMatchdays"
+        [collectionSize]="competitionService.currentCompetition.numberOfMatchdays"
         [pageSize]="1"
         [maxSize]="4"
         [canRotate]="true"
@@ -86,13 +88,12 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row  *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
+
   </div>
 
   </div>
 
 </div>
-
-
 <div class="predictionContainer mat-white-bg container" *ngIf="onPredict">
   <div class="row" fxLayout="column"  [@animate]="{value:'*',params:{delay:'200ms',y:'100%'}}">
     <div class="extra-theme pb-16" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
@@ -102,7 +103,6 @@
     <mat-divider></mat-divider>
     <mat-table #table class="w-100-p" [dataSource]="currentMatch">
 
-      <!-- Checkbox Column -->
       <ng-container matColumnDef="Select">
         <mat-header-cell *matHeaderCellDef>
           <mat-slide-toggle (change)="$event ? masterToggle() : null"
@@ -117,7 +117,6 @@
         </mat-cell>
       </ng-container>
 
-      <!-- Date -->
       <ng-container matColumnDef="Day" >
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >Date</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
@@ -125,7 +124,6 @@
         </mat-cell>
       </ng-container>
 
-      <!-- HomeTeam -->
       <ng-container matColumnDef="HomeTeam" >
         <mat-header-cell  *matHeaderCellDef >HomeTeam</mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -138,7 +136,6 @@
         </mat-cell>
       </ng-container>
 
-      <!-- HomeScore -->
       <ng-container matColumnDef="HomeScore" >
         <mat-header-cell  *matHeaderCellDef >HomeScore</mat-header-cell>
         <mat-cell  *matCellDef="let element">
@@ -148,7 +145,6 @@
         </mat-cell>
       </ng-container>
 
-      <!-- AwayScore -->
       <ng-container matColumnDef="AwayScore" >
         <mat-header-cell *matHeaderCellDef >AwayScore</mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -158,7 +154,6 @@
         </mat-cell>
       </ng-container>
 
-      <!-- AwayTeam -->
       <ng-container matColumnDef="AwayTeam" >
         <mat-header-cell  *matHeaderCellDef >AwayTeam</mat-header-cell>
         <mat-cell  *matCellDef="let element">
@@ -171,8 +166,7 @@
         </mat-cell>
       </ng-container>
 
-      <!-- Info -->
-      <ng-container matColumnDef="Info" >
+      <ng-container matColumnDef="Info">
         <mat-header-cell  fxHide fxShow.gt-sm *matHeaderCellDef ></mat-header-cell>
         <mat-cell  fxHide fxShow.gt-sm *matCellDef="let element">
           <table class="ui unstackable single line small very compact center aligned celled table mob-hide" disabled="disabled">

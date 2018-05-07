@@ -12,7 +12,8 @@ module.exports = (app) => {
     "numberOfMatchdays": 38,
     "numberOfGames": 380,
     "numberOfTeams": 20,
-    "lastUpdated": 1525044008000
+    "lastUpdated": 1525044008000,
+    "crestUrl": "https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg",
   });
 });
 

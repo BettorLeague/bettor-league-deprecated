@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {RankingService} from "../../../../shared/services/football/ranking.service";
 import {StandingModel} from "../../../../shared/models/football/ranking/standing.model";
 import {FixtureModel} from "../../../../shared/models/football/fixture/fixture.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {fuseAnimations} from "../../../../../@fuse/animations";
 
 @Component({
     selector: 'app-ranking',
     templateUrl: './ranking.component.html',
-    styleUrls: ['./ranking.component.scss']
+    styleUrls: ['./ranking.component.scss'],
+  animations   : fuseAnimations
 })
 export class RankingComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
@@ -17,7 +19,6 @@ export class RankingComponent implements OnInit {
 
     displayedColumns = ['position', 'teamName', 'points', 'playedGames','wins','draws','losses', 'goals', 'goalsAgainst', 'goalDifference','forme'];
     ligue1Ranking = new MatTableDataSource();
-    ligue1RankingPrevious;
 
     matchday: number;
     totalmatch:number[] = [];
@@ -25,14 +26,14 @@ export class RankingComponent implements OnInit {
 
     onSearch = true;
 
-    constructor(private rankingService: RankingService,private route: ActivatedRoute,
-                private router: Router) {
-    }
+    constructor(private rankingService: RankingService,
+                private route: ActivatedRoute,
+                private router: Router) {}
 
     ngOnInit() {
-       this.route.params.subscribe(params => {
-         this.competitionId = +params['contestId'];
-         this.getCurrentRanking();
+      this.route.params.subscribe(params => {
+        this.competitionId = +params['contestId'];
+        this.getCurrentRanking();
       });
     }
 
@@ -40,11 +41,14 @@ export class RankingComponent implements OnInit {
     getCurrentRanking(){
       this.resetModel();
         this.rankingService.getCompetitionRanking(this.competitionId).subscribe(data => {
+
             this.lastmatch = data.matchday;
             this.matchday = data.matchday;
+
             for(let i = 1; i <= this.matchday ; i++){
               this.totalmatch.push(i);
             }
+
             setTimeout(() => {
               let standings:StandingModel[] = data.standing;
               for(let standing of standings){
@@ -54,6 +58,7 @@ export class RankingComponent implements OnInit {
               this.ligue1Ranking.sort = this.sort;
               this.onSearch = false;
             }, 1000);
+
         },
           error => {
             this.router.navigate(['/contest']);
@@ -106,7 +111,6 @@ export class RankingComponent implements OnInit {
 
   getClass(teamName:string){
     return teamName.split(" ").join("_");
-
   }
 
 

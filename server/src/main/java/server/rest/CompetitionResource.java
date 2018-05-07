@@ -29,7 +29,7 @@ public class CompetitionResource {
     }
 
 
-    @RequestMapping(path = "/api/competition/all", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/competition", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<Competition>> getAllCompetition() {
         return this.competitionService.getAllCompetition();

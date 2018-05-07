@@ -8,4 +8,5 @@ export class CompetitionModel{
   numberOfGames: number;
   numberOfTeams: number;
   lastUpdated: Date;
+  crestUrl:string;
 }

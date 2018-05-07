@@ -1,16 +1,22 @@
-<div class="tab-container w-100-p">
+<mat-progress-bar
+  *ngIf="!competitionService.currentCompetition"
+  [color]="'primary'"
+  [mode]="'indeterminate'">
+</mat-progress-bar>
 
+<div class="tab-container w-100-p" *ngIf="competitionService.currentCompetition">
   <div class="container-fluid  pt-8 pb-8 mat-light-blue-600-bg title-header">
     <div class="container">
       <div class="row">
         <div class="w-100-p py-8" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex fxLayout="row">
             <div fxFlex="0 0 auto" fxLayoutAlign="flex-start" class="mr-16">
-              <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg"/>
+              <img class="logo" src="{{competitionService.currentCompetition.crestUrl}}"/>
             </div>
             <div fxFlex="1 0 auto" fxLayout="column" >
-              <h1>Ligue 1 2017-2018</h1>
-              <h3>Public Contest</h3>
+              <h1>{{competitionService.currentCompetition.caption}}</h1>
+              <h3 *ngIf="contestService.currentContest.type == 'PUBLIC';else private">Public Contest</h3>
+              <ng-template #private><h3>Private Contest</h3></ng-template>
             </div>
           </div>
           <div>
@@ -21,7 +27,7 @@
     </div>
   </div>
 
-    <mat-tab-group  [(selectedIndex)]="selectedIndex" >
+    <mat-tab-group  [(selectedIndex)]="selectedIndex" *ngIf="contestService.currentContest && competitionService.currentCompetition">
 
       <mat-tab  label="Pronostics"> <app-prediction></app-prediction> </mat-tab>
 

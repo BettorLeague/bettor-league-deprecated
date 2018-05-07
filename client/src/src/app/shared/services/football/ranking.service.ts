@@ -16,7 +16,7 @@ export class RankingService {
     }
 
     public getLast5matchByCompetitionIdAndTeamIdAndMatchDay(competitionId:number,teamId:number,matchDay:number):Observable<any>{
-      return this.http.get(`api/competition/${competitionId}/last_5_match/${teamId}/${matchDay}`);
+      return this.http.get(`/api/competition/${competitionId}/last_5_match/${teamId}/${matchDay}`);
 
     }
 

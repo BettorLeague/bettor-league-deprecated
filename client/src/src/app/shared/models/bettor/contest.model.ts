@@ -8,4 +8,5 @@ export class ContestModel{
   type: ContestType;
   competitionId: number;
   messages: MessageModel[];
+  nbParticipant:number;
 }

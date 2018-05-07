@@ -21,7 +21,7 @@
   <div class="content p-24">
 
     <div fxLayout="column" fxLayoutAlign="center">
-<!--
+
       <div class="filters" fxLayout="column" fxLayoutAlign="center center"
            fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
@@ -30,9 +30,8 @@
           <input matInput placeholder="Search for a competition">
 
         </mat-form-field>
-
+<!--
         <mat-form-field class="category-selector">
-          filter
 
           <mat-select placeholder="Select Category" >
             <mat-option [value]="'all'">
@@ -43,15 +42,14 @@
             </mat-option>
           </mat-select>
 
-        </mat-form-field>
+        </mat-form-field>-->
 
-      </div> -->
+      </div>
 
 
-      <div class="courses" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'50'}"
-           *fuseIfOnDom>
+      <div class="courses" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'50'}" *fuseIfOnDom>
 
-        <div class="course" [routerLink]="'/contest/1'" [@animate]="{value:'*',params:{y:'100%'}}"  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
+        <div class="course" *ngFor="let contest of publicContests" [routerLink]="'/contest/'+contest.id" [@animate]="{value:'*',params:{y:'100%'}}"  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
 
           <div class="course-content" fxLayout="column">
 
@@ -69,24 +67,23 @@
 
             <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
               <div fxFlex fxLayoutAlign="center center">
-                <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg"/>
+                <img class="logo" src="{{competitionFromContest(contest).crestUrl}}"/>
               </div>
               <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex>
-                <div class="h1">Ligue 1</div>
-                <div class="updated">nb Participant</div>
+                <div class="h1">{{contest.caption}}</div>
+                <div class="updated">{{contest.nbParticipant}} Participant</div>
               </div>
             </div>
 
 
             <div class="footer grey-50-bg" fxLayout="row" fxLayoutAlign="center center">
-              <!--<button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>-->
+              <button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> START</button>
             </div>
 
           </div>
 
         </div>
-
-
+        <!--
         <div class="course"  [routerLink]="'/contest/1'" [@animate]="{value:'*',params:{y:'100%'}}" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
 
           <div class="course-content" fxLayout="column">
@@ -115,12 +112,11 @@
 
 
             <div class="footer grey-50-bg" fxLayout="row" fxLayoutAlign="center center">
-              <!--<button mat-button color="accent" > <mat-icon color="accent">star_rate</mat-icon> PARTICIPER</button>-->
             </div>
 
           </div>
 
-        </div>
+        </div> -->
 
       </div>
 

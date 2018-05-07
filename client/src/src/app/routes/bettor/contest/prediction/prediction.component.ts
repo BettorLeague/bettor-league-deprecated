@@ -6,6 +6,7 @@ import {CompetitionModel} from "../../../../shared/models/football/competition/c
 import {MatSort, MatTableDataSource} from "@angular/material";
 import {SelectionModel} from '@angular/cdk/collections';
 import {fuseAnimations} from "../../../../../@fuse/animations";
+import {ContestService} from "../../../../shared/services/bettor/contest.service";
 
 @Component({
   selector: 'app-prediction',
@@ -19,47 +20,37 @@ export class PredictionComponent implements OnInit {
 
   displayedColumns= ["date","result"];
 
-  competitionId:number;
-  competition:CompetitionModel;
-
+  onSearch = true;
   currentMatchday:number;
-  currentMatch = null;
+  currentMatch;
+
+
   selectionMatch = new SelectionModel<FixtureModel>(true, []);
 
-  onSearch = true;
 
 
   constructor(private route: ActivatedRoute,
-              private competitionService:CompetitionService) { }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.competitionId = +params['contestId'];
-      this.getCompetitionById();
-    });
+              public contestService:ContestService,
+              public competitionService:CompetitionService) {
+    this.getMatchByDay(this.competitionService.currentCompetition.currentMatchday);
   }
 
+  ngOnInit() {}
 
-
-  getCompetitionById(){
-    this.competitionService.getCompetitionById(this.competitionId).subscribe(data => {
-      this.competition = data;
-      this.currentMatchday = this.competition.currentMatchday;
-      this.getMatchByDay(this.competition.currentMatchday);
-
-    })
+  resetModel(){
+    this.onSearch = true;
+    this.currentMatch = new MatTableDataSource<FixtureModel>();
   }
 
   getMatchByDay(day:number){
-    this.onSearch = true;
-    this.currentMatch = null;
-    this.competitionService.getMatchFromCompetitionByIdAndMatchDay(this.competitionId,day).subscribe(data => {
+    this.resetModel();
+    this.competitionService.getMatchFromCompetitionByIdAndMatchDay(this.contestService.currentContest.competitionId,day).subscribe(data => {
       setTimeout(() => {
-        this.currentMatch = new MatTableDataSource<FixtureModel>(data);
         this.currentMatchday = day;
+        this.currentMatch.data = data;
         this.onSearch = false;
       },1000);
-    })
+    });
   }
 
   getClass(teamName:string){
