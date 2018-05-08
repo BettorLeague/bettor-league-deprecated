@@ -79,7 +79,7 @@
         <mat-cell *matCellDef="let element" class="orange">{{element.draws}}</mat-cell>
       </ng-container>
 
-      <!-- Nul -->
+      <!-- Perdus -->
       <ng-container matColumnDef="losses">
         <mat-header-cell *matHeaderCellDef mat-sort-header> P </mat-header-cell>
         <mat-cell *matCellDef="let element" class="red">{{element.losses}}</mat-cell>
@@ -105,12 +105,22 @@
         </mat-cell>
       </ng-container>
 
-      <!-- Goal difference -->
+      <!-- Forme -->
       <ng-container  matColumnDef="forme">
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef>Forme</mat-header-cell>
         <mat-cell  fxHide fxShow.gt-sm *matCellDef="let element">
           <div fxLayout="row" fxLayoutAlign="space-between start">
-            <span  matTooltip="{{match.homeTeamName}} {{match.result.goalsHomeTeam}} - {{match.result.goalsAwayTeam}} {{match.awayTeamName}}" matTooltipPosition="above" [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) == 'l') ? 'backRed' : 'backOrange'" *ngFor="let match of element.last5match" class="dot" ngClass="">
+            <span *ngFor="let match of element.last5match" suiPopup popupPlacement="top" [popupTemplate]="popupTemplate" data-variation="wide" [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) ==
+            'l') ? 'backRed' : 'backOrange'" class="dot">
+
+              <ng-template let-popup #popupTemplate>
+                <div class="formePopUp">
+                  <p class="blason {{ getClass(match.homeTeamName) }}"></p>
+                  <div class="ui label">{{match.result.goalsHomeTeam}}</div> -
+                  <div class="ui label">{{match.result.goalsAwayTeam}}</div>
+                  <p class="blason {{ getClass(match.awayTeamName) }}"></p>
+                </div>
+              </ng-template>
             </span>
           </div>
         </mat-cell>
