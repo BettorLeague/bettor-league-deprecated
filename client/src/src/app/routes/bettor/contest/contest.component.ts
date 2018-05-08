@@ -4,6 +4,7 @@ import {ContestModel} from "../../../shared/models/bettor/contest.model";
 import {CompetitionService} from "../../../shared/services/football/competition.service";
 import {ContestService} from "../../../shared/services/bettor/contest.service";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../../../shared/services/auth/auth.service";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ContestComponent implements OnInit {
   public contestId: number;
 
   constructor(private route: ActivatedRoute,
+              public authService:AuthService,
               public competitionService:CompetitionService,
               public contestService:ContestService) { }
 
@@ -59,6 +61,12 @@ export class ContestComponent implements OnInit {
   getCompetitionById(){
     this.competitionService.getCompetitionById(this.contestService.currentContest.competitionId).subscribe(data => {
       this.competitionService.currentCompetition = data;
+    })
+  }
+
+  addUserToContest(){
+    this.contestService.addUserToContest(this.authService.currentUser.id,this.contestService.currentContest.id).subscribe(data =>{
+      this.authService.initUserContest();
     })
   }
 

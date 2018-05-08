@@ -19,8 +19,8 @@
               <ng-template #private><h3>Private Contest</h3></ng-template>
             </div>
           </div>
-          <div>
-            <button mat-button > <mat-icon>star_rate</mat-icon> Participer</button>
+          <div *ngIf="!authService.isParticipatingToContest(contestService.currentContest.id)">
+            <button mat-button (click)="addUserToContest()"> <mat-icon>star_rate</mat-icon> Participer</button>
           </div>
         </div>
       </div>

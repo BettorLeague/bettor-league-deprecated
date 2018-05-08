@@ -37,12 +37,17 @@
                 <mat-menu #more="matMenu" class=""[overlapTrigger]="false" yPosition="below">
                     <button id="profileBtn" *ngIf="hasSignedIn()" mat-menu-item routerLink="/profile" >
                         <mat-icon>face</mat-icon>
-                        <span>Mon Profil</span>
+                        <span>Voir mon Profil</span>
                     </button>
+
+                  <button  *ngIf="hasSignedIn()" mat-menu-item routerLink="/profile" >
+                    <mat-icon>mode_edit</mat-icon>
+                    <span>Editer mon Profil</span>
+                  </button>
                   <mat-divider *ngIf="hasSignedIn()" ></mat-divider>
                     <button id="logoutBtn" *ngIf="hasSignedIn()" mat-menu-item (click)="onLogout()" >
                         <mat-icon>exit_to_app</mat-icon>
-                        <span>Logout</span>
+                        <span>Se déconnecter</span>
                     </button>
                 </mat-menu>
             </div>

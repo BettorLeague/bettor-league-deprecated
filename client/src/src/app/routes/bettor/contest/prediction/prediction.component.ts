@@ -7,6 +7,7 @@ import {MatSort, MatTableDataSource} from "@angular/material";
 import {SelectionModel} from '@angular/cdk/collections';
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {ContestService} from "../../../../shared/services/bettor/contest.service";
+import {AuthService} from "../../../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-prediction',
@@ -28,7 +29,9 @@ export class PredictionComponent implements OnInit {
 
 
 
-  constructor(public contestService:ContestService,
+  constructor(
+              public authService:AuthService,
+              public contestService:ContestService,
               public competitionService:CompetitionService) {
     this.selectedDay = this.competitionService.currentCompetition.currentMatchday;
     this.getMatchByDay();
@@ -69,5 +72,7 @@ export class PredictionComponent implements OnInit {
       this.selectionMatch.clear() :
       this.selectedMatch.data.forEach(row => this.selectionMatch.select(row));
   }
+
+
 
 }

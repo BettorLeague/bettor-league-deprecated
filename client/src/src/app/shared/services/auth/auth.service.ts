@@ -12,7 +12,7 @@ import {ContestModel} from "../../models/bettor/contest.model";
 @Injectable()
 export class AuthService {
 
-  currentUser : UserModel = new UserModel();
+  currentUser : UserModel;
   currentUserContest:ContestModel[] = [];
 
   constructor(private http: HttpClient,private cookieService: CookieService) {
@@ -105,6 +105,14 @@ export class AuthService {
       this.currentUserContest = data;
     }).catch();
     return promise;
+  }
+
+  isParticipatingToContest(contestId):boolean{
+    let result = false;
+    this.currentUserContest.forEach(contest => {
+      if(contest.id == contestId) result = true;
+    });
+    return result;
   }
 
 

@@ -104,6 +104,6 @@ Jenkins script :
 ```
 #!/bin/bash
 JENKINS_NODE_COOKIE=dontKillMe
-ps aux | grep server | awk '{print $2}' | xargs kill -9
+ps aux | grep server | awk '{print $2}' | xargs kill -9 || true
 java -jar server/target/server-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod --server.port=8081 &
 ```

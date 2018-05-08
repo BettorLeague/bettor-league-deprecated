@@ -2,11 +2,11 @@
 
   <div class="row" fxLayout="column" *fuseIfOnDom [@animate]="{value:'*',params:{y:'100%'}}">
 
-    <div class="extra-theme" fxLayout="row" fxFlex fxLayoutAlign="flex-end">
-      <button [disabled]="!selectedMatch" (click)="onPredict = true" class="mx-16 mt-8" mat-raised-button color="accent"> Pronostiquer cette journée</button>
+    <div class="extra-theme py-8" fxLayout="row" fxFlex fxLayoutAlign="flex-end" *ngIf="authService.isParticipatingToContest(contestService.currentContest.id)">
+      <button [disabled]="!selectedMatch" (click)="onPredict = true" class="mx-16" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
 
-    <div  class="w-100-p pb-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
+    <div  class="w-100-p py-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
         [(page)]="selectedDay"
         (pageChange)="getMatchByDay()"

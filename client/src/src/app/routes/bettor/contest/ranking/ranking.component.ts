@@ -5,6 +5,8 @@ import {StandingModel} from "../../../../shared/models/football/ranking/standing
 import {FixtureModel} from "../../../../shared/models/football/fixture/fixture.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {fuseAnimations} from "../../../../../@fuse/animations";
+import {CompetitionService} from "../../../../shared/services/football/competition.service";
+import {ContestService} from "../../../../shared/services/bettor/contest.service";
 
 @Component({
     selector: 'app-ranking',
@@ -15,7 +17,6 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 export class RankingComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
-    competitionId:number;
 
     displayedColumns = ['position', 'teamName', 'points', 'playedGames','wins','draws','losses', 'goals', 'goalsAgainst', 'goalDifference','forme'];
     ligue1Ranking = new MatTableDataSource();
@@ -26,21 +27,22 @@ export class RankingComponent implements OnInit {
 
     onSearch = true;
 
-    constructor(private rankingService: RankingService,
+    constructor(private competitionService:CompetitionService,
+                private contestService:ContestService,
+                private rankingService: RankingService,
                 private route: ActivatedRoute,
-                private router: Router) {}
+                private router: Router) {
 
-    ngOnInit() {
-      this.route.params.subscribe(params => {
-        this.competitionId = +params['contestId'];
-        this.getCurrentRanking();
-      });
+      this.matchday = this.competitionService.currentCompetition.currentMatchday;
+      this.getCurrentRanking();
     }
+
+    ngOnInit() {}
 
 
     getCurrentRanking(){
       this.resetModel();
-        this.rankingService.getCompetitionRanking(this.competitionId).subscribe(data => {
+        this.rankingService.getCompetitionRanking(this.contestService.currentContest.competitionId).subscribe(data => {
 
             this.lastmatch = data.matchday;
             this.matchday = data.matchday;
@@ -67,7 +69,7 @@ export class RankingComponent implements OnInit {
 
     getRankingAtMatchDay(){
       this.resetModel();
-        this.rankingService.getCompetitionRankingAtMatchDay(this.competitionId, this.matchday).subscribe(data => {
+        this.rankingService.getCompetitionRankingAtMatchDay(this.contestService.currentContest.competitionId, this.matchday).subscribe(data => {
             setTimeout(() => {
               let standings:StandingModel[] = data.standing;
               for(let standing of standings){
@@ -81,7 +83,7 @@ export class RankingComponent implements OnInit {
     }
 
     get5LastMatchFromTeamAtMatchDayForAStanding(teamId,matchDay,standing:StandingModel){
-      const promise = this.rankingService.getLast5matchByCompetitionIdAndTeamIdAndMatchDay(this.competitionId,teamId,this.matchday).subscribe(data =>{
+      const promise = this.rankingService.getLast5matchByCompetitionIdAndTeamIdAndMatchDay(this.contestService.currentContest.competitionId,teamId,this.matchday).subscribe(data =>{
         standing.last5match = data;
       });
       return promise;

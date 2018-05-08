@@ -97,11 +97,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<!-- CACHE -->
+		<!-- CACHE
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast</artifactId>
-		</dependency>
+		</dependency>-->
 
 
 		<!-- JWT TOOLS -->

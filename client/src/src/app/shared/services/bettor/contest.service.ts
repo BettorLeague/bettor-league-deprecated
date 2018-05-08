@@ -25,7 +25,11 @@ export class ContestService {
   }
 
   public getContestPlayed(userId:number):Observable<any>{
-    return this.http.get(`api/user/${userId}/contest`);
+    return this.http.get(`/api/user/${userId}/contest`);
+  }
+
+  public addUserToContest(userId:number,contestId:number):Observable<any>{
+    return this.http.post(`/api/contest/${contestId}/players/${userId}`,null);
   }
 
 

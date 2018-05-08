@@ -38,10 +38,12 @@ public class UpdateResult {
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
-    public void getLigue1Competition() {
+    public void getChampionat() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
+        updateCompetition(restTemplate,"445");
+        logger.info("Cron Finish");
     }
 /*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
@@ -136,7 +138,6 @@ public class UpdateResult {
             fixture.setId(new Long(i+1));
             fixtureRepository.save(fixture);
         }
-        logger.info("Cron Finish");
     }
 
 
