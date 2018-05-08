@@ -120,6 +120,16 @@
   padding-top: 100%;
 }
 
+.formePopUp{
+  display: flex;
+  flex-direction: row;
+
+  .blason {
+    margin: auto !important;
+    height: 20px !important;
+  }
+}
+
 
 ::ng-deep .mat-sort-header-arrow.ng-trigger.ng-trigger-arrowPosition {
   opacity: 0;
