@@ -1,8 +1,10 @@
 package server.repository.bettor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import server.model.bettor.Contest;
 import server.model.bettor.ContestType;
+import server.model.bettor.Player;
 
 import java.util.List;
 

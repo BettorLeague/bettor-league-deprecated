@@ -53,6 +53,10 @@ export class HeaderComponent implements OnInit {
     return this.authService.currentUser;
   }
 
+  getContestUser(){
+    return this.authService.currentUserContest;
+  }
+
 
 
 

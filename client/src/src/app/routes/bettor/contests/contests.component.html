@@ -17,8 +17,14 @@
   <!-- / HEADER -->
 
 
+  <mat-progress-bar
+    *ngIf="onSearch"
+    [color]="'primary'"
+    [mode]="'indeterminate'">
+  </mat-progress-bar>
 
-  <div class="content p-24">
+  <div class="content p-24" *ngIf="!onSearch">
+
 
     <div fxLayout="column" fxLayoutAlign="center">
 

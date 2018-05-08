@@ -8,8 +8,8 @@
 
     <div  class="w-100-p pb-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
-        (pageChange)="getMatchByDay()"
         [(page)]="selectedDay"
+        (pageChange)="getMatchByDay()"
         [hasNavigationLinks]="true"
         [hasBoundaryLinks]="true"
         [collectionSize]="competitionService.currentCompetition.numberOfMatchdays"
@@ -120,12 +120,12 @@
       <ng-container matColumnDef="Day" >
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >Date</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let element">
-          {{currentMatchday}}
+          {{selectedDay}}
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="HomeTeam" >
-        <mat-header-cell  *matHeaderCellDef >HomeTeam</mat-header-cell>
+        <mat-header-cell  fxHide fxShow.gt-sm *matHeaderCellDef >HomeTeam</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div fxLayout="row" fxLayoutAlign="center center">
             <div fxFlex="0 0 60%" fxHide fxShow.gt-sm>{{element.homeTeamName}}</div>
@@ -137,31 +137,41 @@
       </ng-container>
 
       <ng-container matColumnDef="HomeScore" >
-        <mat-header-cell  *matHeaderCellDef >HomeScore</mat-header-cell>
+        <mat-header-cell  fxHide fxShow.gt-sm *matHeaderCellDef >HomeScore</mat-header-cell>
         <mat-cell  *matCellDef="let element">
-          <div class="ui input" fxFlex="1 1 80%" fxLayout="row" fxLayoutAlign="center center">
-            <input type="number">
+          <div class="ui input" fxFlex="1 1 90%" fxLayout="column" fxLayoutAlign="center center">
+            <input type="number" >
+            <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="center center" fxFlex="1 1 100%" class="center-aligned mob-show tap-block">
+              <i class="tap-predict left-floated bordered inline icon plus green "></i>
+              <i class="tap-predict right-floated bordered inline icon minus red "></i>
+            </div>
           </div>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="AwayScore" >
-        <mat-header-cell *matHeaderCellDef >AwayScore</mat-header-cell>
+        <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >AwayScore</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <div class="ui input" fxFlex="1 1 80%" fxLayout="row" fxLayoutAlign="center center">
+          <div class="ui input" fxFlex="1 1 90%" fxLayout="column" fxLayoutAlign="center center">
             <input type="number">
+            <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="center center" fxFlex="1 1 100%" class="center-aligned mob-show tap-block">
+              <i class="tap-predict left-floated bordered inline icon plus green "></i>
+              <i class="tap-predict right-floated bordered inline icon minus red "></i>
+            </div>
           </div>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="AwayTeam" >
-        <mat-header-cell  *matHeaderCellDef >AwayTeam</mat-header-cell>
+        <mat-header-cell  fxHide fxShow.gt-sm *matHeaderCellDef >AwayTeam</mat-header-cell>
         <mat-cell  *matCellDef="let element">
           <div fxLayout="row" fxLayoutAlign="center center">
-            <div fxFlex="0 0 40%" fxLayoutAlign="flex-start">
+            <div fxFlex="0 0 40%" fxLayoutAlign="flex-start" fxLayout="column">
               <div class="blason {{ getClass(element.awayTeamName) }}"></div>
             </div>
-            <div fxFlex="0 0 60%" fxHide fxShow.gt-sm>{{element.awayTeamName}}</div>
+            <div fxFlex="0 0 60%" fxHide fxShow.gt-sm >
+              {{element.awayTeamName}}
+            </div>
           </div>
         </mat-cell>
       </ng-container>

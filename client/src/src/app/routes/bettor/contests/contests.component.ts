@@ -15,6 +15,7 @@ export class ContestsComponent implements OnInit {
 
   publicContests:ContestModel[];
   competitions:CompetitionModel[];
+  onSearch = true;
 
   constructor(private contestService:ContestService,
               private competitionService:CompetitionService) {
@@ -26,6 +27,7 @@ export class ContestsComponent implements OnInit {
 
   resetModel(){
     this.publicContests = [];
+    this.onSearch = true;
   }
 
   initModel(){
@@ -34,13 +36,17 @@ export class ContestsComponent implements OnInit {
   }
 
   getAllPublicContest(){
+    this.resetModel();
     this.contestService.getAllPublicContest().subscribe(data => {
-      this.publicContests = data;
-      this.competitions = [];
-      this.publicContests.forEach(contest => {
-        this.getCompetitionById(contest.competitionId);
-        this.getPlayerOfContest(contest);
-      })
+      setTimeout(() => {
+        this.publicContests = data;
+        this.competitions = [];
+        this.publicContests.forEach(contest => {
+          this.getCompetitionById(contest.competitionId);
+          this.getPlayerOfContest(contest);
+        });
+        this.onSearch = false;
+      },1000);
     })
   }
 

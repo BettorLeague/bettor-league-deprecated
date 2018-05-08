@@ -17,7 +17,6 @@ import {ContestService} from "../../../../shared/services/bettor/contest.service
 export class PredictionComponent implements OnInit {
   onPredict = false;
   predictColumns = ["Select","Day","HomeTeam","HomeScore","AwayScore","AwayTeam","Info"];
-
   displayedColumns= ["date","result"];
 
   onSearch = true;
@@ -29,19 +28,13 @@ export class PredictionComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute,
-              public contestService:ContestService,
+  constructor(public contestService:ContestService,
               public competitionService:CompetitionService) {
-    this.initModel();
+    this.selectedDay = this.competitionService.currentCompetition.currentMatchday;
     this.getMatchByDay();
   }
 
   ngOnInit() {}
-
-  initModel(){
-    this.resetModel();
-    this.selectedDay = this.competitionService.currentCompetition.currentMatchday;
-  }
 
   resetModel(){
     this.onSearch = true;
@@ -65,7 +58,6 @@ export class PredictionComponent implements OnInit {
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    console.log(this.selectedMatch)
     const numSelected = this.selectionMatch.selected.length;
     const numRows = this.selectedMatch.data.length;
     return numSelected === numRows;

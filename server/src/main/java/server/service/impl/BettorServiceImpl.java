@@ -1,22 +1,33 @@
 package server.service.impl;
 
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
+import server.model.User;
 import server.model.bettor.Contest;
 import server.model.bettor.ContestType;
 import server.model.bettor.Player;
+import server.repository.UserRepository;
 import server.repository.bettor.ContestRepository;
+import server.repository.bettor.PlayerRepository;
 import server.repository.football.CompetitionRepository;
 import server.service.BettorService;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Objects.nonNull;
 
 @Component
 public class BettorServiceImpl implements BettorService{
 
     private final ContestRepository contestRepository;
+    private final UserRepository userRepository;
+    private final PlayerRepository playerRepository;
 
-    public BettorServiceImpl(ContestRepository contestRepository){
+    public BettorServiceImpl(ContestRepository contestRepository,UserRepository userRepository,PlayerRepository playerRepository){
         this.contestRepository = contestRepository;
+        this.userRepository = userRepository;
+        this.playerRepository = playerRepository;
     }
 
     public List<Contest> getAllPublicContest(){
@@ -24,7 +35,17 @@ public class BettorServiceImpl implements BettorService{
     }
 
     public Contest addContest(Contest contest){
-        return this.contestRepository.save(contest);
+        Contest result = this.contestRepository.save(contest);
+        if(nonNull(result)){
+            Player player = new Player();
+            player.setContestId(result.getId());
+            player.setUserId(result.getOwnerId());
+            List<Player> players = new ArrayList<>();
+            players.add(player);
+            result.setPlayers(players);
+            return this.contestRepository.save(result);
+        }
+        return null;
     }
 
     public List<Player> getPlayersByContestId(Long contestId){
@@ -32,11 +53,51 @@ public class BettorServiceImpl implements BettorService{
         return contest.getPlayers();
     }
 
-    public List<Contest> getAllPrivateContestByOwnerId(Long ownerId){
-        return contestRepository.findAllByTypeAndOwnerId(ContestType.PRIVATE,ownerId);
-    }
 
     public Contest getContestById(Long contestId){
         return contestRepository.findOne(contestId);
+    }
+
+    public Contest deleteContest(Long contestId){
+        Contest contest = contestRepository.findOne(contestId);
+        contestRepository.delete(contest.getId());
+        return contest;
+    }
+
+    public Player getPlayerByContestIdAndPlayerId(Long contestId,Long playerId){
+        Contest contest = contestRepository.findOne(contestId);
+        for(Player player : contest.getPlayers()) {
+            if(player.getId().equals(playerId)) return player;
+        }
+        return null;
+    }
+
+    public Player addPlayerToContest(Long contestId,Long userId){
+        Contest contest = contestRepository.findOne(contestId);
+        User user = userRepository.findOne(userId);
+        if(nonNull(contest) && nonNull(user)){
+            Player player = new Player();
+            player.setUserId(user.getId());
+            player.setContestId(contest.getId());
+            contest.getPlayers().add(player);
+        }
+        return null;
+
+    }
+
+    public List<Contest> getContestPlayedByUser(Long userId){
+        List<Player> players = playerRepository.findAllByUserId(userId);
+        List<Contest> result = new ArrayList<>();
+        players.forEach(e -> {
+            result.add(contestRepository.findOne(e.getContestId()));
+        });
+        return result;
+    }
+
+    public Player deletePlayerFromContest(Long contestId,Long playerId){
+        Contest contest = contestRepository.findOne(contestId);
+        Player player = playerRepository.findOne(playerId);
+        contest.getPlayers().remove(player);
+        return player;
     }
 }

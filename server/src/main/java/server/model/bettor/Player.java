@@ -24,6 +24,10 @@ public class Player {
     @NotNull
     private Long userId;
 
+    @Column(name = "CONTEST_ID")
+    @NotNull
+    private Long contestId;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "PLAYER_PRONOSTIC",
             joinColumns = {@JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID")},

@@ -6,11 +6,14 @@ import {UserModel} from "../../models/user/user.model";
 import {UserTokenModel} from "../../models/auth/user.token.model";
 import {RegisterRequestModel} from "../../models/auth/register.request.model";
 import {CookieService} from "ngx-cookie-service";
+import {ContestService} from "../bettor/contest.service";
+import {ContestModel} from "../../models/bettor/contest.model";
 
 @Injectable()
 export class AuthService {
 
   currentUser : UserModel = new UserModel();
+  currentUserContest:ContestModel[] = [];
 
   constructor(private http: HttpClient,private cookieService: CookieService) {
   }
@@ -31,10 +34,16 @@ export class AuthService {
     return this.http.get('auth/user');
   }
 
+  public getContestPlayed(userId:number):Observable<any>{
+    return this.http.get(`api/user/${userId}/contest`);
+  }
+
+
   public logout(): void{
     localStorage.removeItem('TOKEN_KEY');
     this.cookieService.delete("Authorization");
     this.currentUser = null;
+    this.currentUserContest = null;
   }
 
 
@@ -47,6 +56,7 @@ export class AuthService {
             return this.getCurrentUser().toPromise()
               .then(user => {
                 this.currentUser = user;
+                this.initUserContest();
               });
           }
         })
@@ -59,6 +69,7 @@ export class AuthService {
   initUser(){
     const promise = this.getCurrentUser().toPromise().then(data =>{
       this.currentUser = data;
+      this.initUserContest();
     }).catch();
     return promise;
   }
@@ -89,7 +100,12 @@ export class AuthService {
   }
 
 
-
+  initUserContest(){
+    const promise = this.getContestPlayed(this.currentUser.id).toPromise().then(data =>{
+      this.currentUserContest = data;
+    }).catch();
+    return promise;
+  }
 
 
 }

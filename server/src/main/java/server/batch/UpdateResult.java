@@ -86,7 +86,6 @@ public class UpdateResult {
 
         updateLeagueRank(restTemplate,competition,id);
         updateFixture(restTemplate,id,competitionId);
-
     }
 
     private List<Team> updateTeamCompetition(RestTemplate restTemplate, String id){

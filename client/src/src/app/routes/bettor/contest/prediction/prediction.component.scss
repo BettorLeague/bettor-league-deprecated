@@ -39,20 +39,28 @@
 .labelScore{
   font-size: 14px !important;
 }
-
-.predictionContainer .mat-column-HomeTeam,.predictionContainer .mat-column-AwayTeam{
+ .mat-column-HomeTeam,.mat-column-AwayTeam{
   flex: 1 1 20%;
 }
 
-.predictionContainer .mat-column-Day,.predictionContainer .mat-column-Select{
-  flex: 1 1 30px;
+.mat-column-Day, .mat-column-Select{
+  flex: 1 1 20px;
 }
 
-.predictionContainer .mat-column-HomeScore,.predictionContainer .mat-column-AwayScore{
+@media screen and (max-width: 640px) {
+  .mat-column-HomeScore, .mat-column-AwayScore{
+    flex: 1 1 20%;
+  }
+  .mat-column-HomeTeam,.mat-column-AwayTeam{
+    flex: 1 1 10%;
+  }
+}
+
+.mat-column-HomeScore, .mat-column-AwayScore{
   flex: 1 1 10%;
 }
 
-.predicxtionContainer .mat-column-Info{
-  flex: 1 1 5%;
+.mat-column-Info{
+  flex: 1 1 6%;
 }
 
