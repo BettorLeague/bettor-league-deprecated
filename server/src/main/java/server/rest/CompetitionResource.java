@@ -25,7 +25,7 @@ public class CompetitionResource {
     @RequestMapping(path = "/api/competition/update", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void runCron() {
-        this.updateResult.getLigue1Competition();
+        this.updateResult.getChampionat();
     }
 
 
