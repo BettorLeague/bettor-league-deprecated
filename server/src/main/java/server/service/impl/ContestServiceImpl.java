@@ -35,10 +35,7 @@ public class ContestServiceImpl implements ContestService {
     public Contest addContest(Contest contest){
         Contest result = this.contestRepository.save(contest);
         if(nonNull(result)){
-            Player player = new Player();
-            player.setContestId(result.getId());
-            player.setUserId(result.getOwnerId());
-            player.setUsername(userRepository.findOne(result.getOwnerId()).getUsername());
+            Player player = addPlayerToContest(result.getId(),result.getOwnerId());
             List<Player> players = new ArrayList<>();
             players.add(player);
             result.setPlayers(players);
@@ -77,6 +74,7 @@ public class ContestServiceImpl implements ContestService {
         if(nonNull(contest) && nonNull(user)){
             Player player = new Player();
             player.setUserId(user.getId());
+            player.setUsername(userRepository.findOne(userId).getUsername());
             player.setContestId(contest.getId());
             contest.getPlayers().add(player);
             contestRepository.save(contest);
@@ -101,4 +99,6 @@ public class ContestServiceImpl implements ContestService {
         contest.getPlayers().remove(player);
         return player;
     }
+
+
 }
