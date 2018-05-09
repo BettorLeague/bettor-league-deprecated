@@ -1,7 +1,14 @@
 <div class="standingContainer mat-white-bg container">
   <div class="row" fxLayout="column" *fuseIfOnDom [@animate]="{value:'*',params:{y:'100%'}}">
 
-    <mat-table #table class="w-100-p" >
+    <mat-progress-bar
+      *ngIf="onSearch"
+      [color]="'primary'"
+      [mode]="'indeterminate'">
+    </mat-progress-bar>
+
+    <mat-divider></mat-divider>
+    <mat-table #table class="w-100-p" [dataSource]="players">
 
       <!-- Rank -->
       <ng-container matColumnDef="Rank" >
@@ -15,6 +22,7 @@
       <ng-container matColumnDef="Player" >
         <mat-header-cell  *matHeaderCellDef >Player</mat-header-cell>
         <mat-cell *matCellDef="let element">
+          {{element.username}}
         </mat-cell>
       </ng-container>
 
@@ -22,7 +30,7 @@
       <ng-container matColumnDef="Points" >
         <mat-header-cell  *matHeaderCellDef >Points</mat-header-cell>
         <mat-cell  *matCellDef="let element">
-
+          {{element.points}}
         </mat-cell>
       </ng-container>
 
@@ -30,7 +38,7 @@
       <ng-container matColumnDef="GoodPrediction" >
         <mat-header-cell *matHeaderCellDef >GoodPrediction</mat-header-cell>
         <mat-cell *matCellDef="let element">
-
+          {{element.goodPronostic}}
         </mat-cell>
       </ng-container>
 
@@ -38,7 +46,7 @@
       <ng-container matColumnDef="ExactResult" >
         <mat-header-cell  *matHeaderCellDef >ExactResult</mat-header-cell>
         <mat-cell  *matCellDef="let element">
-
+          {{element.exactPronostic}}
         </mat-cell>
       </ng-container>
 

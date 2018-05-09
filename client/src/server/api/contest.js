@@ -30,12 +30,12 @@ module.exports = (app) =>
     {
       "id": 1,
       "userId": 1,
+      "username":"admin",
       "contestId": 1,
       "pronostics": [],
       "points": 0,
       "goodPronostic": 0,
       "exactPronostic": 1,
-      "position": 0
     }
   ]);
 });

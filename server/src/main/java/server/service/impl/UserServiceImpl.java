@@ -19,6 +19,8 @@ import server.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Component
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -59,11 +61,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public ResponseEntity<User> addUser(User user) {
-        if (!userRepository.exists(user.getId())){
-            userRepository.save(user);
-            return new ResponseEntity<>(user,HttpStatus.CREATED);
-        }else
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        userRepository.save(user);
+        return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
 
     public ResponseEntity<User> userSignUp(JwtSignupRequest jwtSignupRequest){

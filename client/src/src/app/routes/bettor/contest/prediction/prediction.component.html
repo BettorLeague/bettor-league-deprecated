@@ -2,7 +2,7 @@
 
   <div class="row" fxLayout="column" *fuseIfOnDom [@animate]="{value:'*',params:{y:'100%'}}">
 
-    <div class="extra-theme py-8" fxLayout="row" fxFlex fxLayoutAlign="flex-end" *ngIf="authService.isParticipatingToContest(contestService.currentContest.id)">
+    <div class="extra-theme py-16" fxLayout="row" fxFlex fxLayoutAlign="flex-end" *ngIf="authService.isParticipatingToContest(contestService.currentContest.id)">
       <button [disabled]="!selectedMatch" (click)="onPredict = true" class="mx-16" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
 

@@ -1,6 +1,5 @@
 package server.service.impl;
 
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 import server.model.User;
 import server.model.bettor.Contest;
@@ -9,8 +8,7 @@ import server.model.bettor.Player;
 import server.repository.UserRepository;
 import server.repository.bettor.ContestRepository;
 import server.repository.bettor.PlayerRepository;
-import server.repository.football.CompetitionRepository;
-import server.service.BettorService;
+import server.service.ContestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +16,13 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Component
-public class BettorServiceImpl implements BettorService{
+public class ContestServiceImpl implements ContestService {
 
     private final ContestRepository contestRepository;
     private final UserRepository userRepository;
     private final PlayerRepository playerRepository;
 
-    public BettorServiceImpl(ContestRepository contestRepository,UserRepository userRepository,PlayerRepository playerRepository){
+    public ContestServiceImpl(ContestRepository contestRepository, UserRepository userRepository, PlayerRepository playerRepository){
         this.contestRepository = contestRepository;
         this.userRepository = userRepository;
         this.playerRepository = playerRepository;
@@ -40,6 +38,7 @@ public class BettorServiceImpl implements BettorService{
             Player player = new Player();
             player.setContestId(result.getId());
             player.setUserId(result.getOwnerId());
+            player.setUsername(userRepository.findOne(result.getOwnerId()).getUsername());
             List<Player> players = new ArrayList<>();
             players.add(player);
             result.setPlayers(players);
@@ -80,6 +79,8 @@ public class BettorServiceImpl implements BettorService{
             player.setUserId(user.getId());
             player.setContestId(contest.getId());
             contest.getPlayers().add(player);
+            contestRepository.save(contest);
+            return player;
         }
         return null;
 

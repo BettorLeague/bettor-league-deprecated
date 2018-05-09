@@ -5,7 +5,7 @@ import server.model.bettor.Player;
 
 import java.util.List;
 
-public interface BettorService {
+public interface ContestService {
     List<Contest> getAllPublicContest();
     List<Player>  getPlayersByContestId(Long contestId);
     Player getPlayerByContestIdAndPlayerId(Long contestId,Long playerId);

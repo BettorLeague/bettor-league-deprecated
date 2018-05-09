@@ -24,6 +24,10 @@ public class Player {
     @NotNull
     private Long userId;
 
+    @Column(name = "USERNAME")
+    @NotNull
+    private String username;
+
     @Column(name = "CONTEST_ID")
     @NotNull
     private Long contestId;
@@ -42,9 +46,6 @@ public class Player {
 
     @Column(name = "EXACT_PRONOSTIC")
     private int exactPronostic;
-
-    @Column(name = "POSITION")
-    private int position;
 
 
 }
