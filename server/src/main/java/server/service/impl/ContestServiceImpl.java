@@ -35,8 +35,11 @@ public class ContestServiceImpl implements ContestService {
     public Contest addContest(Contest contest){
         Contest result = this.contestRepository.save(contest);
         if(nonNull(result)){
-            Player player = addPlayerToContest(result.getId(),result.getOwnerId());
+            Player player = new Player();
             List<Player> players = new ArrayList<>();
+            player.setUserId(result.getOwnerId());
+            player.setUsername(userRepository.findOne(result.getOwnerId()).getUsername());
+            player.setContestId(result.getId());
             players.add(player);
             result.setPlayers(players);
             return this.contestRepository.save(result);

@@ -37,13 +37,18 @@ public class UpdateResult {
 
     private final Log logger = LogFactory.getLog(this.getClass());
 
+    public void updateChampionant(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new RestTemplateInterceptor());
+        updateCompetition(restTemplate,id);
+    }
+
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
-    public void getChampionat() {
+    public void updateAllChampionat(){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
         updateCompetition(restTemplate,"445");
-        logger.info("Cron Finish");
     }
 /*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
@@ -70,6 +75,7 @@ public class UpdateResult {
 
             List<Team> teams = updateTeamCompetition(restTemplate,id);
             competition.setTeams(teams);
+            competition.setCrestUrl(this.getCompetitionCrestByFootballDataId(id));
             competitionRepository.save(competition);
             competitionId = competitionRepository.findByCaption(competition.getCaption()).getId();
 
@@ -81,6 +87,7 @@ public class UpdateResult {
             }
             current.setCurrentMatchday(competition.getCurrentMatchday());
             current.setLastUpdated(competition.getLastUpdated());
+            competition.setCrestUrl(this.getCompetitionCrestByFootballDataId(id));
             competitionRepository.save(current);
             competitionId = current.getId();
 
@@ -135,8 +142,27 @@ public class UpdateResult {
         for(int i = 0 ; i < fixtures.size(); i++){
             Fixture fixture = fixtures.get(i);
             fixture.setCompetitionId(competitionId);
-            fixture.setId(new Long(i+1));
-            fixtureRepository.save(fixture);
+            Fixture exist = fixtureRepository.findByCompetitionIdAndHomeTeamNameAndAndAwayTeamName(competitionId,fixture.getHomeTeamName(),fixture.getAwayTeamName());
+            if(isNull(exist)){
+                fixture.setId(null);
+                fixtureRepository.save(fixture);
+            }else{
+                exist.setDate(fixture.getDate());
+                exist.setStatus(fixture.getStatus());
+                exist.setResult(fixture.getResult());
+                exist.setMatchday(fixture.getMatchday());
+                fixtureRepository.save(exist);
+            }
+
+        }
+    }
+
+
+    public String getCompetitionCrestByFootballDataId(String id){
+        switch (id){
+            case "450": return "https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg";
+            case "445": return "https://upload.wikimedia.org/wikipedia/fr/f/f2/Premier_League_Logo.svg";
+            default: return null;
         }
     }
 

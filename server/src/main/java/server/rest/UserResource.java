@@ -26,9 +26,7 @@ public class UserResource {
 
     @RequestMapping(path = "/api/user/{userId}", method = RequestMethod.DELETE)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<User> deleteUser(@PathVariable Long userId) {
-        return this.userServiceImpl.deleteUser(userId);
-    }
+    public ResponseEntity<User> deleteUser(@PathVariable Long userId) { return this.userServiceImpl.deleteUser(userId); }
 
     @RequestMapping(path = "/api/user/add", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")

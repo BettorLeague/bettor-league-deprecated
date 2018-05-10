@@ -136,7 +136,6 @@ public class CompetitionService {
                 }
             });
 
-
             return new ResponseEntity<>(last5Match,HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

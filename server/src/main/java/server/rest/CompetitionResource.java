@@ -24,8 +24,14 @@ public class CompetitionResource {
 
     @RequestMapping(path = "/api/competition/update", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void runCron() {
-        this.updateResult.getChampionat();
+    public void updateAllCompetition() {
+        this.updateResult.updateAllChampionat();
+    }
+
+    @RequestMapping(path = "/api/competition/update/{footballDataCompeitionId}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void updateCompetitionByFootballDataId(@PathVariable("footballDataCompeitionId") String footballDataCompeitionId) {
+        this.updateResult.updateChampionant(footballDataCompeitionId);
     }
 
 
