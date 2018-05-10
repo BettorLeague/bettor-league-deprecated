@@ -63,7 +63,9 @@
             </button>
 
             <mat-menu #appConcours="matMenu"  [overlapTrigger]="false" yPosition="below" >
-              <button *ngFor="let contest of getContestUser()" mat-menu-item [routerLink]="'/contest/'+contest.id">{{contest.caption}}</button>
+              <button *ngFor="let contest of getContestUser()" mat-menu-item [routerLink]="'/contest/'+contest.id">
+                <!--<span [style.background-image]="'url(' + + ')'"></span>--><span>{{contest.caption}}</span>
+              </button>
               <mat-divider ></mat-divider>
               <button  mat-menu-item routerLink="/contest" >
                 <span>Tous les concours</span>

@@ -130,7 +130,7 @@
           <div fxLayout="row" fxLayoutAlign="center center">
             <div fxFlex="0 0 60%" fxHide fxShow.gt-sm>{{element.homeTeamName}}</div>
             <div fxFlex="0 0 40%">
-              <div class="blason {{ getClass(element.homeTeamName) }}"></div>
+              <div [style.background-image]="'url(' + getCrestOfTeam(element.homeTeamName) + ')'" class="blason"></div>
             </div>
           </div>
         </mat-cell>
@@ -167,7 +167,7 @@
         <mat-cell  *matCellDef="let element">
           <div fxLayout="row" fxLayoutAlign="center center">
             <div fxFlex="0 0 40%" fxLayoutAlign="flex-start" fxLayout="column">
-              <div class="blason {{ getClass(element.awayTeamName) }}"></div>
+              <div [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="blason "></div>
             </div>
             <div fxFlex="0 0 60%" fxHide fxShow.gt-sm >
               {{element.awayTeamName}}

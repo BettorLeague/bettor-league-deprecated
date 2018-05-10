@@ -14,8 +14,12 @@ import {CompetitionService} from "../../../shared/services/football/competition.
 export class ContestsComponent implements OnInit {
 
   publicContests:ContestModel[];
+  filteredContest:ContestModel[];
   competitions:CompetitionModel[];
   onSearch = true;
+
+
+  searchTerm = '';
 
   constructor(private contestService:ContestService,
               private competitionService:CompetitionService) {
@@ -39,7 +43,7 @@ export class ContestsComponent implements OnInit {
     this.resetModel();
     this.contestService.getAllPublicContest().subscribe(data => {
       setTimeout(() => {
-        this.publicContests = data;
+        this.publicContests = this.filteredContest = data;
         this.competitions = [];
         this.publicContests.forEach(contest => {
           this.getCompetitionById(contest.competitionId);
@@ -71,6 +75,23 @@ export class ContestsComponent implements OnInit {
       }
     });
     return result;
+  }
+
+  filterContestsByTerm()
+  {
+    const searchTerm = this.searchTerm.toLowerCase();
+
+    // Search
+    if ( searchTerm === '' )
+    {
+      this.filteredContest = this.publicContests;
+    }
+    else
+    {
+      this.filteredContest = this.publicContests.filter((contest) => {
+        return contest.caption.toLowerCase().includes(searchTerm);
+      });
+    }
   }
 
 }

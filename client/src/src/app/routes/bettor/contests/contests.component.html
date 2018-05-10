@@ -17,11 +17,13 @@
   <!-- / HEADER -->
 
 
-  <mat-progress-bar
-    *ngIf="onSearch"
-    [color]="'primary'"
-    [mode]="'indeterminate'">
-  </mat-progress-bar>
+  <div class="bg-white">
+    <mat-progress-bar
+      *ngIf="onSearch"
+      [color]="'primary'"
+      [mode]="'indeterminate'">
+    </mat-progress-bar>
+  </div>
 
   <div class="content p-24" *ngIf="!onSearch">
 
@@ -33,8 +35,10 @@
 
         <mat-form-field class="course-search">
 
-          <input matInput placeholder="Search for a competition">
-
+          <input matInput placeholder="Search for a contest" [(ngModel)]="searchTerm" (input)="filterContestsByTerm()">
+          <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm='';filterContestsByTerm()">
+            <mat-icon>close</mat-icon>
+          </button>
         </mat-form-field>
 <!--
         <mat-form-field class="category-selector">
@@ -55,7 +59,7 @@
 
       <div class="courses" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'50'}" *fuseIfOnDom>
 
-        <div class="course" *ngFor="let contest of publicContests" [routerLink]="'/contest/'+contest.id" [@animate]="{value:'*',params:{y:'100%'}}"  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
+        <div class="course" *ngFor="let contest of filteredContest" [routerLink]="'/contest/'+contest.id" [@animate]="{value:'*',params:{y:'100%'}}"  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33" >
 
           <div class="course-content" fxLayout="column">
 
