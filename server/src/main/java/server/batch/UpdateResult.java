@@ -49,6 +49,7 @@ public class UpdateResult {
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
         updateCompetition(restTemplate,"445");
+        updateCompetition(restTemplate,"452");
     }
 /*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
