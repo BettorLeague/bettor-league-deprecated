@@ -47,6 +47,7 @@ export class ContestComponent implements OnInit {
 
   resetModel(){
     this.competitionService.currentCompetition = null;
+    this.competitionService.currentTeamInCompetition = null;
     this.contestService.currentContest = null;
   }
 
@@ -61,6 +62,13 @@ export class ContestComponent implements OnInit {
   getCompetitionById(){
     this.competitionService.getCompetitionById(this.contestService.currentContest.competitionId).subscribe(data => {
       this.competitionService.currentCompetition = data;
+      this.getTeamInCompetition();
+    })
+  }
+
+  getTeamInCompetition(){
+    this.competitionService.getTeamsInCompetition(this.contestService.currentContest.competitionId).subscribe(data =>{
+      this.competitionService.currentTeamInCompetition = data;
     })
   }
 

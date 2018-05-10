@@ -115,5 +115,13 @@ export class RankingComponent implements OnInit {
     return teamName.split(" ").join("_");
   }
 
+  getCrestOfTeam(teamName:string){
+      let result = null;
+      this.competitionService.currentTeamInCompetition.forEach(team => {
+        if(team.name == teamName) result = team.crestUrl;
+      });
+    return result;
+  }
+
 
 }

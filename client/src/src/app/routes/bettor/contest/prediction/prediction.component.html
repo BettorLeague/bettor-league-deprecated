@@ -51,7 +51,7 @@
           <div class="py-8" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
             <div fxFlex="0 0 20%">{{element.homeTeamName}}</div>
             <div fxFlex="0 0 10%" fxLayout="row" fxLayoutAlign="center center">
-              <div class="blason {{ getClass(element.homeTeamName) }}"></div>
+              <div [style.background-image]="'url(' + getCrestOfTeam(element.homeTeamName) + ')'" class="blason"></div>
             </div>
 
             <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
@@ -70,7 +70,7 @@
             </div>
 
             <div fxFlex="0 0 10%" fxLayout="row" fxLayoutAlign="center center">
-              <div class="blason {{ getClass(element.awayTeamName) }}"></div>
+              <div [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="blason"></div>
             </div>
             <div fxFlex="0 0 20%">{{element.awayTeamName}}</div>
           </div>

@@ -49,7 +49,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Ranking.equipe' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div class="name-blason">
-            <div class="blason {{ getClass(element.teamName) }}" ></div>
+            <div [style.background-image]="'url(' + element.team.crestUrl + ')'" class="blason" ></div>
             <span fxHide fxShow.gt-sm>{{element.teamName}}</span>
           </div>
         </mat-cell>
@@ -115,10 +115,10 @@
 
               <ng-template let-popup #popupTemplate>
                 <div class="formePopUp">
-                  <p class="blason {{ getClass(match.homeTeamName) }}"></p>
+                  <p [style.background-image]="'url(' + getCrestOfTeam(element.homeTeamName) + ')'" class="blason"></p>
                   <div class="ui label">{{match.result.goalsHomeTeam}}</div> -
                   <div class="ui label">{{match.result.goalsAwayTeam}}</div>
-                  <p class="blason {{ getClass(match.awayTeamName) }}"></p>
+                  <p [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="blason"></p>
                 </div>
               </ng-template>
             </span>

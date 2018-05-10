@@ -73,6 +73,14 @@ export class PredictionComponent implements OnInit {
       this.selectedMatch.data.forEach(row => this.selectionMatch.select(row));
   }
 
+  getCrestOfTeam(teamName:string){
+    let result = null;
+    this.competitionService.currentTeamInCompetition.forEach(team => {
+      if(team.name == teamName) result = team.crestUrl;
+    });
+    return result;
+  }
+
 
 
 }
