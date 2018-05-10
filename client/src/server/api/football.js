@@ -19,6 +19,171 @@ module.exports = (app) => {
     ]);
 });
 
+  app.get("/api/competition/:number/teams", (req, res) => {
+    res.send([
+    {
+      "id": 1,
+      "name": "AS Monaco FC",
+      "code": "MON",
+      "shortName": "Monaco",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/3/3c/AS_Monaco.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 2,
+      "name": "Toulouse FC",
+      "code": "TOU",
+      "shortName": "Toulouse",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/0/0a/FC_Toulouse_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 3,
+      "name": "Paris Saint-Germain",
+      "code": "PSG",
+      "shortName": "PSG",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/fr/8/86/Paris_Saint-Germain_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 4,
+      "name": "Amiens SC",
+      "code": null,
+      "shortName": "Amiens",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/de/0/0d/SC_Amiens_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 5,
+      "name": "ES Troyes AC",
+      "code": null,
+      "shortName": "Troyes",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/ES_Troyes_AC.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 6,
+      "name": "Stade Rennais FC",
+      "code": "REN",
+      "shortName": "Rennes",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/b/b6/Stade_Rennais_Football_Club.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 7,
+      "name": "AS Saint-Étienne",
+      "code": "ETI",
+      "shortName": "St. Etienne",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Logo_AS_Saint-%C3%89tienne.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 8,
+      "name": "OGC Nice",
+      "code": "NIC",
+      "shortName": "Nice",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/fr/0/03/OGC_Nice_Logo.png",
+      "squadMarketValue": null
+    },
+    {
+      "id": 9,
+      "name": "Olympique Lyonnais",
+      "code": "OLY",
+      "shortName": "Lyon",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/f/f1/Olympique_Lyon.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 10,
+      "name": "RC Strasbourg Alsace",
+      "code": null,
+      "shortName": "Strasbourg",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/de/8/84/Racing_Club_Strasbourg.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 11,
+      "name": "Montpellier Hérault SC",
+      "code": "MON",
+      "shortName": "Montpellier",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/3/35/HSC_Montpellier_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 12,
+      "name": "SM Caen",
+      "code": "SMC",
+      "shortName": "Caen",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/fr/7/79/LogoSmc2013.png",
+      "squadMarketValue": null
+    },
+    {
+      "id": 13,
+      "name": "FC Metz",
+      "code": "FCM",
+      "shortName": "Metz",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/b/ba/FC_Metz_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 14,
+      "name": "EA Guingamp",
+      "code": "GUI",
+      "shortName": "Guingamp",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/a/ae/EA_Guingamp_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 15,
+      "name": "OSC Lille",
+      "code": "OSC",
+      "shortName": "Lille",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/0/08/LOSC_Lille_Crest_2012.png",
+      "squadMarketValue": null
+    },
+    {
+      "id": 16,
+      "name": "FC Nantes",
+      "code": "NAN",
+      "shortName": "Nantes",
+      "crestUrl": "https://upload.wikimedia.org/wikipedia/fr/c/ce/Fcna_logo_2008.png",
+      "squadMarketValue": null
+    },
+    {
+      "id": 17,
+      "name": "Angers SCO",
+      "code": null,
+      "shortName": "Angers",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/0/0f/SCO_Angers.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 18,
+      "name": "FC Girondins de Bordeaux",
+      "code": "BOR",
+      "shortName": "Bordeaux",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/e/ea/Girondins_Bordeaux_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 19,
+      "name": "Olympique de Marseille",
+      "code": "MAR",
+      "shortName": "Marseille",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/2/27/Olympique_Marseille_Logo.svg",
+      "squadMarketValue": null
+    },
+    {
+      "id": 20,
+      "name": "Dijon FCO",
+      "code": null,
+      "shortName": "Dijon",
+      "crestUrl": "http://upload.wikimedia.org/wikipedia/de/e/e1/FCO_Dijon.svg",
+      "squadMarketValue": null
+    }
+  ]);
+});
+
     app.get("/api/competition/:number/ranking/:matchday", (req, res) => {
         res.send({
       "id": 1,

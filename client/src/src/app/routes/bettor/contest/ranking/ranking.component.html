@@ -115,10 +115,10 @@
 
               <ng-template let-popup #popupTemplate>
                 <div class="formePopUp">
-                  <p [style.background-image]="'url(' + getCrestOfTeam(element.homeTeamName) + ')'" class="blason"></p>
-                  <div class="ui label">{{match.result.goalsHomeTeam}}</div> -
+                  <p [style.background-image]="'url(' + getCrestOfTeam(match.homeTeamName) + ')'" class="blason"></p>
+                  <div class="ui label">{{match.result.goalsHomeTeam}}</div>
                   <div class="ui label">{{match.result.goalsAwayTeam}}</div>
-                  <p [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="blason"></p>
+                  <p [style.background-image]="'url(' + getCrestOfTeam(match.awayTeamName) + ')'" class="blason"></p>
                 </div>
               </ng-template>
             </span>

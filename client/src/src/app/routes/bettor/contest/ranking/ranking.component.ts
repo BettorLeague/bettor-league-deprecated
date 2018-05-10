@@ -120,6 +120,7 @@ export class RankingComponent implements OnInit {
       this.competitionService.currentTeamInCompetition.forEach(team => {
         if(team.name == teamName) result = team.crestUrl;
       });
+      console.log(result + teamName);
     return result;
   }
 
