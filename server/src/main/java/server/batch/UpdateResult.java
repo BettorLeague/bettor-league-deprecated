@@ -69,7 +69,7 @@ public class UpdateResult {
 */
 
     @Scheduled(fixedRate = 1000 * 60 * 60 )
-    public void updateResult(){
+    public void updateAllChampionat(){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450"); // Ligue 1
