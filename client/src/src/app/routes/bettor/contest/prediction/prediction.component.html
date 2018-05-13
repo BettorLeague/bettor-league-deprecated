@@ -6,7 +6,7 @@
       <button [disabled]="!selectedMatch" (click)="onPredict = true" class="mx-16" mat-raised-button color="accent"> Pronostiquer cette journée</button>
     </div>
 
-    <div  class="w-100-p py-16 pt-8" fxLayout="row" fxFlex fxLayoutAlign="center center">
+    <div  class="w-100-p py-16" fxLayout="row" fxFlex fxLayoutAlign="center center">
       <sui-pagination
         [(page)]="selectedDay"
         (pageChange)="getMatchByDay()"
@@ -54,20 +54,20 @@
               <div [style.background-image]="'url(' + getCrestOfTeam(element.homeTeamName) + ')'" class="blason"></div>
             </div>
 
-            <div *ngIf="element.status != 'FINISHED'" fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
+            <div *ngIf="element.status == 'TIMED' || element.status == 'SCHEDULED' ; else doing" fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
               <span >
                 <span  class="ui label labelScore mx-8"><span> - </span></span>
 
                 <span  class="ui label labelScore mx-8"><span> - </span></span>
               </span>
             </div>
-            <div *ngIf="element.status == 'FINISHED'"  fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
+            <ng-template #doing  fxFlex="0 0 20% 100%"  fxLayout="row" fxLayoutAlign="center center">
               <span >
                 <span  class="ui label labelScore mx-8"><span>{{element.result.goalsHomeTeam}}</span></span>
 
                 <span  class="ui label labelScore mx-8"><span>{{element.result.goalsAwayTeam}}</span></span>
               </span>
-            </div>
+            </ng-template>
 
             <div fxFlex="0 0 10%" fxLayout="row" fxLayoutAlign="center center">
               <div [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="blason"></div>

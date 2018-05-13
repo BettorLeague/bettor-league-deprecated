@@ -42,7 +42,7 @@ public class UpdateResult {
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,id);
     }
-
+/*
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void updateAllChampionat(){
         RestTemplate restTemplate = new RestTemplate();
@@ -53,20 +53,32 @@ public class UpdateResult {
         updateCompetition(restTemplate,"455");
         updateCompetition(restTemplate,"456");
     }
-/*
+
     @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
     public void getMondialCompetition() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"467");
     }
-
-    @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
+        @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void lol(){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new RestTemplateInterceptor());
         updateCompetition(restTemplate,"450");
-    }*/
+    }
+*/
+
+    @Scheduled(fixedRate = 1000 * 60 * 60 )
+    public void updateResult(){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new RestTemplateInterceptor());
+        updateCompetition(restTemplate,"450"); // Ligue 1
+        updateCompetition(restTemplate,"445"); // Premier League
+        updateCompetition(restTemplate,"452"); // Bundesliga
+        updateCompetition(restTemplate,"455"); // Liga
+        updateCompetition(restTemplate,"456"); // Serie A
+    }
+
 
 
     private void updateCompetition(RestTemplate restTemplate, String id){
@@ -90,7 +102,6 @@ public class UpdateResult {
             }
             current.setCurrentMatchday(competition.getCurrentMatchday());
             current.setLastUpdated(competition.getLastUpdated());
-            competition.setCrestUrl(this.getCompetitionCrestByFootballDataId(id));
             competitionRepository.save(current);
             competitionId = current.getId();
 
