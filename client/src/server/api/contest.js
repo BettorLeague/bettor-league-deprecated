@@ -49,7 +49,15 @@ module.exports = (app) =>
       "type": "PUBLIC",
       "competitionId": 1,
       "messages": []
-    }
+    },
+      {
+        "id": 2,
+        "caption": "Premier League",
+        "ownerId": 1,
+        "type": "PUBLIC",
+        "competitionId": 1,
+        "messages": []
+      }
   ]);
 });
 

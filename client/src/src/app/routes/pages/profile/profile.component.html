@@ -13,18 +13,116 @@
   <!-- CONTENT -->
   <div class="content p-24 mat-white-bg">
 
-    <h1  class="display-4">Profile Page</h1>
+    <span class="ui red ribbon label" style="color: #ffffff">Profil</span>
 
-    <p>User Name: {{authService.currentUser.username}}</p>
+    <div class="ui column sixteen wide">
 
-    <p>Email: {{authService.currentUser.email}}</p>
+      <div class="ui items">
+        <div class="item">
+          <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
+            <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
+            <h1>{{authService.currentUser.username}}</h1>
 
-    <p>First Name: {{authService.currentUser.firstname}}</p>
+            <button class="ui button green floated right">Modifier</button>
+          </div>
+        </div>
+      </div>
 
-    <p>Last Name: {{authService.currentUser.lastname}}</p>
+      <h2 class="ui horizontal divider header">
+        <i class="bar chart icon"></i> Mes Statistiques
+      </h2>
 
-    <p>Account Enabled: {{authService.currentUser.enabled}}</p>
+      <!-- STATS -->
+      <div class="ui three columns stackable grid">
+        <div class="column">
+          <div class="ui card">
+            <div class="content">
+              <div class="center aligned header">Pronos comptabilisés</div>
+              <div class="center aligned description">
+                <h2 class="numeric-stats">100</h2>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div class="column">
+          <div class="ui card">
+            <div class="content">
+              <div class="center aligned header">Scores exacts</div>
+              <div class="center aligned description">
+                <h2 class="numeric-stats">10</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="ui card">
+            <div class="content">
+              <div class="center aligned header">Bons pronos</div>
+              <div class="center aligned description">
+                <h2 class="numeric-stats">70</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2 class="ui horizontal divider header">
+        <i class="trophy icon"></i> Mes Concours
+      </h2>
+
+      <!-- MES CONCOURS -->
+      <div class="ui segments" *ngIf="contestPlayedList">
+        <div class="ui blue segment">
+          <h1> <i class="trophy icon"></i> Mes Concours</h1>
+        </div>
+        <div *ngFor="let contest of contestPlayedList" class="ui segment">
+          <div class="playerContest-header">
+            <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+            {{ contest.type }}
+          </div>
+          <div class="playerContest-description">Classé 123<sup>e</sup></div>
+          <div class="ui top right attached label green">En Cours</div>
+        </div>
+      </div>
+
+      <h2 class="ui horizontal divider header">
+        <i class="edit icon"></i> Gérer les Concours
+      </h2>
+
+      <!-- REJOINDRE UN CONCOURS -->
+      <sui-tabset>
+        <div class="ui top attached tabular menu">
+          <a class="item" suiTabHeader="1"><i class="users icon"></i> Rejoindre</a>
+          <a class="item" suiTabHeader="2"><i class="magic icon"></i> Créer</a>
+        </div>
+
+        <!-- Rejoindre un concours -->
+        <div class="ui bottom attached segment" suiTabContent="1">
+          <div class="ui segments" *ngIf="allPublicContest">
+            <div class="ui blue segment">
+              <h1> <i class="users icon"></i> Rejoindre un concours public</h1>
+            </div>
+            <div *ngFor="let contest of allPublicContest" class="ui segment">
+              <div class="playerContest-header">
+                <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+                {{ contest.type }}
+              </div>
+              <div class="playerContest-description">Classé 123
+                <sup>e</sup>
+              </div>
+              <button class="ui button green">Rejoindre</button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="ui bottom attached segment" suiTabContent="2">Second tab!</div>
+      </sui-tabset>
+
+    </div>
   </div>
   <!-- / CONTENT -->
 
