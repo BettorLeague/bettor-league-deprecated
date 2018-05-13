@@ -54,12 +54,6 @@ public class UpdateResult {
         updateCompetition(restTemplate,"456");
     }
 
-    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Paris")
-    public void getMondialCompetition() {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new RestTemplateInterceptor());
-        updateCompetition(restTemplate,"467");
-    }
         @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void lol(){
         RestTemplate restTemplate = new RestTemplate();
@@ -77,6 +71,7 @@ public class UpdateResult {
         updateCompetition(restTemplate,"452"); // Bundesliga
         updateCompetition(restTemplate,"455"); // Liga
         updateCompetition(restTemplate,"456"); // Serie A
+        //updateCompetition(restTemplate,"467");   // MONDIALE
     }
 
 

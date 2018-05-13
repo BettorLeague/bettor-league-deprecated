@@ -21,16 +21,16 @@ module.exports = (app) => {
     res.send(
     [
       {
-        "id": 351,
+        "id": 281,
         "competitionId": 1,
-        "date": 1525629600000,
-        "status": "TIMED",
+        "date": 1520624700000,
+        "status": "FINISHED",
         "matchday": 36,
-        "homeTeamName": "FC Metz",
-        "awayTeamName": "Angers SCO",
+        "homeTeamName": "RC Strasbourg Alsace",
+        "awayTeamName": "AS Monaco FC",
         "result": {
-          "goalsAwayTeam": 0,
-          "goalsHomeTeam": 0
+          "goalsAwayTeam": 3,
+          "goalsHomeTeam": 1
         }
       },
       {
