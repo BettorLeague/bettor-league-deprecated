@@ -1,50 +1,53 @@
 package server.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import server.dto.user.UpdateUserInfoRequest;
 import server.model.User;
-import server.model.Authority;
-import server.service.impl.UserServiceImpl;
 
-import javax.inject.Inject;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class UserResource {
 
-    @Autowired
-    private UserServiceImpl userServiceImpl;
+    private final UserResourceDelegate userResourceDelegate;
 
-
-    @RequestMapping(path = "/api/user/all", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<User>> getAllUser() {
-        return this.userServiceImpl.getAllUser();
+    public UserResource(UserResourceDelegate userResourceDelegate){
+        this.userResourceDelegate = userResourceDelegate;
     }
 
-    @RequestMapping(path = "/api/user/{userId}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<User> deleteUser(@PathVariable Long userId) { return this.userServiceImpl.deleteUser(userId); }
+    @RequestMapping(path = "/api/user", method = RequestMethod.PATCH)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<User> updateUserInfo(@RequestBody UpdateUserInfoRequest user, HttpServletRequest request) {
+        return userResourceDelegate.updateUser(user,request);
+    }
+/*
+    @RequestMapping(path = "/api/user", method = RequestMethod.PATCH)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<User> updateUserEmail(@RequestBody UpdateUserInfoRequest user, HttpServletRequest request) {
+        return userResourceDelegate.updateUser(user,request);
+    }*/
 
-    @RequestMapping(path = "/api/user/add", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        return this.userServiceImpl.addUser(user);
+    @RequestMapping(path = "/api/user", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<User> getUser(HttpServletRequest request) {
+        return userResourceDelegate.getUser(request);
     }
 
-    @RequestMapping(path = "/api/user/{userId}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        return this.userServiceImpl.getUser(userId);
+    @RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<User> deleteAccount(HttpServletRequest request) {
+        return userResourceDelegate.deleteUser(request);
     }
+    /*
+    @RequestMapping(path = "/api/user/stats", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> getUserStats(HttpServletRequest request) {
+        return new ResponseEntity(HttpStatus.OK);
+    }*/
 
-    @RequestMapping(path = "/api/user/authorities", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<Authority>> getAllAuthority() {
-        return this.userServiceImpl.getAllAuthority();
-    }
 
 
 

@@ -1,4 +1,4 @@
-package server.dto;
+package server.dto.football;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

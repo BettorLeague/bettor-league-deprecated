@@ -1,6 +1,7 @@
 package server.service.impl;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import server.model.User;
 import server.model.bettor.Contest;
 import server.model.bettor.ContestType;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static java.util.Objects.nonNull;
 
-@Component
+@Service
 public class ContestServiceImpl implements ContestService {
 
     private final ContestRepository contestRepository;

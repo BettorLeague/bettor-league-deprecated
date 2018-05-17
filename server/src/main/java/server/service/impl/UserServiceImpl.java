@@ -1,92 +1,77 @@
 package server.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import server.dto.user.UpdateUserInfoRequest;
 import server.model.AuthorityName;
 import server.model.User;
 import server.repository.AuthorityRepository;
 import server.repository.UserRepository;
 import server.model.Authority;
-import server.dto.JwtSignupRequest;
+import server.dto.authentification.JwtSignupRequest;
+import server.repository.football.TeamRepository;
 import server.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.isNull;
-
-@Component
+@Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
+    private final TeamRepository teamRepository;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
+                           TeamRepository teamRepository,
                            AuthorityRepository authorityRepository){
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.teamRepository = teamRepository;
     }
 
-    public ResponseEntity<List<User>> getAllUser() {
-        List<User> users =  this.userRepository.findAll();
-        if (users.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else
-            return new ResponseEntity<>(users,HttpStatus.OK);
+
+    public boolean existUser(Long userId){
+        return this.userRepository.exists(userId);
+    }
+    public boolean existUserByUsername(String username){
+        return this.userRepository.existsByUsername(username);
+    }
+    public boolean existUserByEmail(String email){
+        return this.userRepository.existsByEmail(email);
     }
 
-    public ResponseEntity<User> getUser(Long id) {
-        if (userRepository.exists(id)){
-            return new ResponseEntity<User>(userRepository.findOne(id),HttpStatus.OK);
-        }else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public List<User> getAllUser() {
+        return this.userRepository.findAll();
+    }
+    public User getUser(Long id) {
+        return userRepository.findOne(id);
+    }
+    public void deleteUser(Long id) {
+        userRepository.delete(id);
+    }
+    public User addUser(User user) {
+        return userRepository.save(user);
+    }
+    public User updateUserInfo(User user, UpdateUserInfoRequest userInfoRequest){
+        User current = userRepository.findOne(user.getId());
+        current.setUsername(userInfoRequest.getUsername());
+        current.setBirthDate(userInfoRequest.getBirthDate());
+        current.setCountry(userInfoRequest.getCountry());
+        current.setFavoriteTeam(teamRepository.findOne(userInfoRequest.getFavoriteTeamId()));
+        current.setSex(userInfoRequest.getSex());
+        return this.userRepository.save(current);
     }
 
-    public ResponseEntity<User> deleteUser(Long id) {
-        if (userRepository.exists(id)){
-            User user = userRepository.findOne(id);
-            userRepository.delete(id);
-            return new ResponseEntity<>(user,HttpStatus.OK);
-        }else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 
-    public ResponseEntity<User> addUser(User user) {
-        userRepository.save(user);
-        return new ResponseEntity<>(user,HttpStatus.CREATED);
-    }
-
-    public ResponseEntity<User> userSignUp(JwtSignupRequest jwtSignupRequest){
-        if(userRepository.existsByUsername(jwtSignupRequest.getUsername()) || userRepository.existsByEmail(jwtSignupRequest.getEmail())){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-        User user = new User();
-        user.setUsername(jwtSignupRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(jwtSignupRequest.getPassword()));
-        user.setEmail(jwtSignupRequest.getEmail());
-        user.setEnabled(true);
-        List<Authority> authorities = new ArrayList<>();
-        authorities.add(authorityRepository.findByName(AuthorityName.ROLE_USER));
-        user.setAuthorities(authorities);
-        userRepository.save(user);
-        return new ResponseEntity<>(user,HttpStatus.OK);
-    }
-
-    public ResponseEntity<List<Authority>> getAllAuthority() {
-        List<Authority> authorities =  this.authorityRepository.findAll();
-        if (authorities.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else
-            return new ResponseEntity<>(authorities,HttpStatus.OK);
+    public List<Authority> getAllAuthority() {
+        return this.authorityRepository.findAll();
     }
 
     public User getUserByEmail(String email){
@@ -111,6 +96,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                     .disabled(false)
                     .build();
         }
+    }
+
+    public User signUp(JwtSignupRequest jwtSignupRequest){
+        User user = new User();
+        user.setUsername(jwtSignupRequest.getUsername());
+        user.setPassword(this.passwordEncoder.encode(jwtSignupRequest.getPassword()));
+        user.setEmail(jwtSignupRequest.getEmail());
+        user.setEnabled(true);
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(authorityRepository.findByName(AuthorityName.ROLE_USER));
+        user.setAuthorities(authorities);
+        return userRepository.save(user);
     }
 
 

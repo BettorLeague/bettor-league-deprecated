@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import server.model.football.Team;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -55,5 +56,31 @@ public class User  {
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private List<Authority> authorities;
+
+    @Column(name = "COUNTRY")
+    private String country;
+
+    @Column(name = "BIRTH_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthDate;
+
+    @Column(name = "SEX")
+    @Enumerated(EnumType.STRING)
+    private UserSex sex;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "FAVORITE_TEAM",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "TEAM_ID", referencedColumnName = "ID")})
+    private Team favoriteTeam;
+
+    @Column(name = "QUOTE")
+    private String quote;
+
+    @Column(name = "LEVEL")
+    @Enumerated(EnumType.STRING)
+    private UserLevel level;
+
+
 
 }

@@ -21,7 +21,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import server.social.SocialConnectionSignup;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import server.security.JwtAuthenticationEntryPoint;
 import server.security.JwtAuthenticationTokenFilter;
 
@@ -29,8 +28,6 @@ import java.util.Arrays;
 
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
-@EnableSwagger2
-
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {

@@ -8,9 +8,11 @@ import java.util.List;
 public interface ContestService {
     List<Contest> getAllPublicContest();
     List<Player>  getPlayersByContestId(Long contestId);
+
     Player getPlayerByContestIdAndPlayerId(Long contestId,Long playerId);
     Player addPlayerToContest(Long contestId,Long userId);
     Player deletePlayerFromContest(Long contestId,Long playerId);
+
     Contest addContest(Contest contest);
     Contest getContestById(Long contestId);
     Contest deleteContest(Long contestId);

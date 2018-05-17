@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.connect.Connection;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.NativeWebRequest;
 import server.model.User;
 import server.security.JwtTokenUtil;
-import server.service.impl.UserServiceImpl;
+import server.service.UserService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -26,15 +24,15 @@ import static java.util.Objects.isNull;
 @Slf4j
 public class SocialSignInAdapter implements SignInAdapter {
 
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public SocialSignInAdapter(UserServiceImpl userServiceImpl, JwtTokenUtil jwtTokenUtil) {
+    public SocialSignInAdapter(UserService userService, JwtTokenUtil jwtTokenUtil) {
         this.jwtTokenUtil = jwtTokenUtil;
-        this.userServiceImpl = userServiceImpl;
+        this.userService = userService;
     }
 
 
@@ -43,7 +41,7 @@ public class SocialSignInAdapter implements SignInAdapter {
 
         final UserProfile userProfile = connection.fetchUserProfile();
 
-        User user = this.userServiceImpl.getUserByUsernameOrEmail(localUserId);
+        User user = this.userService.getUserByUsernameOrEmail(localUserId);
         if (isNull(user)){
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", localUserId));
         }

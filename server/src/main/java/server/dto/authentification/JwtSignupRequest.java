@@ -1,4 +1,4 @@
-package server.dto;
+package server.dto.authentification;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
