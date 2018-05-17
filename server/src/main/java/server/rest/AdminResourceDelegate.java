@@ -3,10 +3,8 @@ package server.rest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import server.model.Authority;
-import server.model.User;
+import server.model.user.Authority;
+import server.model.user.User;
 import server.service.UserService;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package server.model;
+package server.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

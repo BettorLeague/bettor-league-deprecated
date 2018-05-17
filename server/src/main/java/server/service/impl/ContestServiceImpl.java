@@ -1,12 +1,11 @@
 package server.service.impl;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import server.model.User;
+import server.model.user.User;
 import server.model.bettor.Contest;
 import server.model.bettor.ContestType;
 import server.model.bettor.Player;
-import server.repository.UserRepository;
+import server.repository.user.UserRepository;
 import server.repository.bettor.ContestRepository;
 import server.repository.bettor.PlayerRepository;
 import server.service.ContestService;

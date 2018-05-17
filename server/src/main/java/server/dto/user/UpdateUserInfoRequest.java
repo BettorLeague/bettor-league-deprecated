@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import server.model.UserLevel;
-import server.model.UserSex;
-import server.model.football.Team;
+import server.model.user.UserLevel;
+import server.model.user.UserSex;
+
 import java.util.Date;
 
 @Data

@@ -3,8 +3,8 @@ package server.service;
 import org.springframework.security.core.userdetails.UserDetails;
 import server.dto.authentification.JwtSignupRequest;
 import server.dto.user.UpdateUserInfoRequest;
-import server.model.Authority;
-import server.model.User;
+import server.model.user.Authority;
+import server.model.user.User;
 
 import java.util.List;
 

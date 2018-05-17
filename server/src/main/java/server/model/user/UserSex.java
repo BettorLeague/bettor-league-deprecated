@@ -1,4 +1,4 @@
-package server.model;
+package server.model.user;
 
 public enum UserSex {
     MALE,FEMALE

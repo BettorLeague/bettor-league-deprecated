@@ -8,7 +8,7 @@ import server.model.football.Competition;
 import server.model.football.Fixture;
 import server.model.football.LeagueTable;
 import server.model.football.Team;
-import server.service.impl.CompetitionService;
+import server.service.impl.CompetitionServiceImpl;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CompetitionResource {
 
     @Inject
-    private CompetitionService competitionService;
+    private CompetitionServiceImpl competitionService;
 
     @Inject
     private UpdateResult updateResult;

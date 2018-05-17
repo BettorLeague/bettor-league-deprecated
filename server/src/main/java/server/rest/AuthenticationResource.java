@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import server.dto.authentification.JwtAuthenticationRequest;
-import server.model.User;
+import server.model.user.User;
 import server.security.JwtTokenUtil;
 import server.dto.authentification.JwtAuthenticationResponse;
 import server.dto.authentification.JwtSignupRequest;

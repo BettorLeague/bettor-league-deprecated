@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import server.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

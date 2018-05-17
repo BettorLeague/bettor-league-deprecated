@@ -5,11 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import server.dto.user.UpdateUserInfoRequest;
-import server.model.User;
+import server.dto.user.UserStatsResponse;
+import server.model.bettor.Player;
+import server.model.user.User;
 import server.security.JwtTokenUtil;
+import server.service.PlayerService;
 import server.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import static java.util.Objects.nonNull;
 
@@ -22,9 +27,13 @@ public class UserResourceDelegate {
 
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
+    private final PlayerService playerService;
 
-    public UserResourceDelegate(UserService userService, JwtTokenUtil jwtTokenUtil){
+    public UserResourceDelegate(UserService userService,
+                                PlayerService playerService,
+                                JwtTokenUtil jwtTokenUtil){
         this.userService = userService;
+        this.playerService = playerService;
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
@@ -56,5 +65,35 @@ public class UserResourceDelegate {
         }else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+    }
+
+
+    public ResponseEntity<List<Player>> getAllPlayerByUser(HttpServletRequest request){
+        String token = request.getHeader(tokenHeader);
+        User user = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
+        return new ResponseEntity<>(playerService.getAllPlayerByUserId(user.getId()), HttpStatus.OK);
+    }
+
+    public ResponseEntity<UserStatsResponse> getUserStats(HttpServletRequest request){
+
+        String token = request.getHeader(tokenHeader);
+        User user = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
+
+        List<Player> players = playerService.getAllPlayerByUserId(user.getId());
+        UserStatsResponse userStatsResponse = new UserStatsResponse();
+        int nbProno = 0;
+        int nbBon = 0;
+        int nbExact = 0;
+        for(Player player : players){
+            nbProno += player.getPronostics().size();
+            nbExact += player.getExactPronostic();
+            nbBon += player.getGoodPronostic();
+        }
+
+        userStatsResponse.setExactPronostic(nbExact);
+        userStatsResponse.setGoodPronostic(nbBon);
+        userStatsResponse.setNumberPronostic(nbProno);
+
+        return new ResponseEntity<>(userStatsResponse, HttpStatus.OK);
     }
 }

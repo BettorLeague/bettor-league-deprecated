@@ -11,7 +11,7 @@ import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.NativeWebRequest;
-import server.model.User;
+import server.model.user.User;
 import server.security.JwtTokenUtil;
 import server.service.UserService;
 

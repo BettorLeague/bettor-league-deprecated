@@ -13,6 +13,7 @@ import server.repository.football.CompetitionRepository;
 import server.repository.football.FixtureRepository;
 import server.repository.football.LeagueTableRepository;
 import server.repository.football.TeamRepository;
+import server.service.CompetitionService;
 
 import java.util.*;
 
@@ -20,17 +21,17 @@ import static java.util.Objects.isNull;
 
 @Service
 @Slf4j
-public class CompetitionService {
+public class CompetitionServiceImpl implements CompetitionService{
 
     private final CompetitionRepository competitionRepository;
     private final LeagueTableRepository leagueTableRepository;
     private final FixtureRepository fixtureRepository;
     private final TeamRepository teamRepository;
 
-    public CompetitionService(CompetitionRepository competitionRepository,
-                              TeamRepository teamRepository,
-                              FixtureRepository fixtureRepository,
-                              LeagueTableRepository leagueTableRepository){
+    public CompetitionServiceImpl(CompetitionRepository competitionRepository,
+                                  TeamRepository teamRepository,
+                                  FixtureRepository fixtureRepository,
+                                  LeagueTableRepository leagueTableRepository){
         this.competitionRepository = competitionRepository;
         this.leagueTableRepository = leagueTableRepository;
         this.fixtureRepository = fixtureRepository;

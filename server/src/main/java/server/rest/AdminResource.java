@@ -3,8 +3,8 @@ package server.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import server.model.Authority;
-import server.model.User;
+import server.model.user.Authority;
+import server.model.user.User;
 
 import java.util.List;
 
@@ -46,4 +46,7 @@ public class AdminResource {
     public ResponseEntity<List<Authority>> getAllAuthority() {
         return this.adminResourceDelegate.getAllAuthority();
     }
+
+
+
 }

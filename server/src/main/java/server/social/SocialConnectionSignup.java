@@ -8,10 +8,10 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.stereotype.Service;
-import server.model.AuthorityName;
-import server.model.User;
-import server.repository.AuthorityRepository;
-import server.repository.UserRepository;
+import server.model.user.AuthorityName;
+import server.model.user.User;
+import server.repository.user.AuthorityRepository;
+import server.repository.user.UserRepository;
 
 import java.util.Arrays;
 
