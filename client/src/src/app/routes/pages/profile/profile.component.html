@@ -13,23 +13,22 @@
   <!-- CONTENT -->
   <div class="content p-24 mat-white-bg">
 
-
     <div class="ui column sixteen wide">
 
-      <div class="ui items">
-        <div class="item">
-          <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
-            <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
-            <h1>{{authService.currentUser.username}}</h1>
+      <section class="profil-section">
 
-            <button class="ui button green floated right">Modifier</button>
+        <div class="ui items">
+          <div class="item">
+            <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
+              <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
+              <h1>{{authService.currentUser.username}}</h1>
+
+              <button class="ui button green floated right">Modifier</button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <h2 class="ui horizontal divider header">
-        <i class="bar chart icon"></i> Mes Statistiques
-      </h2>
 
       <!-- STATS -->
       <section class="profil-section">
@@ -60,50 +59,47 @@
         </div>
       </section>
 
-
-      <h2 class="ui horizontal divider header">
-        <i class="trophy icon"></i> Mes Concours
-      </h2>
-
       <!-- MES CONCOURS -->
-      <div class="ui segments" *ngIf="contestPlayedList">
-        <div class="ui blue segment">
-          <h1> <i class="trophy icon"></i> Mes Concours</h1>
-        </div>
-        <div *ngFor="let contest of contestPlayedList" class="ui segment">
-          <div class="playerContest-header">
-            <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
-            {{ contest.type }}
-          </div>
-          <div class="playerContest-description">Classé 123<sup>e</sup></div>
-          <div class="ui top right attached label green">En Cours</div>
-        </div>
-      </div>
+      <section class="profil-section">
+        <h2 class="ui horizontal divider header">
+          <i class="trophy icon"></i> Mes Concours
+        </h2>
 
-      <h2 class="ui horizontal divider header">
-        <i class="edit icon"></i> Gérer les Concours
-      </h2>
+        <div class="ui segments" *ngIf="contestPlayedList">
+          <div class="ui blue segment">
+
+            <h1> <i class="trophy icon"></i> Mes Concours</h1>
+          </div>
+          <div *ngFor="let contest of contestPlayedList" class="ui segment">
+            <div class="playerContest-header">
+              <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+              {{ contest.type }}
+            </div>
+            <div class="playerContest-description">Classé 123<sup>e</sup></div>
+            <div class="ui top right attached label green">En Cours</div>
+          </div>
+        </div>
+      </section>
 
       <!-- REJOINDRE UN CONCOURS -->
-      <sui-tabset>
-        <div class="ui top attached tabular menu">
-          <a class="item" suiTabHeader="1"><i class="users icon"></i> Rejoindre</a>
-          <a class="item" suiTabHeader="2"><i class="magic icon"></i> Créer</a>
-        </div>
+      <section class="profil-section">
 
-        <!-- Rejoindre un concours -->
-        <div class="ui bottom attached segment" suiTabContent="1">
-          <div class="ui segments" *ngIf="allPublicContest">
-            <div class="ui blue segment">
-              <h1> <i class="users icon"></i> Rejoindre un concours public</h1>
-            </div>
-            <div *ngFor="let contest of allPublicContest" class="ui segment">
-              <div class="playerContest-header">
-                <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
-                {{ contest.type }}
-              </div>
-              <div class="playerContest-description">Classé 123
-                <sup>e</sup>
+        <h2 class="ui horizontal divider header">
+          <i class="edit icon"></i> Gérer les Concours
+        </h2>
+
+        <sui-tabset>
+          <div class="ui top attached tabular menu">
+            <a class="item" suiTabHeader="1"><i class="users icon"></i> Rejoindre</a>
+            <a class="item" suiTabHeader="2"><i class="magic icon"></i> Créer</a>
+          </div>
+
+          <!-- Rejoindre un concours -->
+          <div class="ui bottom attached segment" suiTabContent="1">
+            <div class="ui segments" *ngIf="allPublicContest">
+
+              <div class="ui blue segment">
+                <h1> <i class="users icon"></i> Rejoindre un concours public</h1>
               </div>
 
               <div *ngFor="let contest of allPublicContest" class="ui segment two column grid">
@@ -119,15 +115,16 @@
                   <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
                 </div>
 
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="ui bottom attached segment" suiTabContent="2">Second tab!</div>
-      </sui-tabset>
+          <div class="ui bottom attached segment" suiTabContent="2">Second tab!</div>
+        </sui-tabset>
+      </section>
 
+      </div>
     </div>
-  </div>
-  <!-- / CONTENT -->
+    <!-- / CONTENT -->
 
 </div>
