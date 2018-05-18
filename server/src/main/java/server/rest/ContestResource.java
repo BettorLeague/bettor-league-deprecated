@@ -19,22 +19,9 @@ public class ContestResource {
 
     @RequestMapping(path = "/api/contest", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<List<Contest>> getAllPublicContest() {
+    public ResponseEntity<List<Contest>> getAllContest() {
         return new ResponseEntity<>(this.contestService.getAllPublicContest(), HttpStatus.OK);
     }
-
-    @RequestMapping(path = "/api/contest", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<Contest> addContest(@RequestBody Contest contest) {
-        return new ResponseEntity<>(this.contestService.addContest(contest), HttpStatus.OK);
-    }
-
-    @RequestMapping(path = "/api/contest/{contestId}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<Contest> deleteContest(@PathVariable("contestId") Long contestId) {
-        return new ResponseEntity<>(this.contestService.deleteContest(contestId), HttpStatus.OK);
-    }
-
 
     @RequestMapping(path = "/api/contest/{contestId}", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -48,26 +35,11 @@ public class ContestResource {
         return new ResponseEntity<>(this.contestService.getPlayersByContestId(contestId), HttpStatus.OK);
     }
 
-
-    @RequestMapping(path = "/api/contest/{contestId}/players/{userId}", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<Player> addPlayerByUserId(@PathVariable("contestId") Long contestId,@PathVariable("userId") Long userId) {
-        return new ResponseEntity<>(this.contestService.addPlayerToContest(contestId, userId), HttpStatus.OK);
-    }
-
     @RequestMapping(path = "/api/contest/{contestId}/players/{playerId}", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<Player> getPlayerByContestIdAndPlayerId(@PathVariable("contestId") Long contestId,@PathVariable("playerId") Long playerId) {
         return new ResponseEntity<>(this.contestService.getPlayerByContestIdAndPlayerId(contestId,playerId), HttpStatus.OK);
     }
-
-
-    @RequestMapping(path = "/api/contest/{contestId}/players/{playerId}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<Player> deletePlayerFromContest(@PathVariable("contestId") Long contestId,@PathVariable("playerId") Long playerId) {
-        return new ResponseEntity<>(this.contestService.deletePlayerFromContest(contestId,playerId),HttpStatus.NOT_FOUND);
-    }
-
 
     @RequestMapping(path = "/api/user/{userId}/contest", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")

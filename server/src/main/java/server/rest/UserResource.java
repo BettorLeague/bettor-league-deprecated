@@ -4,10 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import server.dto.user.UpdateUserEmailRequest;
-import server.dto.user.UpdateUserInfoRequest;
-import server.dto.user.UpdateUserPasswordRequest;
-import server.dto.user.UserStatsResponse;
+import server.dto.user.*;
+import server.model.bettor.Contest;
 import server.model.bettor.Player;
 import server.model.user.User;
 
@@ -63,6 +61,36 @@ public class UserResource {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<UserStatsResponse> getUserStats(HttpServletRequest request) {
         return userResourceDelegate.getUserStats(request);
+    }
+
+    @RequestMapping(path = "/api/user/contest", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<List<Contest>> getUserContests(HttpServletRequest request) {
+        return userResourceDelegate.getUserContests(request);
+    }
+
+    @RequestMapping(path = "/api/user/contest", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Contest> addPrivateContest(@RequestBody PrivateContestRequest privateContestRequest, HttpServletRequest request) {
+        return userResourceDelegate.addPrivateContest(privateContestRequest,request);
+    }
+
+    @RequestMapping(path = "/api/user/contest/{contestId}", method = RequestMethod.DELETE)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Contest> deletePrivateContest(@PathVariable("contestId") Long contestId,HttpServletRequest request) {
+        return userResourceDelegate.deletePrivateContest(contestId,request);
+    }
+
+    @RequestMapping(path = "/api/user/contest/{contestId}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Player> signupContest(@PathVariable("contestId") Long contestId,HttpServletRequest request) {
+        return userResourceDelegate.signupContest(contestId,request);
+    }
+
+    @RequestMapping(path = "/api/user/contest/{contestId}/{playerId}", method = RequestMethod.DELETE)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Player> deletePlayerFromContest(@PathVariable("contestId") Long contestId,@PathVariable("playerId") Long playerId,HttpServletRequest request) {
+        return userResourceDelegate.deletePlayerFromContest(contestId,playerId,request);
     }
 
 

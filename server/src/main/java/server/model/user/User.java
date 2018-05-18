@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import server.model.football.Team;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +60,7 @@ public class User  {
     private String country;
 
     @Column(name = "BIRTH_DATE")
+    @Past
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
 
@@ -77,9 +77,10 @@ public class User  {
     @Column(name = "QUOTE")
     private String quote;
 
+    @Min(0)
+    @Max(10)
     @Column(name = "LEVEL")
-    @Enumerated(EnumType.STRING)
-    private UserLevel level;
+    private int level;
 
 
 

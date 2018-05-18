@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PlayerService {
     List<Player> getAllPlayerByUserId(Long userId);
+    Player getPlayerById(Long playerId);
 }

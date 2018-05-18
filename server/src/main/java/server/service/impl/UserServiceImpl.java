@@ -53,8 +53,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User getUser(Long id) {
         return userRepository.findOne(id);
     }
-    public void deleteUser(Long id) {
+    public User deleteUser(Long id) {
+        User user = userRepository.findOne(id);
         userRepository.delete(id);
+        return user;
     }
     public User addUser(User user) {
         return userRepository.save(user);

@@ -1,6 +1,7 @@
 package server.service.impl;
 
 import org.springframework.stereotype.Service;
+import server.model.bettor.Message;
 import server.model.user.User;
 import server.model.bettor.Contest;
 import server.model.bettor.ContestType;
@@ -37,11 +38,13 @@ public class ContestServiceImpl implements ContestService {
         if(nonNull(result)){
             Player player = new Player();
             List<Player> players = new ArrayList<>();
+            List<Message> messages = new ArrayList<>();
             player.setUserId(result.getOwnerId());
             player.setUsername(userRepository.findOne(result.getOwnerId()).getUsername());
             player.setContestId(result.getId());
             players.add(player);
             result.setPlayers(players);
+            result.setMessages(messages);
             return this.contestRepository.save(result);
         }
         return null;
@@ -71,7 +74,7 @@ public class ContestServiceImpl implements ContestService {
         return null;
     }
 
-    public Player addPlayerToContest(Long contestId,Long userId){
+    public Player addUserToContest(Long contestId, Long userId){
         Contest contest = contestRepository.findOne(contestId);
         User user = userRepository.findOne(userId);
         if(nonNull(contest) && nonNull(user)){
@@ -103,5 +106,14 @@ public class ContestServiceImpl implements ContestService {
         return player;
     }
 
+
+
+    public boolean existUserInContest(Long userId,Long contestId){
+        List<Player> players = this.getPlayersByContestId(contestId);
+        for(Player player : players){
+            if (player.getUserId().equals(userId)) return true;
+        }
+        return false;
+    }
 
 }
