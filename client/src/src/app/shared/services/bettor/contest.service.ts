@@ -29,7 +29,11 @@ export class ContestService {
   }
 
   public addUserToContest(userId:number,contestId:number):Observable<any>{
-    return this.http.post(`/api/contest/${contestId}/players/${userId}`,null);
+    return this.http.post(`/api/contest/${contestId}/players/${userId}`, null);
+  }
+
+  public deleteUserFromContest(userId: number, contestId: number): Observable<any> {
+    return this.http.delete(`/api/contest/${contestId}/players/${userId}`, null);
   }
 
 

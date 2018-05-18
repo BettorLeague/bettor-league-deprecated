@@ -105,7 +105,19 @@
               <div class="playerContest-description">Classé 123
                 <sup>e</sup>
               </div>
-              <button class="ui button green">Rejoindre</button>
+
+              <div *ngFor="let contest of allPublicContest" class="ui segment two column grid">
+                <div class="column">
+                  <div class="playerContest-header">
+                    <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+                    {{ contest.type }}
+                  </div>
+                  <div class="playerContest-description">Classé 123<sup>e</sup></div>
+                </div>
+                <div class="column">
+                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;" (click)="joinContest(contest.id)">Rejoindre</button>
+                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
+                </div>
 
             </div>
           </div>

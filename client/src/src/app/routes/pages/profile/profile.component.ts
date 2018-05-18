@@ -10,6 +10,7 @@ import { ContestService } from '../../../shared/services/bettor/contest.service'
 export class ProfileComponent implements OnInit {
 
   contestPlayedList: any;
+  contestPlayedIdList = [];
   allPublicContest: any;
 
   constructor(public authService: AuthService, private contestService: ContestService) {
@@ -23,14 +24,25 @@ export class ProfileComponent implements OnInit {
   getContestPlayed() {
     this.contestService.getContestPlayed(this.authService.currentUser.id).subscribe(data => {
       this.contestPlayedList = data;
+      this.contestPlayedList.forEach(element => {
+        this.contestPlayedIdList.push(element.id);
+      });
       console.log(data);
+      console.log(this.contestPlayedIdList);
     });
   }
 
   getAllPublicContest() {
     this.contestService.getAllPublicContest().subscribe(data => {
       this.allPublicContest = data;
-      console.log(data);
     });
+  }
+
+  joinContest(contestId) {
+    this.contestService.addUserToContest(this.authService.currentUser.id, contestId);
+  }
+
+  quitContext(contestId) {
+    this.contestService.deleteUserFromContest(this.authService.currentUser.id, contestId);
   }
 }
