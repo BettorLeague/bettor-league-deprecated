@@ -77,8 +77,10 @@ public class User  {
     @Column(name = "QUOTE")
     private String quote;
 
+    @Min(0)
+    @Max(10)
     @Column(name = "LEVEL")
-    private int level;
+    private Long level;
 
 
 
