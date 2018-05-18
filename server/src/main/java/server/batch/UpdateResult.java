@@ -64,14 +64,12 @@ public class UpdateResult {
 
     @Scheduled(fixedRate = 1000 * 60 * 60 )
     public void updateAllChampionat(){
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new RestTemplateInterceptor());
-        updateCompetition(restTemplate,"450"); // Ligue 1
-        updateCompetition(restTemplate,"445"); // Premier League
-        updateCompetition(restTemplate,"452"); // Bundesliga
-        updateCompetition(restTemplate,"455"); // Liga
-        updateCompetition(restTemplate,"456"); // Serie A
-        //updateCompetition(restTemplate,"467");   // MONDIALE
+        updateChampionant("450"); //Ligue1
+        updateChampionant("445"); //PremierLeague
+        updateChampionant("452"); //Bundesliga
+        updateChampionant("455"); //Liga
+        updateChampionant("456"); //SerieA
+        //updateChampionant("467"); //MONDIALE
     }
 
 
@@ -167,10 +165,14 @@ public class UpdateResult {
     }
 
 
-    public String getCompetitionCrestByFootballDataId(String id){
+    private String getCompetitionCrestByFootballDataId(String id){
         switch (id){
             case "450": return "https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg";
             case "445": return "https://upload.wikimedia.org/wikipedia/fr/f/f2/Premier_League_Logo.svg";
+            case "452": return "https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg";
+            case "455": return "https://upload.wikimedia.org/wikipedia/commons/archive/9/92/20171221112945%21LaLiga_Santander.svg";
+            case "456": return "https://upload.wikimedia.org/wikipedia/en/f/f7/LegaSerieAlogoTIM.png";
+            case "467": return "https://upload.wikimedia.org/wikipedia/fr/f/f7/FIFA_World_Cup_2018_Logo.png";
             default: return null;
         }
     }

@@ -116,4 +116,8 @@ public class ContestServiceImpl implements ContestService {
         return false;
     }
 
+    public boolean existContest(Long contestId){
+        return this.contestRepository.exists(contestId);
+    }
+
 }

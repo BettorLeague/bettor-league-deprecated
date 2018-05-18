@@ -21,5 +21,6 @@ public interface ContestService {
     List<Contest> getContestPlayedByUser(Long userId);
 
 
-     boolean existUserInContest(Long userId,Long contestId);
+    boolean existUserInContest(Long userId,Long contestId);
+    boolean existContest(Long contestId);
 }
