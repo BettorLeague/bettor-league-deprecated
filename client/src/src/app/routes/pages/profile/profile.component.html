@@ -118,7 +118,52 @@
             </div>
           </div>
 
-          <div class="ui bottom attached segment" suiTabContent="2">Second tab!</div>
+          <!-- Crée un concours -->
+          <div class="ui bottom attached segment" suiTabContent="2">
+            <div class="ui segments" *ngIf="allPublicContest">
+
+              <div class="ui blue segment">
+                <h1>
+                  <i class="magic icon"></i> Crée un concours privé</h1>
+              </div>
+
+              <div class="ui segment">
+                <div class="ui form">
+                  <div class="two fields">
+                    <div class="field" *ngIf="allCompetitions">
+                      {{ selectedCompetition }}
+                      <sui-select class="selection" [(ngModel)]="selectedCompetition" [options]="allCompetitions.caption" labelField="Compétition" #select>
+                        <sui-select-option *ngFor="let competition of allCompetitions" [value]="competition.id">
+                        </sui-select-option>
+                      </sui-select>
+                    </div>
+                    <div class="field">
+                      <label>Nom</label>
+                      <input placeholder="Last Name" type="text" [ngModel]="newContestName" (ngModelChange)="newContestName  = $event">
+                    </div>
+                  </div>
+                  <div class="ui submit button" (click)="createNewPrivateContest()">Submit</div>
+                </div>
+              </div>
+
+              <!-- <div *ngFor="let contest of allPublicContest" class="ui segment two column grid">
+                <div class="column">
+                  <div class="playerContest-header">
+                    <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+                    {{ contest.type }}
+                  </div>
+                  <div class="playerContest-description">Classé 123
+                    <sup>e</sup>
+                  </div>
+                </div>
+                <div class="column">
+                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;" (click)="joinContest(contest.id)">Rejoindre</button>
+                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
+                </div>
+
+              </div> -->
+            </div>
+          </div>
         </sui-tabset>
       </section>
 
