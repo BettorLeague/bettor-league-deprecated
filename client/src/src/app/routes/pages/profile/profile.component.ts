@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     this.getCurrentUser();
     this.getAllPublicContest();
+    this.getUserStats();
    }
 
   ngOnInit() {
@@ -35,6 +36,12 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       console.log(this.contestPlayedIdList);
 
+  getUserStats() {
+    this.userService.getUserStats().subscribe(data => {
+      this.userStats = data;
+    });
+  }
+
   getCurrentUser() {
     this.userService.getUser().subscribe(data => {
       this.userInfo = data;
@@ -44,6 +51,7 @@ export class ProfileComponent implements OnInit {
   getAllPublicContest() {
     this.contestService.getAllPublicContest().subscribe(data => {
       this.allPublicContest = data;
+      console.log(data);
     });
   }
 

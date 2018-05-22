@@ -34,24 +34,24 @@
         <h2 class="ui horizontal divider header">
           <i class="bar chart icon"></i> Mes Statistiques
         </h2>
-        <div class="ui statistics three columns stackable grid">
+        <div class="ui statistics three columns stackable grid" *ngIf="userStats">
           <div class="statistic column center aligned ">
             <div class="value">
-              100
+              {{ userStats.numberPronostic }}
             </div>
             <div class="label">Pronostiques </div>
           </div>
 
           <div class="statistic column center aligned ">
             <div class="value">
-              43
+              {{ userStats.goodPronostic }}
             </div>
             <div class="label">Bons Pronos </div>
           </div>
 
           <div class="statistic column center aligned">
             <div class="value">
-              9
+              {{ userStats.exactPronostic }}
             </div>
             <div class="label">Scores Exactes </div>
           </div>
