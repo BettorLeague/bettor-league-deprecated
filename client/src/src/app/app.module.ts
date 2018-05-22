@@ -44,6 +44,7 @@ import { MessageComponent } from './routes/bettor/contest/message/message.compon
 import { SettingsComponent } from './routes/bettor/contest/settings/settings.component';
 import { StandingComponent } from './routes/bettor/contest/standing/standing.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { UserService } from './shared/services/user/user.service';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -115,7 +116,7 @@ export function initUserFactory(authService: AuthService) {
       multi: true
     },
     CookieService,
-
+    UserService,
     SidenavService
   ],
   bootstrap: [AppComponent]
