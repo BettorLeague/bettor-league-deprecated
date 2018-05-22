@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth/auth.service";
 import { ContestService } from '../../../shared/services/bettor/contest.service';
+import { UserService } from '../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,13 @@ export class ProfileComponent implements OnInit {
   contestPlayedList: any;
   contestPlayedIdList = [];
   allPublicContest: any;
+  userInfo: any;
+  userStats: any;
 
   constructor(public authService: AuthService, private contestService: ContestService) {
     this.getContestPlayed();
+    private userService: UserService,
+    this.getCurrentUser();
     this.getAllPublicContest();
    }
 
@@ -29,6 +34,10 @@ export class ProfileComponent implements OnInit {
       });
       console.log(data);
       console.log(this.contestPlayedIdList);
+
+  getCurrentUser() {
+    this.userService.getUser().subscribe(data => {
+      this.userInfo = data;
     });
   }
 

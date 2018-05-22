@@ -11,7 +11,7 @@
   <!-- / HEADER -->
 
   <!-- CONTENT -->
-  <div class="content p-24 mat-white-bg">
+  <div class="content p-24 mat-white-bg" *ngIf="userInfo">
 
     <div class="ui column sixteen wide">
 
@@ -21,8 +21,7 @@
           <div class="item">
             <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
               <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
-              <h1>{{authService.currentUser.username}}</h1>
-
+              <h1>{{ userInfo.username}}</h1>
               <button class="ui button green floated right">Modifier</button>
             </div>
           </div>
