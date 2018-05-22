@@ -10,17 +10,19 @@ import { UserService } from '../../../shared/services/user/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  contestPlayedList: any;
   contestPlayedIdList = [];
   allPublicContest: any;
   userInfo: any;
   userStats: any;
+  userContests: any;
 
-  constructor(public authService: AuthService, private contestService: ContestService) {
-    this.getContestPlayed();
+  constructor(
+    public authService: AuthService,
+    private contestService: ContestService,
     private userService: UserService,
     this.getCurrentUser();
     this.getAllPublicContest();
+    this.getUserContests();
     this.getUserStats();
    }
 
@@ -39,6 +41,12 @@ export class ProfileComponent implements OnInit {
   getUserStats() {
     this.userService.getUserStats().subscribe(data => {
       this.userStats = data;
+    });
+  }
+
+  getUserContests() {
+    this.userService.getUserContests().subscribe(data => {
+      this.userContests = data;
     });
   }
 

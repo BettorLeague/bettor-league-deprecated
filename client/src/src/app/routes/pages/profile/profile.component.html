@@ -64,12 +64,12 @@
           <i class="trophy icon"></i> Mes Concours
         </h2>
 
-        <div class="ui segments" *ngIf="contestPlayedList">
+        <div class="ui segments" *ngIf="userContests">
           <div class="ui blue segment">
 
             <h1> <i class="trophy icon"></i> Mes Concours</h1>
           </div>
-          <div *ngFor="let contest of contestPlayedList" class="ui segment">
+          <div *ngFor="let contest of userContests" class="ui segment">
             <div class="playerContest-header">
               <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
               {{ contest.type }}
@@ -107,11 +107,11 @@
                     <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
                     {{ contest.type }}
                   </div>
-                  <div class="playerContest-description">Classé 123<sup>e</sup></div>
+                  <div class="playerContest-description"> 100 Participants </div>
                 </div>
                 <div class="column">
-                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;" (click)="joinContest(contest.id)">Rejoindre</button>
-                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
+                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;">Rejoindre</button>
+                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;">Quitter</button>
                 </div>
 
               </div>

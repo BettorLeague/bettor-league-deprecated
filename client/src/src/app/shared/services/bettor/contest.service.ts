@@ -8,7 +8,7 @@ import {AuthService} from "../auth/auth.service";
 export class ContestService {
 
 
-  currentContest:ContestModel;
+  currentContest: ContestModel;
 
   constructor(private http: HttpClient) { }
 
@@ -16,27 +16,26 @@ export class ContestService {
     return this.http.get(`/api/contest`);
   }
 
-  public getPublicContestById(contestId:number): Observable<any>  {
+  public getPublicContestById(contestId: number): Observable<any>  {
     return this.http.get(`/api/contest/${contestId}`);
   }
 
-  public getPlayerOfContest(contestId:number):Observable<any>{
+  public getPlayerOfContest(contestId: number): Observable<any> {
     return this.http.get(`/api/contest/${contestId}/players`);
   }
 
-  public getContestPlayed(userId:number):Observable<any>{
+  public getContestPlayed(userId: number): Observable<any> {
     return this.http.get(`/api/user/${userId}/contest`);
   }
 
-  public addUserToContest(userId:number,contestId:number):Observable<any>{
-    return this.http.post(`/api/contest/${contestId}/players/${userId}`, null);
+  public getNbPlayersContest(contestId: number): Observable<any> {
+    return this.http.get(`/api/contest/${contestId}/nbPlayers`);
   }
 
-  public deleteUserFromContest(userId: number, contestId: number): Observable<any> {
-    return this.http.delete(`/api/contest/${contestId}/players/${userId}`, null);
+  public createNewPrivateContest(competitionId: number, caption: string) {
+    return this.http.post(`/api/user/contest`, {
+      competitionId,
+      caption
+    });
   }
-
-
-
-
 }
