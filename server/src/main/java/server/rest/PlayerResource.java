@@ -22,7 +22,8 @@ public class PlayerResource {
     @RequestMapping(path = "/api/player/contest/{contestId}/pronostic", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<Pronostic>> getPronosticsByContest(@PathVariable("contestId") Long contestId ,HttpServletRequest request) {
-        return playerResourceDelegate.upadtePronostic(contestId,request);
+        //return playerResourceDelegate.upadtePronostic(contestId,request);
+        return null;
     }
 
     @RequestMapping(path = "/api/player/contest/{contestId}/pronostic", method = RequestMethod.POST)

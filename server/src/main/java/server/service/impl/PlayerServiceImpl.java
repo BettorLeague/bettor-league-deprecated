@@ -23,4 +23,8 @@ public class PlayerServiceImpl implements PlayerService{
     public Player getPlayerById(Long playerId){
         return this.playerRepository.findOne(playerId);
     }
+
+    public Player getPlayerByUserIdAndContestId(Long userId,Long contestId ){
+         return this.playerRepository.findByUserIdAndContestId(userId,contestId);
+    }
 }

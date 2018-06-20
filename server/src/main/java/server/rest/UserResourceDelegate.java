@@ -46,7 +46,6 @@ public class UserResourceDelegate {
 
 
     public ResponseEntity<User> updateUser(UpdateUserInfoRequest userInfoRequest, HttpServletRequest request){
-
         String token = request.getHeader(tokenHeader);
         User user = userService.getUserByUsername(jwtTokenUtil.getUsernameFromToken(token));
         return new ResponseEntity<>(this.userService.updateUserInfo(user,userInfoRequest),HttpStatus.OK);
