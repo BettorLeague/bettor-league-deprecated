@@ -32,7 +32,7 @@
 
 @media screen and (max-width: 640px) {
   .predictionContainer .mat-row{
-    height: 130px;
+    height: 100px;
   }
 }
 
@@ -59,8 +59,8 @@
 .mat-column-HomeScore, .mat-column-AwayScore{
   flex: 1 1 10%;
 }
-
+/*
 .mat-column-Info{
   flex: 1 1 6%;
 }
-
+*/

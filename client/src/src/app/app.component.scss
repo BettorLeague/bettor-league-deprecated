@@ -17,12 +17,12 @@ a.mat-list-item:hover{
 
 
 .stickyHeader{
-  padding-top:64px !important;
+  margin-top:64px !important;
 }
 
 @media screen and (max-width: 640px) {
   .stickyHeader{
-    padding-top:56px !important;
+    margin-top:56px !important;
   }
 }
 
@@ -44,12 +44,23 @@ app-header{
 }
 
 main{
-  display:flex; /* 2 */
-  flex-direction:column; /* 3 */
+  display: flex;
+  flex-direction: column;
   height: 100%;
   overflow: auto;
 }
 
 app-footer{
   flex: none;
+}
+
+.mat-drawer-content {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  flex-direction: column;
 }

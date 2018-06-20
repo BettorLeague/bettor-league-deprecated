@@ -17,7 +17,7 @@ import {AuthService} from "../../../../shared/services/auth/auth.service";
 })
 export class PredictionComponent implements OnInit {
   onPredict = false;
-  predictColumns = ["Select","Day","HomeTeam","HomeScore","AwayScore","AwayTeam","Info"];
+  predictColumns = ["Select","Day","HomeTeam","HomeScore","AwayScore","AwayTeam"];
   displayedColumns= ["date","result"];
 
   onSearch = true;
@@ -26,8 +26,6 @@ export class PredictionComponent implements OnInit {
 
 
   selectionMatch = new SelectionModel<FixtureModel>(true, []);
-
-
 
   constructor(
               public authService:AuthService,
@@ -54,9 +52,8 @@ export class PredictionComponent implements OnInit {
     });
   }
 
-  getClass(teamName:string){
+  static getClass(teamName:string){
     return teamName.split(" ").join("_");
-
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
