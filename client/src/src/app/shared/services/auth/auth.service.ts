@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {LoginRequestModel} from "../../models/auth/login.request.model";
 import {UserModel} from "../../models/user/user.model";
-import {UserTokenModel} from "../../models/auth/user.token.model";
 import {RegisterRequestModel} from "../../models/auth/register.request.model";
 import {CookieService} from "ngx-cookie-service";
 import {ContestService} from "../bettor/contest.service";
@@ -30,16 +29,16 @@ export class AuthService {
     return this.http.get('auth/refresh');
   }
 
-  public getCurrentUser() : Observable<any> {
+  public getCurrentUser(): Observable<any> {
     return this.http.get('auth/user');
   }
 
-  public getContestPlayed(userId:number):Observable<any>{
+  public getContestPlayed(userId: number):Observable<any> {
     return this.http.get(`api/user/${userId}/contest`);
   }
 
 
-  public logout(): void{
+  public logout(): void {
     localStorage.removeItem('TOKEN_KEY');
     this.cookieService.delete("Authorization");
     this.currentUser = null;
@@ -48,7 +47,7 @@ export class AuthService {
 
 
   refreshUser() {
-    if(this.getToken() != null){
+    if(this.getToken() != null) {
       const promise = this.refresh().toPromise()
         .then(res => {
           if (res !== null) {
@@ -60,13 +59,15 @@ export class AuthService {
               });
           }
         })
-        .catch(() => null);
+        .catch(() => {
+          this.logout();
+        });
       return promise;
     }
     return null;
   }
 
-  initUser(){
+  initUser() {
     const promise = this.getCurrentUser().toPromise().then(data =>{
       this.currentUser = data;
       this.initUserContest();
@@ -74,11 +75,11 @@ export class AuthService {
     return promise;
   }
 
-  haveAdminAuth() : boolean{
+  haveAdminAuth(): boolean {
     return JSON.stringify(this.currentUser.authorities).search('ROLE_ADMIN') !== -1 ;
   }
 
-  haveUserAuth() : boolean{
+  haveUserAuth(): boolean {
     return JSON.stringify(this.currentUser.authorities).search('ROLE_USER') !== -1 ;
   }
 

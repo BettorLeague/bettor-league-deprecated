@@ -40,7 +40,7 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     },(error: any) => {
       if (error instanceof HttpErrorResponse) {
-        this.openDialog("Error "+error.status,error.error);
+        this.openDialog("Error "+error.status,error.message);
       }
     });
 
