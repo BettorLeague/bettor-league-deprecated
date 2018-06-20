@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginRequestModel} from "../../../shared/models/auth/login.request.model";
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {MatDialog, MatDialogRef} from "@angular/material";
 import {ConfirmDialogComponent} from "../../../shared/components/confirm-dialog/confirm-dialog.component";

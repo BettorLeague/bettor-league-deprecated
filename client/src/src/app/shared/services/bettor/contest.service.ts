@@ -1,5 +1,5 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
 import {ContestModel} from "../../models/bettor/contest.model";
 import {AuthService} from "../auth/auth.service";

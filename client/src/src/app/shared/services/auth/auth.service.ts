@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {LoginRequestModel} from "../../models/auth/login.request.model";
 import {UserModel} from "../../models/user/user.model";
 import {RegisterRequestModel} from "../../models/auth/register.request.model";

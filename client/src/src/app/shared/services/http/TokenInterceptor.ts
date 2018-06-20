@@ -1,4 +1,6 @@
 
+import {tap} from 'rxjs/operators';
+
 import {Injectable, Injector} from '@angular/core';
 import {
   HttpRequest,
@@ -6,9 +8,9 @@ import {
   HttpEvent,
   HttpInterceptor, HttpClient, HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {AuthService} from "../auth/auth.service";
-import 'rxjs/add/operator/do';
+
 import {ConfirmDialogComponent} from "../../components/confirm-dialog/confirm-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material";
 
@@ -34,7 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
       request = request.clone();
     }
 
-    return next.handle(request).do((event: HttpEvent<any>) => {
+    return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         // do stuff with response if you want
       }
@@ -42,7 +44,7 @@ export class TokenInterceptor implements HttpInterceptor {
       if (error instanceof HttpErrorResponse) {
         this.openDialog("Error "+error.status,error.message);
       }
-    });
+    }));
 
   }
 
