@@ -15,7 +15,7 @@
   background: rgba(0,0,0,.03);
 }
 .predictionContainer .mat-row{
-  height: 60px;
+  height: 70px;
   position: relative;
 }
 
@@ -57,10 +57,15 @@
 }
 
 .mat-column-HomeScore, .mat-column-AwayScore{
-  flex: 1 1 10%;
+  flex: 1 1 15%;
 }
 /*
 .mat-column-Info{
   flex: 1 1 6%;
 }
 */
+
+
+.matchSelected {
+  background: #fff8e1 !important;
+}

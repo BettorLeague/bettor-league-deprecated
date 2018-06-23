@@ -44,9 +44,9 @@
       <ng-container matColumnDef="result">
         <mat-header-cell *matHeaderCellDef >Result</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <div class="py-8" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="1 0 20%" fxHide fxShow.gt-sm>{{element.homeTeamName}}</div>
-            <div fxFlex="1 0 10%" fxLayout="row" fxLayoutAlign="center center">
+          <div class="py-8" fxFlex  fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="1 0 20%"   fxLayout="row" fxHide fxShow.gt-sm><span class="mr-auto">{{element.homeTeamName}}</span></div>
+            <div fxFlex="1 0 10%"   fxLayout="row" fxLayoutAlign="center center">
               <div [style.background-image]="'url(' + getCrestOfTeam(element.homeTeamName) + ')'" class="blason"></div>
             </div>
             <div fxFlex="1 0 auto"  fxLayout="row" fxLayoutAlign="center center">
@@ -61,10 +61,10 @@
                 <span  class="ui label labelScore mx-8"><span>{{element.result.goalsAwayTeam}}</span></span>
               </ng-template>
             </div>
-            <div fxFlex="1 0 10%" fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="1 0 10%"   fxLayout="row" fxLayoutAlign="center center">
               <div [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="blason"></div>
             </div>
-            <div fxFlex="1 0 20%" fxHide fxShow.gt-sm>{{element.awayTeamName}}</div>
+            <div fxFlex="1 0 20%"   fxLayout="row" fxHide fxShow.gt-sm><span class="ml-auto">{{element.awayTeamName}}</span></div>
           </div>
         </mat-cell>
       </ng-container>
@@ -132,21 +132,17 @@
       <ng-container matColumnDef="HomeScore" >
         <mat-header-cell  fxHide fxShow.gt-sm *matHeaderCellDef >HomeScore</mat-header-cell>
         <mat-cell  *matCellDef="let element">
-          <div class="ui input" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="center center">
-            <div [ngClass]="selectionMatch.isSelected(row) ? 'ui input ' : 'ui disabled input'" >
-              <input type="number" >
+            <div  [ngClass]="!selectionMatch.isSelected(element)? 'ui disabled input' :'ui input'">
+              <input type="number" class="w-100" placeholder="Score {{element.homeTeamName}}">
             </div>
-          </div>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="AwayScore" >
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef >AwayScore</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <div class="ui input" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="center center">
-            <div [ngClass]="{ 'ui input' :selectionMatch.isSelected(row) , 'ui disabled input':! selectionMatch.isSelected(row)}" >
-              <input type="number" >
-            </div>
+          <div [ngClass]="!selectionMatch.isSelected(element)? 'ui disabled input' :'ui input'">
+            <input type="number" class="w-100" placeholder="Score {{element.awayTeamName}}">
           </div>
         </mat-cell>
       </ng-container>
@@ -158,7 +154,7 @@
             <div fxFlex="0 0 40%" fxLayoutAlign="flex-start" fxLayout="row">
               <div [style.background-image]="'url(' + getCrestOfTeam(element.awayTeamName) + ')'" class="mx-auto blason "></div>
             </div>
-            <div fxFlex="1 0 auto" fxLayoutAlign="flex-end" fxLayout="row" fxHide fxShow.gt-sm >
+            <div fxFlex="0 0 60%" fxLayoutAlign="flex-end" fxLayout="row" fxHide fxShow.gt-sm >
               {{element.awayTeamName}}
             </div>
           </div>
@@ -180,7 +176,7 @@
 
 
       <mat-header-row *matHeaderRowDef="predictColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: predictColumns"></mat-row>
+      <mat-row  [ngClass]="selectionMatch.isSelected(row)? 'matchSelected': null"*matRowDef="let row; columns: predictColumns"></mat-row>
     </mat-table>
   </div>
 </div>

@@ -33,7 +33,7 @@
       <div class="filters" fxLayout="column" fxLayoutAlign="center center"
            fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
-        <mat-form-field class="course-search">
+        <mat-form-field class="course-search" appearance="fill">
 
           <input matInput placeholder="Search for a contest" [(ngModel)]="searchTerm" (input)="filterContestsByTerm()">
           <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm='';filterContestsByTerm()">

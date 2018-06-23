@@ -23,7 +23,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <main  #main [ngClass]="headerService.isOpen() ? 'stickyHeader' : ''" >
+        <main  #main [ngClass]="headerService.isOpen() ? 'stickyHeader' : ''" fusePerfectScrollbar >
             <app-header></app-header>
             <router-outlet (deactivate)="onDeactivate(main)"></router-outlet>
             <app-footer></app-footer>
