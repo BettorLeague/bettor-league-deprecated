@@ -11,119 +11,164 @@
   <!-- / HEADER -->
 
   <!-- CONTENT -->
-  <div class="content p-24 mat-white-bg">
-
-    <span class="ui red ribbon label" style="color: #ffffff">Profil</span>
+  <div class="content p-24 mat-white-bg" *ngIf="userInfo">
 
     <div class="ui column sixteen wide">
 
-      <div class="ui items">
-        <div class="item">
-          <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
-            <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
-            <h1>{{authService.currentUser.username}}</h1>
+      <section class="profil-section">
 
-            <button class="ui button green floated right">Modifier</button>
+        <div class="ui items">
+          <div class="item">
+            <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
+              <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
+              <h1>{{ userInfo.username}}</h1>
+              <button class="ui button green floated right">Modifier</button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <h2 class="ui horizontal divider header">
-        <i class="bar chart icon"></i> Mes Statistiques
-      </h2>
 
       <!-- STATS -->
-      <div class="ui three columns stackable grid">
-        <div class="column">
-          <div class="ui card">
-            <div class="content">
-              <div class="center aligned header">Pronos comptabilisés</div>
-              <div class="center aligned description">
-                <h2 class="numeric-stats">100</h2>
-              </div>
+      <section class="profil-section">
+        <h2 class="ui horizontal divider header">
+          <i class="bar chart icon"></i> Mes Statistiques
+        </h2>
+        <div class="ui statistics three columns stackable grid" *ngIf="userStats">
+          <div class="statistic column center aligned ">
+            <div class="value">
+              {{ userStats.numberPronostic }}
             </div>
+            <div class="label">Pronostiques </div>
+          </div>
+
+          <div class="statistic column center aligned ">
+            <div class="value">
+              {{ userStats.goodPronostic }}
+            </div>
+            <div class="label">Bons Pronos </div>
+          </div>
+
+          <div class="statistic column center aligned">
+            <div class="value">
+              {{ userStats.exactPronostic }}
+            </div>
+            <div class="label">Scores Exactes </div>
           </div>
         </div>
-
-        <div class="column">
-          <div class="ui card">
-            <div class="content">
-              <div class="center aligned header">Scores exacts</div>
-              <div class="center aligned description">
-                <h2 class="numeric-stats">10</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="ui card">
-            <div class="content">
-              <div class="center aligned header">Bons pronos</div>
-              <div class="center aligned description">
-                <h2 class="numeric-stats">70</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <h2 class="ui horizontal divider header">
-        <i class="trophy icon"></i> Mes Concours
-      </h2>
+      </section>
 
       <!-- MES CONCOURS -->
-      <div class="ui segments" *ngIf="contestPlayedList">
-        <div class="ui blue segment">
-          <h1> <i class="trophy icon"></i> Mes Concours</h1>
-        </div>
-        <div *ngFor="let contest of contestPlayedList" class="ui segment">
-          <div class="playerContest-header">
-            <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
-            {{ contest.type }}
-          </div>
-          <div class="playerContest-description">Classé 123<sup>e</sup></div>
-          <div class="ui top right attached label green">En Cours</div>
-        </div>
-      </div>
+      <section class="profil-section">
+        <h2 class="ui horizontal divider header">
+          <i class="trophy icon"></i> Mes Concours
+        </h2>
 
-      <h2 class="ui horizontal divider header">
-        <i class="edit icon"></i> Gérer les Concours
-      </h2>
+        <div class="ui segments" *ngIf="userContests">
+          <div class="ui blue segment">
+
+            <h1> <i class="trophy icon"></i> Mes Concours</h1>
+          </div>
+          <div *ngFor="let contest of userContests" class="ui segment">
+            <div class="playerContest-header">
+              <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+              {{ contest.type }}
+            </div>
+            <div class="playerContest-description">Classé 123<sup>e</sup></div>
+            <div class="ui top right attached label green">En Cours</div>
+          </div>
+        </div>
+      </section>
 
       <!-- REJOINDRE UN CONCOURS -->
-      <sui-tabset>
-        <div class="ui top attached tabular menu">
-          <a class="item" suiTabHeader="1"><i class="users icon"></i> Rejoindre</a>
-          <a class="item" suiTabHeader="2"><i class="magic icon"></i> Créer</a>
-        </div>
+      <section class="profil-section">
 
-        <!-- Rejoindre un concours -->
-        <div class="ui bottom attached segment" suiTabContent="1">
-          <div class="ui segments" *ngIf="allPublicContest">
-            <div class="ui blue segment">
-              <h1> <i class="users icon"></i> Rejoindre un concours public</h1>
-            </div>
-            <div *ngFor="let contest of allPublicContest" class="ui segment">
-              <div class="playerContest-header">
-                <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
-                {{ contest.type }}
-              </div>
-              <div class="playerContest-description">Classé 123
-                <sup>e</sup>
-              </div>
-              <button class="ui button green">Rejoindre</button>
+        <h2 class="ui horizontal divider header">
+          <i class="edit icon"></i> Gérer les Concours
+        </h2>
 
+        <sui-tabset>
+          <div class="ui top attached tabular menu">
+            <a class="item" suiTabHeader="1"><i class="users icon"></i> Rejoindre</a>
+            <a class="item" suiTabHeader="2"><i class="magic icon"></i> Créer</a>
+          </div>
+
+          <!-- Rejoindre un concours -->
+          <div class="ui bottom attached segment" suiTabContent="1">
+            <div class="ui segments" *ngIf="allPublicContest">
+
+              <div class="ui blue segment">
+                <h1> <i class="users icon"></i> Rejoindre un concours public</h1>
+              </div>
+
+              <div *ngFor="let contest of allPublicContest" class="ui segment two column grid">
+                <div class="column">
+                  <div class="playerContest-header">
+                    <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+                    {{ contest.type }}
+                  </div>
+                  <div class="playerContest-description"> 100 Participants </div>
+                </div>
+                <div class="column">
+                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;">Rejoindre</button>
+                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;">Quitter</button>
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="ui bottom attached segment" suiTabContent="2">Second tab!</div>
-      </sui-tabset>
+          <!-- Crée un concours -->
+          <div class="ui bottom attached segment" suiTabContent="2">
+            <div class="ui segments" *ngIf="allPublicContest">
 
+              <div class="ui blue segment">
+                <h1>
+                  <i class="magic icon"></i> Crée un concours privé</h1>
+              </div>
+
+              <div class="ui segment">
+                <div class="ui form">
+                  <div class="two fields">
+                    <div class="field" *ngIf="allCompetitions">
+                      {{ selectedCompetition }}
+                      <sui-select class="selection" [(ngModel)]="selectedCompetition" [options]="allCompetitions.caption" labelField="Compétition" #select>
+                        <sui-select-option *ngFor="let competition of allCompetitions" [value]="competition.id">
+                        </sui-select-option>
+                      </sui-select>
+                    </div>
+                    <div class="field">
+                      <label>Nom</label>
+                      <input placeholder="Last Name" type="text" [ngModel]="newContestName" (ngModelChange)="newContestName  = $event">
+                    </div>
+                  </div>
+                  <div class="ui submit button" (click)="createNewPrivateContest()">Submit</div>
+                </div>
+              </div>
+
+              <!-- <div *ngFor="let contest of allPublicContest" class="ui segment two column grid">
+                <div class="column">
+                  <div class="playerContest-header">
+                    <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+                    {{ contest.type }}
+                  </div>
+                  <div class="playerContest-description">Classé 123
+                    <sup>e</sup>
+                  </div>
+                </div>
+                <div class="column">
+                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;" (click)="joinContest(contest.id)">Rejoindre</button>
+                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
+                </div>
+
+              </div> -->
+            </div>
+          </div>
+        </sui-tabset>
+      </section>
+
+      </div>
     </div>
-  </div>
-  <!-- / CONTENT -->
+    <!-- / CONTENT -->
 
 </div>

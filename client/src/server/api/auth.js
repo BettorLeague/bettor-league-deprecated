@@ -15,4 +15,5 @@ module.exports = (app) => {
     res.send({"id":28,"username":"admin","firstname":"admin","lastname":"admin","email":"admin@test.fr","enabled":true,"authorities":[{"id":1,"name":"ROLE_USER","authority":"ROLE_USER"},{"id":2,"name":"ROLE_ADMIN","authority":"ROLE_ADMIN"}]});
 });
 
+
 };

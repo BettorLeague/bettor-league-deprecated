@@ -71,13 +71,4 @@ export class ContestComponent implements OnInit {
       this.competitionService.currentTeamInCompetition = data;
     })
   }
-
-  addUserToContest(){
-    this.contestService.addUserToContest(this.authService.currentUser.id,this.contestService.currentContest.id).subscribe(data =>{
-      this.authService.initUserContest();
-    })
-  }
-
-
-
 }
