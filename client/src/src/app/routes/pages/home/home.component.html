@@ -19,29 +19,38 @@
   <div class="content p-24 ">
     <h2>PRONOSTICS AVAILABLE FOR ALL MAJOR EUROPEAN LEAGUES</h2>
     <p>Build customer confidence by listing your users! Anyone who has used your service and has been pleased with it should have a place here! From Fortune 500 to start-ups, all your app enthusiasts will be glad to be featured in this section. Moreover, users will feel confident seing someone vouching for your product!</p>
-    <div fxFlex="row" fxLayoutAlign="center center">
-      <img class="logo" *ngFor="let competition of competitions" src="{{competition.crestUrl}}"/>
+    <div fxFlex="row" fxLayoutAlign="space-between">
+
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/9/9b/Logo_de_la_Ligue_1_%282008%29.svg"/>
+
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/2/23/Logo_La_Liga.png"/>
+
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/f/f7/LegaSerieAlogoTIM.png"/>
+
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg"/>
+
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/fr/f/f2/Premier_League_Logo.svg"/>
     </div>
   </div>
 
   <div class="content p-24">
     <div fxFlex fxLayout="row">
-      <div fxFlex="0 0 50%">
+      <div class="col-md-6 col-sm-12">
         <h2>FEATURES</h2>
         <h4>Private competitions</h4>
         <p>        Invite your friends and colleagues to predict with you on the sports competition of your choice.
           It's free, up to 40 participants per contest.
           Beyond 40 people, contact us to benefit from the company offer.
           Alternatively, join a public prognostic contest open to all.</p>
-<h4>Live</h4>
+        <h4>Live</h4>
         <p>
           Updated scores and live rankings after each goal.
           Receive push notifications directly in your web browser or on your mobile to be alerted to the result.
           Do not miss a prognosis: receive a summary of your notifications every day by e-mail for the events you have selected</p>
 
       </div>
-      <div fxFlex="0 0 50%" class="mat-elevation-z4">
-        <img  class="featurelogo" src="../../../assets/images/img/ecran.png">
+      <div class="col-md-6" fxHide fxShow.gt-xs>
+        <img  class="featurelogo mat-elevation-z4" src="../../../assets/images/img/ecran.png">
       </div>
     </div>
 
