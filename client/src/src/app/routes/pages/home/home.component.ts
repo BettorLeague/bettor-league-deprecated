@@ -10,12 +10,9 @@ import {CompetitionModel} from "../../../shared/models/football/competition/comp
 })
 export class HomeComponent implements OnInit {
 
-  publicContests:ContestModel[];
-  competitions:CompetitionModel[];
 
-  constructor(private contestService:ContestService,
-              private competitionService:CompetitionService) {
-    this.initModel();
+  constructor() {
+
   }
 
 
@@ -23,29 +20,4 @@ export class HomeComponent implements OnInit {
 
   }
 
-  resetModel(){
-    this.publicContests = [];
-  }
-
-  initModel(){
-    this.resetModel();
-    this.getAllPublicContest();
-  }
-
-  getAllPublicContest(){
-    this.resetModel();
-    this.contestService.getAllPublicContest().subscribe(data => {
-        this.publicContests  = data;
-        this.competitions = [];
-        this.publicContests.forEach(contest => {
-          this.getCompetitionById(contest.competitionId);
-        });
-    })
-  }
-
-  getCompetitionById(competitionId){
-    this.competitionService.getCompetitionById(competitionId).subscribe(data => {
-      this.competitions.push(data);
-    })
-  }
 }
