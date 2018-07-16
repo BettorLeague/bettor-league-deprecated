@@ -71,7 +71,7 @@
           </div>
           <div *ngFor="let contest of userContests" class="ui segment">
             <div class="playerContest-header">
-              <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
+              <a [routerLink]="'/contest/' + contest.id">{{ contest.caption }}</a>
               {{ contest.type }}
             </div>
             <div class="playerContest-description">Classé 123<sup>e</sup></div>
