@@ -58,6 +58,7 @@ export class ProfileComponent implements OnInit {
   getCurrentUser() {
     this.userService.getUser().subscribe(data => {
       this.userInfo = data;
+      console.log(data);
     });
   }
 
@@ -74,5 +75,15 @@ export class ProfileComponent implements OnInit {
       console.log(this.selectedCompetition);
       this.contestService.createNewPrivateContest(this.selectedCompetition, this.newContestName);
     }
+  }
+
+  joinContest(contestId) {
+      this.contestService.joinContest(contestId);
+      console.log(contestId);
+  }
+
+  quitContest(contestId) {
+      console.log(contestId);
+      console.log(this.userInfo.id);
   }
 }

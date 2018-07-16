@@ -22,7 +22,7 @@
             <div class="content" fxLayout="row" fxLayoutAlign="center center" ng-reflect-layout="row" ng-reflect-align="center center">
               <img src="../../../../assets/images/avatars/profile.jpg" alt="" class="avatar">
               <h1>{{ userInfo.username}}</h1>
-              <button class="ui button green floated right">Modifier</button>
+              <!--<button class="ui button green floated right">Modifier</button>-->
             </div>
           </div>
         </div>
@@ -110,8 +110,8 @@
                   <div class="playerContest-description"> 100 Participants </div>
                 </div>
                 <div class="column">
-                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;">Rejoindre</button>
-                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;">Quitter</button>
+                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;" (click)="joinContest(contest.id)">Rejoindre</button>
+                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
                 </div>
 
               </div>
@@ -145,23 +145,6 @@
                   <div class="ui submit button" (click)="createNewPrivateContest()">Submit</div>
                 </div>
               </div>
-
-              <!-- <div *ngFor="let contest of allPublicContest" class="ui segment two column grid">
-                <div class="column">
-                  <div class="playerContest-header">
-                    <a href="/contest/{{contest.id}}">{{ contest.caption }}</a>
-                    {{ contest.type }}
-                  </div>
-                  <div class="playerContest-description">Classé 123
-                    <sup>e</sup>
-                  </div>
-                </div>
-                <div class="column">
-                  <button *ngIf="!contestPlayedIdList.includes(contest.id)" class="ui button green" style="float: right;" (click)="joinContest(contest.id)">Rejoindre</button>
-                  <button *ngIf="contestPlayedIdList.includes(contest.id)" class="ui button red" style="float: right;" (click)="quitContest(contest.id)">Quitter</button>
-                </div>
-
-              </div> -->
             </div>
           </div>
         </sui-tabset>

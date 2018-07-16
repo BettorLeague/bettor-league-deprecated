@@ -38,4 +38,12 @@ export class ContestService {
       caption
     });
   }
+
+  public joinContest(contestId: number) {
+      return this.http.get(`/api/user/contest/${contestId}`);
+  }
+
+  public quitContest(contestId: number, userId) {
+      return this.http.delete(`/api/user/contest/${contestId}/${userId}`);
+  }
 }
