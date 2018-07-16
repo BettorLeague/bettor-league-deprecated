@@ -30,19 +30,17 @@
     <mat-tab-group  [(selectedIndex)]="selectedIndex" *ngIf="contestService.currentContest && competitionService.currentCompetition">
 
       <mat-tab  label="Pronostics">
-
         <ng-template matTabContent>
           <app-prediction></app-prediction>
         </ng-template>
       </mat-tab>
 
       <mat-tab  label="Classement">
-
         <ng-template matTabContent>
           <app-standing></app-standing>
         </ng-template>
       </mat-tab>
-
+      <!--
       <mat-tab  label="Messages">
 
         <ng-template matTabContent>
@@ -56,9 +54,8 @@
           <app-settings></app-settings>
         </ng-template>
       </mat-tab>
-
+-->
       <mat-tab  label="Championnat">
-
         <ng-template matTabContent>
           <app-ranking></app-ranking>
         </ng-template>

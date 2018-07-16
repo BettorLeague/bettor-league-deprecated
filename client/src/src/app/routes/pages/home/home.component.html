@@ -1,19 +1,106 @@
-<div id="homePage" class="page-layout simple mat-white-bg " >
+<div id="homePage" class="page-layout simple " >
 
   <!-- HEADER -->
   <div class="header mat-accent-bg" fxLayout="column" fxLayoutAlign="center center">
+    <div class="filter">
+
+    </div>
 
     <div class="hero-text">
-      <h1>Welcome to Bettor League</h1>
+      <h1>Bet with your friends and have fun !</h1>
+      <h3>Be amazed by the best pronostics website on the web!
+        Your new app to show your abilities to your friends and to show them who's the best.
+        Simple, elegant and well coded :) we are trying to make our users happy everyday !</h3>
     </div>
 
   </div>
   <!-- / HEADER -->
 
-  <!-- CONTENT -->
-  <div class="content p-24">
+  <div class="content p-24 ">
+    <h2>PRONOSTICS AVAILABLE FOR ALL MAJOR EUROPEAN LEAGUES</h2>
+    <p>Build customer confidence by listing your users! Anyone who has used your service and has been pleased with it should have a place here! From Fortune 500 to start-ups, all your app enthusiasts will be glad to be featured in this section. Moreover, users will feel confident seing someone vouching for your product!</p>
+    <div fxFlex="row" fxLayoutAlign="center center">
+      <img class="logo" *ngFor="let competition of competitions" src="{{competition.crestUrl}}"/>
+    </div>
   </div>
-  <!-- / CONTENT -->
+
+  <div class="content p-24">
+    <div fxFlex fxLayout="row">
+      <div fxFlex="0 0 50%">
+        <h2>FEATURES</h2>
+        <h4>Private competitions</h4>
+        <p>        Invite your friends and colleagues to predict with you on the sports competition of your choice.
+          It's free, up to 40 participants per contest.
+          Beyond 40 people, contact us to benefit from the company offer.
+          Alternatively, join a public prognostic contest open to all.</p>
+<h4>Live</h4>
+        <p>
+          Updated scores and live rankings after each goal.
+          Receive push notifications directly in your web browser or on your mobile to be alerted to the result.
+          Do not miss a prognosis: receive a summary of your notifications every day by e-mail for the events you have selected</p>
+
+      </div>
+      <div fxFlex="0 0 50%" class="mat-elevation-z4">
+        <img  class="featurelogo" src="../../../assets/images/img/ecran.png">
+      </div>
+    </div>
+
+  </div>
+  <div class="content p-24" fxLayout="column">
+
+    <!-- PRICE TABLES -->
+    <div class="price-tables" fxLayout="row wrap">
+
+      <div class="price-table style-2 mat-elevation-z4" fxLayout="column">
+
+        <div class="package-type mat-accent-fg" fxFlex="0 0 auto">Create a prediction contest</div>
+
+        <div fxFlex="1 0 auto" fxLayout="column">
+          <img class="miniIcon" src="../../../assets/images/img/bet.png">
+        </div>
+        <div class="terms" fxLayout="column" fxLayoutAlign="start center">
+          <div class="term">
+            You can create a contest with your friends or join a public competition
+          </div>
+        </div>
+
+      </div>
+
+      <div class="price-table style-2 mat-elevation-z4" fxLayout="column">
+
+
+        <div class="package-type mat-accent-fg" fxFlex="0 0 auto">Predict on the matches</div>
+        <div fxFlex="1 0 auto" fxLayout="column">
+          <img class="miniIcon" src="../../../assets/images/img/comp.png">
+        </div>
+
+        <div class="terms" fxLayout="column" fxLayoutAlign="start center">
+          <div class="term">
+            Via the application, by email or facebook
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="price-table style-2 mat-elevation-z4" fxLayout="column">
+
+        <div class="package-type mat-accent-fg" fxFlex="0 0 auto">Invite your friends to join you in this game</div>
+        <div fxFlex="1 0 auto" fxLayout="column">
+          <img class="miniIcon" src="../../../assets/images/img/social.png">
+        </div>
+
+
+        <div class="terms" fxLayout="column" fxLayoutAlign="start center">
+          <div class="term">
+            Prognose and show others who is the best
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- / PRICE TABLES -->
+  </div>
 
 </div>
 

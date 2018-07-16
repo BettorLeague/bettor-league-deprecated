@@ -18,7 +18,8 @@ import {ContestsComponent} from "./routes/bettor/contests/contests.component";
 import {ContestComponent} from "./routes/bettor/contest/contest.component";
 
 export const ROUTES: Routes = [
-  { path: '',                     component: HomeComponent },
+  { path: '',                     redirectTo: '/home' ,pathMatch: "full"},
+  { path: 'home',                 component: HomeComponent},
   { path: '404',                  component: FileNotFoundComponent},
   { path: '403',                  component: UnauthorizeComponent },
   { path: 'home',                 component: HomeComponent },

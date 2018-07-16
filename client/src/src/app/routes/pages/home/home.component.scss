@@ -4,18 +4,30 @@
 
   .header {
     flex: 1 0 auto;
-    height: 200px;
-    max-height: 280px;
+    height: 400px;
+    max-height: 400px;
     background: #1A237E;
-    background: linear-gradient(to right, #0E2A3B 0%, #34306B 100%);
+    background: url('../../../../assets/images/backgrounds/landing.jpeg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 
+    .filter{
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:0;
+      background-image: radial-gradient(circle at 50% 100%, rgba(54, 151, 142, 0.9) 0%, rgba(255,255,255, 0.5) 100%);
+    }
     @include media-breakpoint('xs') {
       height: 180px;
       padding: 16px;
     }
 
     .hero-text {
-
+      z-index: 1;
       h1 {
         color: white;
         font-size: 48px;
@@ -36,7 +48,7 @@
         text-align: center;
         font-weight: 300;
         letter-spacing: 0.03em;
-        margin: 0;
+        margin: auto;
 
         @include media-breakpoint-down('xs') {
           font-size: 14px;
@@ -49,5 +61,28 @@
     max-width: 960px;
     width: 100%;
     margin: 0 auto;
+  }
+
+  .logo{
+    max-height: 150px;
+  }
+  .price-tables {
+    flex: 1 0 auto;
+
+    @include media-breakpoint-down('xs') {
+      margin-top: -128px;
+    }
+
+    .price-table {
+      margin: 12px;
+    }
+  }
+  .featurelogo{
+    border:1px solid rgba(0,0,0,0.2);
+  }
+  .miniIcon{
+    height: 80px;
+    width:80px;
+    margin:auto;
   }
 }

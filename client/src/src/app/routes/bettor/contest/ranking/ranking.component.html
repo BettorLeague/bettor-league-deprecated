@@ -109,10 +109,8 @@
       <ng-container  matColumnDef="forme">
         <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef>Forme</mat-header-cell>
         <mat-cell  fxHide fxShow.gt-sm *matCellDef="let element">
-          <div fxLayout="row" fxLayoutAlign="space-between start">
-            <span *ngFor="let match of element.last5match" suiPopup popupPlacement="top" [popupTemplate]="popupTemplate" data-variation="wide" [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) ==
-            'l') ? 'backRed' : 'backOrange'" class="dot">
-
+          <div fxLayout="row" fxLayoutAlign="space-between start" style="width:100%">
+            <span *ngFor="let match of element.last5match" suiPopup popupPlacement="top" [popupTemplate]="popupTemplate" data-variation="wide" [ngClass]=" (isTeamWinMatch(element.team.name,match) == 'w') ? 'backGreen' : (isTeamWinMatch(element.team.name,match) == 'l') ? 'backRed' : 'backOrange'" class="dot">
               <ng-template let-popup #popupTemplate>
                 <div class="formePopUp">
                   <p [style.background-image]="'url(' + getCrestOfTeam(match.homeTeamName) + ')'" class="blason"></p>
