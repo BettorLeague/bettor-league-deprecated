@@ -40,10 +40,10 @@
                         <span>Voir mon Profil</span>
                     </button>
 
-                  <button  *ngIf="hasSignedIn()" mat-menu-item routerLink="/profile" >
+                  <!--<button  *ngIf="hasSignedIn()" mat-menu-item routerLink="/profile" >
                     <mat-icon>mode_edit</mat-icon>
                     <span>Editer mon Profil</span>
-                  </button>
+                  </button>-->
                   <mat-divider *ngIf="hasSignedIn()" ></mat-divider>
                     <button id="logoutBtn" *ngIf="hasSignedIn()" mat-menu-item (click)="onLogout()" >
                         <mat-icon>exit_to_app</mat-icon>
