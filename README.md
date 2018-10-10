@@ -6,7 +6,7 @@
 
 https://bettorleague.github.io/bettor-league/
 
-<a href="https://www.instagram.com/bettor.league" target="_blank"><img src="https://www.iconfinder.com/icons/1620007/color_instagram_instagram_new_design_logo_social_media_icon"></a>
+<a href="https://www.instagram.com/bettor.league" target="_blank"><img src="https://imgur.com/gallery/O4c3T"></a>
 
 # Bettor-league
 
